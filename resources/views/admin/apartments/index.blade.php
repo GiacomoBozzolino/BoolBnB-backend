@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-
+<div class="container py-5">
+    
     @if (isset($message))
     <div class="col-12 mt-5">
         <div class="alert alert-success">
@@ -10,7 +10,7 @@
         </div>
     </div>
     @endif  
-  
+
     <table class="table table-striped ">    
         <thead>
           <tr>

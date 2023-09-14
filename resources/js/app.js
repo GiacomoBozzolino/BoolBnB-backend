@@ -16,6 +16,12 @@ apartmentDeleteButton.forEach((button) => {
 
         // QUANDO L'UTENTE CLICCA SUL DELETE_BUTTON, IL FORM NON VIENE AVVIATO GRAZIE A QUESTO COMANDO
         event.preventDefault();
+        const apartmentTitle = button.getAttribute('data-apartment-title');
+
+        const modalApartmentTitle = document.getElementById('modal-apartment-title');
+
+        modalApartmentTitle.innerText = apartmentTitle;
+
 
         // RECUPERO L'HTML DELLA MODALE "MODAL_PROJECT_DELETE", DALLA VIEW ADMIN -> PARTIALS
         const modal = document.getElementById('apartmentConfirmDeleteModal');

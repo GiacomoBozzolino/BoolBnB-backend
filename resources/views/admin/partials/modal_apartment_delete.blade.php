@@ -8,13 +8,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                Sei Sicuro di Voler Eliminare questo Appartamento 
-                {{-- <span id="apartment?"></span>  --}}
+                Sei Sicuro di Voler Eliminare l'apartamento:
+                <span id="modal-apartment-title"></span> 
                 dal Tuo Account?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                <button type="button" class="btn btn-danger" id="xxxxxx">Cancella</button>
+                <button type="button" class="btn btn-danger" id="apartment-confirm-delete-button">Cancella</button>
             </div>
         </div>
     </div>

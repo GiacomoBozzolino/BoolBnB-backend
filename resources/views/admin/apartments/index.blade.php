@@ -44,7 +44,7 @@
                   </div>
                    
                   <div>
-                    <form class="apartment-delete-button d-inline-block mx-1" data-apartment-title="{{ $apartment->name }}" action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                    <form class="apartment-delete-button d-inline-block mx-1" data-apartment-title="{{ $apartment->title }}" action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger">

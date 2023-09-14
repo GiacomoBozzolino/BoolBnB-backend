@@ -113,13 +113,13 @@
                                     {{-- parte del si  --}}
                                     <div class="yes-container">
                                         <input type="radio" id="yes" name="visibility" value="1"
-                                            {{ old('visibility') == $apartment->visibility ? 'checked' : '' }}>
+                                            {{ $apartment->visibility == 1 ? 'checked' : '' }}>
                                         <label for="yes">Si rendi l'anuncio visibile</label>
                                     </div>
                                     {{-- parte del no --}}
                                     <div class="no-container ms-5">
                                         <input type="radio" id="no" name="visibility" value="0"
-                                            {{ old('visibility') == $apartment->visibility ? 'checked' : '' }}>
+                                            {{ $apartment->visibility == 0 ? 'checked' : '' }}>
                                         <label for="no">Non rendere l'anuncio visibile</label>
                                     </div>
                                 </div>
@@ -127,17 +127,19 @@
 
                             <!-- Descrizione -->
                             <div class="col-12 my-2">
-                                <label class="control-label my-2">Descrizione</label>
-                                <textarea name="description" id="description" placeholder="Inserisci descrzione" class="form-control"
-                                    rows="3" required>
-                                    {{ old('description') ?? $apartment->description }}
-                                </textarea>
+                                <div class="form-group">
+                                    <label class="control-label my-2">Descrizione</label>
+                                    <textarea name="description" id="description" placeholder="Inserisci descrzione" class="text-start form-control"
+                                        required>
+                                        {{ old('description') ?? $apartment->description }}
+                                    </textarea>
+                                </div>
                             </div>
 
 
                             <!-- Submit Button -->
                             <div class="col-12 text-center my-5">
-                                <button type="submit" class="btn btn-success">Crea</button>
+                                <button type="submit" class="btn btn-success">Salva</button>
                             </div>
                         </div>
                     </div>

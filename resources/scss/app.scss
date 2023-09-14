@@ -1,3 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
-@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css'
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
+.logo {
+    background: rgb(0, 129, 154);
+    background: linear-gradient(150deg, rgba(0, 129, 154, 1) 22%, rgba(3, 218, 246, 1) 49%, rgba(0, 255, 194, 1) 78%);
+}

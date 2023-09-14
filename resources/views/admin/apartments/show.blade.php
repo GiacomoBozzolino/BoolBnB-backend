@@ -13,7 +13,13 @@
                         <p class="card-text">Numero stanze da letto: <strong>{{ $apartment->n_beds }}</strong></p>
                         <p class="card-text">Numero bagni: <strong>{{ $apartment->n_bathrooms }}</strong></p>
                         <p class="card-text">Metri quadri: <strong>{{ $apartment->square_meters }}</strong></p>
-                        <p class="card-text">Visibilita <strong>{{ $apartment->visibility }}</strong></p>
+                        <p class="card-text">Visibilita:
+                            @if ($apartment->visibility === 1)
+                                <strong>Il tuo anuncio e visibile al pubblico</strong>
+                            @else
+                                <strong>Il tuo annuncio non e visibile al pubblico</strong>
+                            @endif
+                        </p>
                         <p class="card-text">Breve descrizione: <strong>{{ $apartment->description }}</strong></p>
                         <a href="{{ Route('admin.apartments.index') }}" class="btn btn-primary">Back Home</a>
                         {{-- <p class="card-text"> {{ $posts->category->name }} </p> --}}

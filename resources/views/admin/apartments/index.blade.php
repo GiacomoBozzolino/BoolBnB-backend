@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="container py-5">
     <table class="table table-striped ">    
         <thead>
           <tr>

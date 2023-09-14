@@ -3,6 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row">
+            @if (isset($message))
+            <div class="col-12 mt-5">
+                <div class="alert alert-success">
+                    <span>{{ $message }}</span>
+                </div>
+            </div>
+            @endif
             <div class="col d-flex justify-content-center mt-5">
                 <div class="card" style="width: 45rem;">
                     <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top" alt=""

@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+
+    @if (isset($message))
+    <div class="col-12 mt-5">
+        <div class="alert alert-success">
+            <span>{{ $message }}</span>
+        </div>
+    </div>
+    @endif  
+  
     <table class="table table-striped ">    
         <thead>
           <tr>
@@ -35,7 +44,7 @@
                   </div>
                    
                   <div>
-                    <form class="project-delete-button d-inline-block mx-1" data-project-title="{{ $apartment->name }}" action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                    <form class="apartment-delete-button d-inline-block mx-1" data-apartment-title="{{ $apartment->name }}" action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger">
@@ -56,6 +65,6 @@
     
     
           
-  
+@include('admin.partials.modal_apartment_delete'); 
 {{-- @include('admin.partials.modal_delete') --}}
 @endsection

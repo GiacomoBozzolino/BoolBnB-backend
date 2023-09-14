@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+// import
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
@@ -27,7 +30,9 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        $apartments = Apartment::all();
+
+        return view('admin.apartments.create', compact('apartments'));
     }
 
     /**
@@ -38,7 +43,21 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        //
+        $form_data = $request->all();
+        // controllo per aggiornare l'imagine
+        if($request->hasFile('cover_img')){
+            $path = Storage::put('apartments_img', $request->cover_img);
+            $form_data['cover_img']=$path;
+        }
+
+        $apartment = new Apartment();
+        // funzione che genera lo slug
+        $form_data['slug'] = $apartment->generateSlug($form_data['title']);
+
+        $apartment->fill($form_data);
+        $apartment->save();
+
+        return redirect()->route('admin.apartments.index');
     }
 
     /**
@@ -49,7 +68,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -60,7 +79,7 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -72,7 +91,17 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $form_data = $request->all();
+        // controllo per aggiornare l'imagine
+        if($request->hasFile('cover_img')){
+            $path = Storage::put('apartments_img', $request->cover_img);
+
+            $form_data['cover_img']=$path;
+        }
+
+        $apartment->update($form_data);
+
+        return redirect()->route('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -83,6 +112,11 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+        // da creare la modale ~~~~~~~~~~
+
+
+
+        $apartment->delete();
+        return redirect()->route('admin.apartments.index');
     }
 }

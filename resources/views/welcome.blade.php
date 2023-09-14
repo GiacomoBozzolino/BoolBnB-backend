@@ -44,8 +44,8 @@
                             Scopri strumenti intuitivi e ottieni il controllo totale sulla gestione.
 
                         </p>
-                        <a href="{{ url('admin/apartments') }}"
-                            class="btn btn-primary btn-lg btn-color text-uppercase fw-semibold" type="button">Scopri</a>
+                        <a href="{{ url('admin/apartments') }}" class="btn btn-lg btn-color text-uppercase fw-semibold"
+                            type="button">Scopri</a>
                     </div>
                 </div>
             </div>

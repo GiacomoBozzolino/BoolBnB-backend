@@ -26,7 +26,7 @@
 
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <div class="logo_laravel">
+                    <div class="logo-laravel">
                         <h2 class="logo p-4 rounded-5 shadow-lg"><i class="fa-solid fa-earth-europe"></i> BoolBnB</h2>
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
@@ -43,7 +43,7 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
-                                href="{{ url('/') }}">{{ __('Home') }}</a>
+                                href="{{ url('admin/apartments') }}">{{ __('Home') }}</a>
                         </li>
                     </ul>
 

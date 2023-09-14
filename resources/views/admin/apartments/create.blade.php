@@ -5,14 +5,13 @@
         <div class="row">
             <div class="col-12 text-center">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="fw-bold">Crea il tuo progetto</h2>
-                    <a href="{{ Route('admin.apartments.index') }}" class="btn btn-danger">Back</a>
+                    <h2 class="fw-bold">Aggiungi il tuo apartamento</h2>
                 </div>
             </div>
-            <div class="col-12 mb-5">
+            <div class="col-12 mb-5 bg-light">
                 <form action=" {{ Route('admin.apartments.store') }} " method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group border p-4">
+                    <div class="form-group p-4">
                         <div class="row">
 
                             <!-- Titolo -->
@@ -117,6 +116,7 @@
                             <!-- Submit Button -->
                             <div class="col-12 text-center my-5">
                                 <button type="submit" class="btn btn-success">Crea</button>
+                                <a href="{{ Route('admin.apartments.index') }}" class="btn btn-danger">Anulla</a>
                             </div>
                         </div>
                     </div>

@@ -5,18 +5,17 @@
         <div class="row">
             <div class="col-12 text-center">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="fw-bold">Crea il tuo progetto</h2>
-                    <a href="{{ Route('admin.apartments.index') }}" class="btn btn-danger">Back</a>
+                    <h2 class="fw-bold">Modifica il tuo appartamento</h2>
                 </div>
             </div>
-            <div class="col-12 mb-5">
+            <div class="col-12 mb-5 bg-light">
                 <form action=" {{ Route('admin.apartments.update', $apartment->id) }} " method="POST"
                     enctype="multipart/form-data">
                     {{-- TOKEN --}}
                     @csrf
                     {{-- METHOD PUT --}}
                     @method('PUT')
-                    <div class="form-group border p-4">
+                    <div class="form-group p-4">
                         <div class="row">
 
                             <!-- Titolo -->
@@ -81,8 +80,8 @@
                             <!-- Cover Image -->
                             <div class="form-group my-5 d-flex flex-column ">
                                 <label for="" class="control-label mb-3">Image</label>
-                                <div class="col-12 text-center my-5">
-                                    <img width="450px" src="{{ asset('storage/' . $apartment->cover_img) }}"
+                                <div class="my-2">
+                                    <img width="50%" src="{{ asset('storage/' . $apartment->cover_img) }}"
                                         alt="">
                                 </div>
                                 <input class="ps-3 form-control" type="file" id="cover_img" name="cover_img"
@@ -140,6 +139,7 @@
                             <!-- Submit Button -->
                             <div class="col-12 text-center my-5">
                                 <button type="submit" class="btn btn-success">Salva</button>
+                                <a href="{{ Route('admin.apartments.index') }}" class="btn btn-danger">Anulla</a>
                             </div>
                         </div>
                     </div>

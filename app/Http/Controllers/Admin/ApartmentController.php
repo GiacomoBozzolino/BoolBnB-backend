@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 // import
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
@@ -17,10 +18,12 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $message = $request->query->get('message');
+
         $apartments = Apartment::all();
-        return view('admin.apartments.index', compact('apartments'));
+        return view('admin.apartments.index', compact('apartments', 'message'));
     }
 
     /**
@@ -57,7 +60,9 @@ class ApartmentController extends Controller
         $apartment->fill($form_data);
         $apartment->save();
 
-        return redirect()->route('admin.apartments.index');
+        $message = 'Appartamento aggiunto con successo!';
+
+        return redirect()->route('admin.apartments.index', compact('apartment', 'message'));
     }
 
     /**
@@ -66,9 +71,11 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show(Request $request, Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        $message = $request->query->get('message');
+
+        return view('admin.apartments.show', compact('apartment', 'message'));
     }
 
     /**
@@ -101,7 +108,9 @@ class ApartmentController extends Controller
 
         $apartment->update($form_data);
 
-        return redirect()->route('admin.apartments.show', compact('apartment'));
+        $message = 'Modifiche Appartamento Completata';
+
+        return redirect()->route('admin.apartments.show', compact('apartment', 'message'));
     }
 
     /**
@@ -112,11 +121,11 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        // da creare la modale ~~~~~~~~~~
-
-
-
+        
         $apartment->delete();
-        return redirect()->route('admin.apartments.index');
+
+        $message = 'Appartamento rimosso dal tuo account!';
+
+        return redirect()->route('admin.apartments.index', compact('message'));
     }
 }

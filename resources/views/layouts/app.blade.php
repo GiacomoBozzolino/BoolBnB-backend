@@ -22,12 +22,12 @@
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light nav-background shadow-sm">
 
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div class="logo_laravel">
-                        <h2 class="logo"><i class="fa-solid fa-earth-europe"> BoolBnB</i></h2>
+                        <h2 class="logo p-4 rounded-5 shadow-lg"><i class="fa-solid fa-earth-europe"></i> BoolBnB</h2>
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
@@ -42,7 +42,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link header-hover fs-5 fst-itali"
+                            <a class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
                                 href="{{ url('/') }}">{{ __('Home') }}</a>
                         </li>
                     </ul>
@@ -52,25 +52,29 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
+                                    href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
+                                        href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown"
+                                    class="nav-link dropdown-toggle fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
+                                    href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item"
+                                <div class="dropdown-menu dropdown-menu-right border-none" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item drop-down"
                                         href="{{ url('admin/apartments') }}">{{ __('Dashboard') }}</a>
-                                    <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item drop-down" href="{{ url('profile') }}">{{ __('Profile') }}</a>
+                                    <a class="dropdown-item drop-down" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -87,7 +91,7 @@
             </div>
         </nav>
 
-        <main class="">
+        <main class="jumbotron-welcome-base">
             @yield('content')
         </main>
     </div>

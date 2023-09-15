@@ -78,11 +78,7 @@
             </div>
         </div>
     </div>
-    </div>
 
-
-
-
-    @include('admin.partials.modal_apartment_delete');
+    @include('admin.partials.modal_apartment_delete')
     {{-- @include('admin.partials.modal_delete') --}}
 @endsection

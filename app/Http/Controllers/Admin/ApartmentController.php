@@ -116,6 +116,7 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+        
 
         $services = Service::all();
 
@@ -138,11 +139,27 @@ class ApartmentController extends Controller
             $form_data['cover_img']=$path;
         }
 
+        $address = $request->input('address');
+        
+        $client = new Client();
+        $response = $client->get("https://api.tomtom.com/search/2/geocode/{$address}.json", [
+            'query' => [
+                'key' => config('services.tomtom.key'), // Leggi la chiave API dalla configurazione
+            ],
+        ]);
+
+        $data = json_decode($response->getBody());
+
+        // Estrai le coordinate dalla risposta
+        $coordinates = $data->results[0]->position;
+
+        // Aggiorna il modello di appartamento con le coordinate
+        $apartment->latitude = $coordinates->lat;
+        $apartment->longitude = $coordinates->lon;
+        
+
         $form_data['slug'] = Str::slug($form_data['title'], '-');
 
-      
-
-        
         $apartment->update($form_data);
 
         if($request->has('services')){

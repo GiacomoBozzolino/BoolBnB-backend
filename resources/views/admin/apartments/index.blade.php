@@ -19,61 +19,59 @@
                             <i class="fa-solid fa-plus"></i></a>
                     </div>
                 </div>
-                <div class="border border-primary-subtle rounded-3 p-5 bg-light">
-                    <table class="">
-                        <thead>
-                            <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Servizi</th>
-                                <th scope="col">Rooms</th>
-                                <th scope="col">Bedrooms</th>
-                                <th scope="col">Bathrooms</th>
-                                <th scope="col">Strumenti</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($apartments as $apartment)
-                                <tr>
-                                    <td>{{ $apartment->title }}</td>
-                                    <td>
+                <div class="border border-primary-subtle rounded-3 p-5 bg-light d-flex flex-wrap justify-content-center">
+                    {{-- CARDS --}}
+                    @foreach ($apartments as $apartment)
+                        <div class="card m-4" style="max-width: 25rem; height: 40rem">
+                            <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top"
+                                alt="{{ $apartment->title }}">
+                            <div class="card-body">
+                                <h4 class="card-title text-center">{{ $apartment->title }}</h4>
+                                <div class="description-card overflow-auto mt-2" style="height: 12rem">
+                                    <p class="card-text py-2 text-start">{{ $apartment->description }}</p>
+                                </div>
+                            </div>
+                            <ul class="list-group list-group-flush text-center">
+                                <li class="list-group-item">
+
+                                    @if (count($apartment->services) > 0)
                                         @foreach ($apartment->services as $item)
                                             <?php echo $item->icon; ?>
                                         @endforeach
-                                    </td>
-                                    <td>{{ $apartment->n_rooms }}</td>
-                                    <td>{{ $apartment->n_beds }}</td>
-                                    <td>{{ $apartment->n_bathrooms }}</td>
-                                    <td class="d-flex">
-                                        <div>
-                                            <a href="{{ route('admin.apartments.show', $apartment->id) }}"
-                                                class="btn mx-1 rounded-5 btn-show">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
+                                    @else
+                                        <strong>Non ci sono servizi inseriti</strong>
+                                    @endif
+                                </li>
+                            </ul>
+                            <div class="my-2 d-flex align-items-center justify-content-center">
+                                <div>
+                                    <a href="{{ route('admin.apartments.show', $apartment->id) }}"
+                                        class="btn mx-1 rounded-5 btn-show">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
 
-                                        <div>
-                                            <a href="{{ route('admin.apartments.edit', $apartment->id) }}"
-                                                class="btn rounded-5 btn-modify">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                        </div>
+                                <div>
+                                    <a href="{{ route('admin.apartments.edit', $apartment->id) }}"
+                                        class="btn rounded-5 btn-modify">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </div>
 
-                                        <div>
-                                            <form class="apartment-delete-button d-inline-block mx-1 btn-delete rounded-5"
-                                                data-apartment-title="{{ $apartment->title }}"
-                                                action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn ">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                <div>
+                                    <form class="apartment-delete-button d-inline-block mx-1 btn-delete rounded-5"
+                                        data-apartment-title="{{ $apartment->title }}"
+                                        action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn ">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

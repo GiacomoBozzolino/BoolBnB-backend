@@ -91,7 +91,10 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        return view('admin.apartments.edit', compact('apartment'));
+
+        $services = Service::all();
+
+        return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
     /**
@@ -111,7 +114,12 @@ class ApartmentController extends Controller
             $form_data['cover_img']=$path;
         }
 
+        
         $apartment->update($form_data);
+
+        if($request->has('services')){
+            $apartment->services()->sync($request->services);
+        }  
 
         $message = 'Modifiche Appartamento Completata';
 

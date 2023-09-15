@@ -55,12 +55,12 @@
                                 <label class="control-label my-2">Seleziona i servizi</label>
                                 <ul class="list-group d-flex flex-row flex-wrap justify-content-evenly my-3">
                                     @foreach ($services as $item)
-                                        <li class="list-group-item col-5">
+                                        <li class="list-group-item col-5 d-flex align-items-center">
+                                            <input type="checkbox" name="services[]" value="{{ $item->id }}"
+                                                class="form-check-input me-4"
+                                                {{ in_array($item->id, old('services', [])) ? 'checked' : '' }}>
                                             <label class="control-label my-2"><?php echo $item->icon; ?>
                                                 {{ $item->type }}</label>
-                                            <input type="checkbox" name="services[]" value="{{ $item->id }}"
-                                                class="form-check-input"
-                                                {{ in_array($item->id, old('services', [])) ? 'checked' : '' }}>
                                         </li>
                                     @endforeach
                                 </ul>

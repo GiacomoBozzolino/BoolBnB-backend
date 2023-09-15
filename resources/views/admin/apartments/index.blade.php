@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+    <div class="mx-5">
         <div class="row">
             @if (isset($message))
                 <div class="col-12 mt-5">
@@ -19,7 +19,7 @@
                             <i class="fa-solid fa-plus"></i></a>
                     </div>
                 </div>
-                <div class="border border-light rounded-3 bg-light d-flex flex-wrap justify-content-evenly">
+                <div class="border border-light rounded-3 d-flex flex-wrap justify-content-evenly">
                     {{-- CARDS --}}
                     @foreach ($apartments as $apartment)
                         <div class="card m-4" style="max-width: 23rem; height: 40rem">

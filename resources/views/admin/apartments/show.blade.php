@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+    <div class="mx-5">
         <div class="row">
             @if (isset($message))
                 <div class="col-12 mt-5">

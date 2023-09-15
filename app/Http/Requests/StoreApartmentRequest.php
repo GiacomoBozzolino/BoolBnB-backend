@@ -33,7 +33,7 @@ class StoreApartmentRequest extends FormRequest
             'address'=>'required|max:250',
             'visibility'=>'required',
             'description'=>'required|max:255',
-            'cover_image'=>'image',
+            'cover_img'=>'image',
             
         ];
         
@@ -53,7 +53,7 @@ class StoreApartmentRequest extends FormRequest
             'visibility.required'=>'ERRORE: specificare se rendere visibile o nascosto l annuncio',
             'description.max'=>'ERRORE: la descrizione non puo essere lunga più di 255 caratteri',
             'description.required'=>'ERRORE: la descrizione è obbligatorio',
-            'cover_image.image'=>'ERRORE: assicurati che il file caricato sia in formato png, jpeg, jpg',
+            'cover_img.image'=>'ERRORE: assicurati che il file caricato sia in formato png, jpeg, jpg',
 
         ];
     }

@@ -27,7 +27,7 @@
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center transition-logo" href="{{ url('/') }}">
                     <div class="logo-laravel">
-                        <h2 class="logo p-4 rounded-5 shadow-lg"><i class="fa-solid fa-earth-europe"></i> BoolBnB</h2>
+                        <h2 class="logo p-4 rounded-5 shadow-lg"><i class="fa-solid fa-earth-europe"></i>BoolBnB</h2>
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
@@ -53,12 +53,12 @@
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
-                                    href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    href="{{ route('login') }}">{{ __('Accedi') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
-                                        href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        href="{{ route('register') }}">{{ __('Registrati') }}</a>
                                 </li>
                             @endif
                         @else
@@ -71,7 +71,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right border-none" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item drop-down" href="{{ url('profile') }}">{{ __('Profile') }}</a>
+                                    <a class="dropdown-item drop-down" href="{{ url('profile') }}">{{ __('Account') }}</a>
                                     <a class="dropdown-item drop-down" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

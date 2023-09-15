@@ -62,7 +62,7 @@ class ApartmentController extends Controller
 
         // Nuova logica per la conversione dell'indirizzo in coordinate
         $address = $request->input('address');
-
+        
         $client = new Client();
         $response = $client->get("https://api.tomtom.com/search/2/geocode/{$address}.json", [
             'query' => [

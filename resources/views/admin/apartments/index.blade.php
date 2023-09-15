@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+    @php
+    //phpinfo();
+    @endphp
     <div class="container">
         <div class="row">
             @if (isset($message))

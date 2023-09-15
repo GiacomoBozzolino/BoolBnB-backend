@@ -101,6 +101,13 @@ tr:hover {
     background-color: rgb(206, 227, 245);
 }
 
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
 // Jumbotron welcom.blade.php
 .jumbotron-welcome-base {
     background-color: #ba9593;
@@ -152,7 +159,11 @@ tr:hover {
 .background-color {
     background-color: #c8ffbe;
     padding-bottom: 65em;
-
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    margin-top: 120px;
+    padding: 5px;
     padding-top: 0.5rem;
     width: 210px;
 }
@@ -168,6 +179,7 @@ tr:hover {
 // YELD ADMIN.BLADE.PHP
 
 .main-width {
-    background-color: rgb(233, 232, 232);
     width: calc(100% - 211px);
+    margin-left: 210px;
+    margin-top: 120px;
 }

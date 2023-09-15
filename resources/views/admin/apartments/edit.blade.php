@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container py-5">
+    <div class="mx-5 py-5">
         <div class="row">
             <div class="col-12 text-center">
                 <div class="d-flex justify-content-between align-items-center">
@@ -19,7 +19,7 @@
                 </div>
                     
             @endif
-            <div class="col-12 mb-5 bg-light">
+            <div class="col-12 mb-5">
                 <form action=" {{ Route('admin.apartments.update', $apartment->id) }} " method="POST"
                     enctype="multipart/form-data">
                     {{-- TOKEN --}}
@@ -27,10 +27,10 @@
                     {{-- METHOD PUT --}}
                     @method('PUT')
                     <div class="form-group p-4">
-                        <div class="row">
+                        <ul class="list-unstyled">
 
                             <!-- Titolo -->
-                            <div class="col-12 my-2">
+                            <li>
                                 <label class="control-label my-2">Titolo</label>
                                 <input type="text" name="title" id="title" placeholder="Inserisci il titolo"
                                 class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? $apartment->title }}" required>
@@ -41,62 +41,66 @@
                                     </span>
                                 @enderror
 
-                            </div>
+                            </li>
 
                             <!-- Numero stanze -->
-                            <div class="col-12 my-2">
+                            <li>
                                 <label class="control-label my-2">Numero delle stanze</label>
                                 <select class="form-control " name="n_rooms" id="n_rooms" required>
                                     <option
                                         {{ $apartment->n_rooms == old('n_rooms', $apartment->n_rooms) ? 'selected' : '' }}
                                         value="{{ $apartment->n_rooms }}">{{ $apartment->n_rooms }}</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
+                                    @for ($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
                                 </select>
-                            </div>
+                            </li>
 
                             <!-- Numero tanze da letto -->
-                            <div class="col-12 my-2">
+                            <li>
                                 <label class="control-label my-2">Numero delle stanze da letto</label>
                                 <select class="form-control" name="n_beds" id="n_beds" required>
                                     <option {{ $apartment->n_beds == old('n_beds', $apartment->n_beds) ? 'selected' : '' }}
                                         value="{{ $apartment->n_beds }}">{{ $apartment->n_beds }}</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
+                                    @for ($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
                                 </select>
-                            </div>
+                            </li>
 
                             <!-- Numero bagni -->
-                            <div class="col-12 my-2">
+                            <li>
                                 <label class="control-label my-2">Numero bagni</label>
                                 <select class="form-control" name="n_bathrooms" id="n_bathrooms" required>
                                     <option
                                         {{ $apartment->n_bathrooms == old('n_bathrooms', $apartment->n_bathrooms) ? 'selected' : '' }}
                                         value="{{ $apartment->n_bathrooms }}">{{ $apartment->n_bathrooms }}</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    @for ($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
                                 </select>
-                            </div>
+                            </li>
+
+                            <!-- Servizi -->
+                            <li>
+                                <label class="control-label my-2">Seleziona i servizi</label>
+                                <ul class="list-group d-flex flex-row flex-wrap justify-content-evenly my-3">
+
+                                    @foreach ($services as $item)
+                                        <li class="list-group-item col-5 d-flex align-items-center">
+                                            <input type="checkbox" name="services[]" value="{{ $item->id }}"
+                                                class="form-check-input me-4"
+                                                {{ $apartment->services->contains($item) ? 'checked' : '' }}>
+                                            <label class="control-label my-2"><?php echo $item->icon; ?>
+                                                {{ $item->type }}</label>
+                                        </li>
+                                    @endforeach
+
+                                </ul>
+                            </li>
 
                             <!-- Cover Image -->
-                            <div class="form-group my-5 d-flex flex-column ">
+                            <li>
                                 <label for="" class="control-label mb-3">Image</label>
                                 <div class="my-2">
                                     <img width="50%" src="{{ asset('storage/' . $apartment->cover_img) }}"
@@ -112,11 +116,10 @@
                                 @enderror
 
                                 
-                            </div>
+                            </li>
 
                             <!-- Metratura appartamento -->
-                            <div class="col-12
-                                    my-2">
+                            <li>
                                 <label class="control-label my-2">Inserisci la metratura</label>
                                 <input type="number" name="square_meters" id="square_meters"
                                     placeholder="Inserisci la metratura del tuo locale" class="form-control @error('square_meters') is-invalid @enderror" min="1"
@@ -127,10 +130,10 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                            </div>
+                            </li>
 
                             <!-- Indrizzo -->
-                            <div class="col-12 my-2">
+                            <li>
                                 <label class="control-label my-2">Inserisci il tuo indirizzo</label>
                                 <input type="text" name="address" id="address" placeholder="Inserisci il tuo indirizzo"
                                     class="form-control @error('address') is-invalid @enderror" value="{{ old('address') ?? $apartment->address }}" required>
@@ -139,10 +142,10 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div>
+                            </li>
 
                             <!-- Visibili -->
-                            <div class="col-12 my-2">
+                            <li>
                                 <label class="control-label my-2">Rendi visibile il tuo anuncio</label>
                                 <div class="radio-container d-flex">
                                     {{-- parte del si  --}}
@@ -158,10 +161,10 @@
                                         <label for="no">Non rendere l'anuncio visibile</label>
                                     </div>
                                 </div>
-                            </div>
+                            </li>
 
                             <!-- Descrizione -->
-                            <div class="col-12 my-2">
+                            <li>
                                 <div class="form-group">
                                     <label class="control-label my-2">Descrizione</label>
                                     <textarea name="description" id="description" placeholder="Inserisci descrzione" class="text-start form-control @error('address') is-invalid @enderror"
@@ -174,15 +177,14 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </li>
 
 
                             <!-- Submit Button -->
-                            <div class="col-12 text-center my-5">
+                            <li class="text-center my-5">
                                 <button type="submit" class="btn btn-success">Salva</button>
                                 <a href="{{ Route('admin.apartments.index') }}" class="btn btn-danger">Anulla</a>
-                            </div>
-                        </div>
+                            </li>
                     </div>
                 </form>
             </div>

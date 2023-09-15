@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+    <div class="mx-5">
         <div class="row">
             @if (isset($message))
-            <div class="col-12 mt-5">
-                <div class="alert alert-success">
-                    <span>{{ $message }}</span>
+                <div class="col-12 mt-5">
+                    <div class="alert alert-success">
+                        <span>{{ $message }}</span>
+                    </div>
                 </div>
-            </div>
             @endif
             <div class="col d-flex justify-content-center mt-5">
                 <div class="card" style="width: 45rem;">
@@ -28,6 +28,18 @@
                             @endif
                         </p>
                         <p class="card-text">Breve descrizione: <strong>{{ $apartment->description }}</strong></p>
+                        <p class="card-text">Servizi: <strong>
+                                <ul class="card-list list-unstyled ms-5">
+                                    @if (count($apartment->services) > 0)
+                                        @foreach ($apartment->services as $item)
+                                            <li><?php echo $item->icon; ?> {{ $item->type }}</li>
+                                        @endforeach
+                                    @else
+                                        <li>Non ci sono servizi inseriti</li>
+                                    @endif
+                                </ul>
+
+                            </strong></p>
                         <a href="{{ Route('admin.apartments.index') }}" class="btn btn-primary">Back Home</a>
                         {{-- <p class="card-text"> {{ $posts->category->name }} </p> --}}
                         <div class="col-12">

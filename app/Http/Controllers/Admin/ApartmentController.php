@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 // import
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Models\Service;
 
 use GuzzleHttp\Client;
 use App\Models\Apartment;
@@ -35,8 +36,9 @@ class ApartmentController extends Controller
     public function create()
     {
         $apartments = Apartment::all();
+        $services = Service::all();
 
-        return view('admin.apartments.create', compact('apartments'));
+        return view('admin.apartments.create', compact('apartments', 'services'));
     }
 
     /**
@@ -61,6 +63,7 @@ class ApartmentController extends Controller
         // funzione che genera lo slug
         $form_data['slug'] = $apartment->generateSlug($form_data['title']);
 
+
         $apartment->fill($form_data);
 
         // Nuova logica per la conversione dell'indirizzo in coordinate
@@ -84,8 +87,10 @@ class ApartmentController extends Controller
         
         $apartment->save();
 
+        if($request->has('services')){
+            $apartment->services()->attach($request->services);
+        }  
         $message = 'Appartamento aggiunto con successo!';
-
         return redirect()->route('admin.apartments.index', compact('apartment', 'message'));
     }
 
@@ -110,7 +115,10 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        return view('admin.apartments.edit', compact('apartment'));
+
+        $services = Service::all();
+
+        return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
     /**
@@ -130,7 +138,12 @@ class ApartmentController extends Controller
             $form_data['cover_img']=$path;
         }
 
+        
         $apartment->update($form_data);
+
+        if($request->has('services')){
+            $apartment->services()->sync($request->services);
+        }  
 
         $message = 'Modifiche Appartamento Completata';
 

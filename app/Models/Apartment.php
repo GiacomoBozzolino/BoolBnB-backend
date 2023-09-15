@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str; 
 
 use App\Models\User;
+use App\Models\Service;
 
 class Apartment extends Model
 {
@@ -20,7 +21,7 @@ class Apartment extends Model
     }
 
     public function services() {
-        return $this->belongsToMany('App\Service');
+        return $this->belongsToMany(Service::class);
     }
 
     protected $fillable = [

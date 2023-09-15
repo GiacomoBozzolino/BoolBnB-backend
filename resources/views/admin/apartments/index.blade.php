@@ -55,10 +55,10 @@
                                         </div>
 
                                         <div>
-                                            <form class="apartment-delete-button d-inline-block mx-1" data-apartment-title="{{ $apartment->title }}" action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                                            <form class="apartment-delete-button d-inline-block mx-1 btn-delete rounded-5" data-apartment-title="{{ $apartment->title }}" action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">
+                                                <button type="submit" class="btn ">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                               </form>

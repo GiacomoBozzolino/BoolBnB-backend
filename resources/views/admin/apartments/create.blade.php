@@ -8,17 +8,17 @@
                     <h2 class="fw-bold">Aggiungi il tuo apartamento</h2>
                 </div>
             </div>
-            @if ($errors->any())
-
+            {{-- BANNER TUTTI MESSAGGI ERRORE --}}
+            {{-- @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach($errors->all() as $err)
                             <li>{{$err}}</li>
                         @endforeach
                     </ul>
-                </div>
-                        
-            @endif
+                </div>        
+            @endif --}}
+
             <div class="col-12 mb-5 bg-light">
                 <form action=" {{ Route('admin.apartments.store') }} " method="POST" enctype="multipart/form-data">
                     @csrf

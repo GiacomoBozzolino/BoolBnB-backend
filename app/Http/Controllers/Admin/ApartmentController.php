@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 // import
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 use GuzzleHttp\Client;
 use App\Models\Apartment;
@@ -126,9 +127,10 @@ class ApartmentController extends Controller
         // controllo per aggiornare l'imagine
         if($request->hasFile('cover_img')){
             $path = Storage::put('apartments_img', $request->cover_img);
-
             $form_data['cover_img']=$path;
         }
+
+        $form_data['slug'] = Str::slug($form_data['title'], '-');
 
         $apartment->update($form_data);
 

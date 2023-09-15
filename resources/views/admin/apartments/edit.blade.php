@@ -8,6 +8,17 @@
                     <h2 class="fw-bold">Modifica il tuo appartamento</h2>
                 </div>
             </div>
+            @if ($errors->any())
+
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $err)
+                            <li>{{$err}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                    
+            @endif
             <div class="col-12 mb-5 bg-light">
                 <form action=" {{ Route('admin.apartments.update', $apartment->id) }} " method="POST"
                     enctype="multipart/form-data">

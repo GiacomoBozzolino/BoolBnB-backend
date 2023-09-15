@@ -33,13 +33,20 @@
                             <div class="col-12 my-2">
                                 <label class="control-label my-2">Titolo</label>
                                 <input type="text" name="title" id="title" placeholder="Inserisci il titolo"
-                                    class="form-control" value="{{ old('title') ?? $apartment->title }}" required>
+                                class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? $apartment->title }}" required>
+
+                                @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
                             </div>
 
                             <!-- Numero stanze -->
                             <div class="col-12 my-2">
                                 <label class="control-label my-2">Numero delle stanze</label>
-                                <select class="form-control" name="n_rooms" id="n_rooms" required>
+                                <select class="form-control " name="n_rooms" id="n_rooms" required>
                                     <option
                                         {{ $apartment->n_rooms == old('n_rooms', $apartment->n_rooms) ? 'selected' : '' }}
                                         value="{{ $apartment->n_rooms }}">{{ $apartment->n_rooms }}</option>
@@ -95,8 +102,16 @@
                                     <img width="50%" src="{{ asset('storage/' . $apartment->cover_img) }}"
                                         alt="">
                                 </div>
-                                <input class="ps-3 form-control" type="file" id="cover_img" name="cover_img"
+                                <input class="ps-3 form-control @error('cover_img') is-invalid @enderror" type="file" id="cover_img" name="cover_img"
                                     value="{{ $apartment->cover_img }}">
+
+                                @error('cover_img')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
+                                
                             </div>
 
                             <!-- Metratura appartamento -->
@@ -104,16 +119,26 @@
                                     my-2">
                                 <label class="control-label my-2">Inserisci la metratura</label>
                                 <input type="number" name="square_meters" id="square_meters"
-                                    placeholder="Inserisci la metratura del tuo locale" class="form-control" min="1"
+                                    placeholder="Inserisci la metratura del tuo locale" class="form-control @error('square_meters') is-invalid @enderror" min="1"
                                     max="249" value="{{ old('square_meters') ?? $apartment->square_meters }}"
                                     required>
+                                    @error('square_meters')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
 
                             <!-- Indrizzo -->
                             <div class="col-12 my-2">
                                 <label class="control-label my-2">Inserisci il tuo indirizzo</label>
                                 <input type="text" name="address" id="address" placeholder="Inserisci il tuo indirizzo"
-                                    class="form-control" value="{{ old('address') ?? $apartment->address }}" required>
+                                    class="form-control @error('address') is-invalid @enderror" value="{{ old('address') ?? $apartment->address }}" required>
+                                @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
                             <!-- Visibili -->
@@ -139,10 +164,15 @@
                             <div class="col-12 my-2">
                                 <div class="form-group">
                                     <label class="control-label my-2">Descrizione</label>
-                                    <textarea name="description" id="description" placeholder="Inserisci descrzione" class="text-start form-control"
+                                    <textarea name="description" id="description" placeholder="Inserisci descrzione" class="text-start form-control @error('address') is-invalid @enderror"
                                         required>
                                         {{ old('description') ?? $apartment->description }}
                                     </textarea>
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 

@@ -29,7 +29,14 @@
                             <div class="col-12 my-2">
                                 <label class="control-label my-2">Titolo</label>
                                 <input type="text" name="title" id="title" placeholder="Inserisci il titolo"
-                                    class="form-control" required>
+                                class="form-control @error('title') is-invalid @enderror" required>
+                                @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                                
                             </div>
 
                             <!-- Numero stanze -->
@@ -81,7 +88,12 @@
                                 <label for="" class="control-label mb-3">
                                     Image
                                 </label>
-                                <input class="ps-3 form-control" type="file" id="cover_img" name="cover_img">
+                                <input class="ps-3 @error('cover_img') is-invalid @enderror form-control" type="file" id="cover_img" name="cover_img">
+                                @error('cover_img')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
                             <!-- Metratura appartamento -->
@@ -96,7 +108,16 @@
                             <div class="col-12 my-2">
                                 <label class="control-label my-2">Inserisci il tuo indirizzo</label>
                                 <input type="text" name="address" id="address" placeholder="Inserisci il tuo indirizzo"
-                                    class="form-control" required>
+                                class="form-control @error('address') is-invalid @enderror" required>
+
+                                @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
+
+
                             </div>
 
                             <!-- Visibili -->
@@ -119,8 +140,13 @@
                             <!-- Descrizione -->
                             <div class="col-12 my-2">
                                 <label class="control-label my-2">Descrizione</label>
-                                <textarea name="description" id="description" placeholder="Inserisci descrzione" class="form-control" required>
+                                <textarea name="description" id="description" placeholder="Inserisci descrzione" class="form-control @error('description') is-invalid @enderror" required>
                                 </textarea>
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
 

@@ -22,8 +22,8 @@ class ApartmentController extends Controller
     public function index(Request $request)
     {
         $message = $request->query->get('message');
-
-        $apartments = Apartment::all();
+        // yhfrxcytcuyghv hvv ik
+        $apartments = auth()->user()->apartments;
         return view('admin.apartments.index', compact('apartments', 'message'));
     }
 
@@ -55,6 +55,9 @@ class ApartmentController extends Controller
         }
 
         $apartment = new Apartment();
+        // yfvuyvyuhvuiyhvuiyhvyv
+        $apartment->user_id = auth()->user()->id;
+
         // funzione che genera lo slug
         $form_data['slug'] = $apartment->generateSlug($form_data['title']);
 

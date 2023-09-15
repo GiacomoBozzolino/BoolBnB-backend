@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
+use GuzzleHttp\Client;
 use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
@@ -58,6 +59,26 @@ class ApartmentController extends Controller
         $form_data['slug'] = $apartment->generateSlug($form_data['title']);
 
         $apartment->fill($form_data);
+
+        // Nuova logica per la conversione dell'indirizzo in coordinate
+        $address = $request->input('address');
+
+        $client = new Client();
+        $response = $client->get("https://api.tomtom.com/search/2/geocode/{$address}.json", [
+            'query' => [
+                'key' => config('services.tomtom.key'), // Leggi la chiave API dalla configurazione
+            ],
+        ]);
+
+        $data = json_decode($response->getBody());
+
+        // Estrai le coordinate dalla risposta
+        $coordinates = $data->results[0]->position;
+
+        // Aggiorna il modello di appartamento con le coordinate
+        $apartment->latitude = $coordinates->lat;
+        $apartment->longitude = $coordinates->lon;
+        
         $apartment->save();
 
         $message = 'Appartamento aggiunto con successo!';

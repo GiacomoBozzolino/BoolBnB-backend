@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row">
             @if (isset($message))
-            <div class="col-12 mt-5">
-                <div class="alert alert-success">
-                    <span>{{ $message }}</span>
+                <div class="col-12 mt-5">
+                    <div class="alert alert-success">
+                        <span>{{ $message }}</span>
+                    </div>
                 </div>
-            </div>
             @endif
             <div class="mt-5">
                 <div class="d-flex justify-content-between justify-content-center me-5 mb-3 p-2">
@@ -24,7 +24,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Title</th>
-                                <th scope="col">Slug</th>
+                                <th scope="col">Servizi</th>
                                 <th scope="col">Rooms</th>
                                 <th scope="col">Bedrooms</th>
                                 <th scope="col">Bathrooms</th>
@@ -35,7 +35,11 @@
                             @foreach ($apartments as $apartment)
                                 <tr>
                                     <td>{{ $apartment->title }}</td>
-                                    <td>{{ $apartment->slug }}</td>
+                                    <td>
+                                        @foreach ($apartment->services as $item)
+                                            <?php echo $item->icon; ?>
+                                        @endforeach
+                                    </td>
                                     <td>{{ $apartment->n_rooms }}</td>
                                     <td>{{ $apartment->n_beds }}</td>
                                     <td>{{ $apartment->n_bathrooms }}</td>
@@ -55,13 +59,15 @@
                                         </div>
 
                                         <div>
-                                            <form class="apartment-delete-button d-inline-block mx-1 btn-delete rounded-5" data-apartment-title="{{ $apartment->title }}" action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                                            <form class="apartment-delete-button d-inline-block mx-1 btn-delete rounded-5"
+                                                data-apartment-title="{{ $apartment->title }}"
+                                                action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn ">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                              </form>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -72,11 +78,11 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
-    
-    
-          
-@include('admin.partials.modal_apartment_delete'); 
-{{-- @include('admin.partials.modal_delete') --}}
+
+
+
+    @include('admin.partials.modal_apartment_delete');
+    {{-- @include('admin.partials.modal_delete') --}}
 @endsection

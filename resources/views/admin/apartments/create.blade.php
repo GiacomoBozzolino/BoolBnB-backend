@@ -69,13 +69,13 @@
                             <!-- Servizi -->
                             <li>
                                 <label class="control-label my-2">Seleziona i servizi</label>
-                                <ul class="list-group d-flex flex-row flex-wrap justify-content-evenly my-3">
+                                <ul class="list-group d-flex flex-row flex-wrap justify-content-evenly my-3 ">
                                     @foreach ($services as $item)
                                         <li class="list-group-item col-5 d-flex align-items-center">
                                             <input type="checkbox" name="services[]" value="{{ $item->id }}"
                                                 class="form-check-input me-4"
                                                 {{ in_array($item->id, old('services', [])) ? 'checked' : '' }}>
-                                            <label class="control-label my-2"><?php echo $item->icon; ?>
+                                            <label class="control-label my-2 text-capitalize" ><?php echo $item->icon; ?>
                                                 {{ $item->type }}</label>
                                         </li>
                                     @endforeach
@@ -85,7 +85,7 @@
                             <!-- Cover Image -->
                             <li>
                                 <label for="" class="control-label mb-3">
-                                    Image
+                                    Immagine
                                 </label>
                                 <input class="ps-3 @error('cover_img') is-invalid @enderror form-control" type="file" id="cover_img" name="cover_img" value="{{old('cover_img')}}">
                                 @error('cover_img')
@@ -147,7 +147,7 @@
 
                             <!-- Submit Button -->
                             <li class="text-center my-5">
-                                <button type="submit" class="btn btn-success">Crea</button>
+                                <button type="submit" class="btn btn-success">Aggiungi</button>
                                 <a href="{{ Route('admin.apartments.index') }}" class="btn btn-danger">Annulla</a>
                             </li>
                         </ul>

@@ -30,7 +30,7 @@ class ServiceSeeder extends Seeder
                 'icon'=>'<i class="fa-solid fa-utensils"></i>'
             ],
             [
-                'type'=>'Animali ammessi', 
+                'type'=>'Animali Ammessi', 
                 'icon'=>'<i class="fa-solid fa-paw"></i>'
             ],
             [
@@ -38,11 +38,11 @@ class ServiceSeeder extends Seeder
                 'icon'=>'<i class="fa-solid fa-dumbbell"></i>'
             ],
             [
-                'type'=>'Camere non fumatori', 
+                'type'=>'Camere Non Fumatori', 
                 'icon'=>'<i class="fa-solid fa-ban-smoking"></i>'
             ],
             [
-                'type'=>'Spa & Centro benessere', 
+                'type'=>'Spa & Centro Benessere', 
                 'icon'=>'<i class="fa-solid fa-spa"></i>'
             ],
             [

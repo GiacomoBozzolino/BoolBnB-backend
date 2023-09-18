@@ -105,14 +105,14 @@
                                 class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === 'admin.apartments.create' ? 'selected' : '' }} select">
                                 <div class="text-container d-flex align-items-center">
                                     <i class="fa-regular fa-lightbulb ms-3"></i>
-                                    <h4 class="ms-3">Servizi</h4>
+                                    <h4 class="ms-3">Sponsor</h4>
                                 </div>
                             </a>
                             <a href=""
                                 class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === '' ? 'selected' : '' }} select">
                                 <div class="text-container d-flex align-items-center">
                                     <i class="fa-solid fa-diagram-project ms-3"></i>
-                                    <h4 class="ms-3">Types</h4>
+                                    <h4 class="ms-3">Statistiche</h4>
                                 </div>
                             </a>
                         </div>

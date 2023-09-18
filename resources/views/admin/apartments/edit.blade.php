@@ -89,7 +89,7 @@
 
                             <!-- Cover Image -->
                             <li>
-                                <label for="" class="control-label mb-3">Image</label>
+                                <label for="" class="control-label mb-3">Immagine</label>
                                 <div class="my-2">
                                     <img width="50%" src="{{ asset('storage/' . $apartment->cover_img) }}"
                                         alt="">

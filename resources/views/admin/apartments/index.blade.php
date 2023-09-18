@@ -22,9 +22,11 @@
                 <div class="border border-light rounded-3 d-flex flex-wrap justify-content-evenly">
                     {{-- CARDS --}}
                     @foreach ($apartments as $apartment)
-                        <div class="card m-4" style="max-width: 23rem; height: 40rem">
-                            <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top"
-                                alt="{{ $apartment->title }}">
+                        <div class="card m-4" style="max-width: 23rem; ">
+                            <div class="ratio ratio-4x3">
+                                <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top ratio ratio-4x3"
+                                    alt="{{ $apartment->title }}">
+                            </div>
                             <div class="card-body">
                                 <h4 class="card-title text-center">{{ $apartment->title }}</h4>
                                 <div class="description-card overflow-auto mt-2" style="height: 12rem">

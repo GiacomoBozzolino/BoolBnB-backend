@@ -28,7 +28,7 @@
                             <li>
                                 <label class="control-label my-2">Titolo</label>
                                 <input type="text" name="title" id="title" placeholder="Inserisci il titolo"
-                                class="form-control @error('title') is-invalid @enderror" required>
+                                class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}" required>
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
                                 <label class="control-label my-2">Numero delle stanze</label>
                                 <select class="form-control" name="n_rooms" id="n_rooms" required>
                                     @for ($i = 1; $i <= 9; $i++)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                        <option value="{{ $i }}" @selected(old('n_rooms') == $i)>{{ $i }} </option>
                                     @endfor
                                 </select>
                             </li>
@@ -53,7 +53,7 @@
                                 <label class="control-label my-2">Numero delle stanze da letto</label>
                                 <select class="form-control" name="n_beds" id="n_beds" required>
                                     @for ($i = 1; $i <= 9; $i++)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                        <option value="{{$i}}" @selected(old('n_beds') == $i)>{{ $i }}</option>
                                     @endfor
                                 </select>
                             </li>
@@ -63,7 +63,7 @@
                                 <label class="control-label my-2">Numero bagni</label>
                                 <select class="form-control" name="n_bathrooms" id="n_bathrooms" required>
                                     @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                        <option value="{{ $i }}" @selected(old('n_bathrooms') == $i)>{{ $i }}</option>
                                     @endfor
                                 </select>
                             </li>
@@ -89,7 +89,7 @@
                                 <label for="" class="control-label mb-3">
                                     Image
                                 </label>
-                                <input class="ps-3 @error('cover_img') is-invalid @enderror form-control" type="file" id="cover_img" name="cover_img">
+                                <input class="ps-3 @error('cover_img') is-invalid @enderror form-control" type="file" id="cover_img" name="cover_img" value="{{old('cover_img')}}">
                                 @error('cover_img')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -102,13 +102,13 @@
                                 <label class="control-label my-2">Inserisci la metratura</label>
                                 <input type="number" name="square_meters" id="square_meters"
                                     placeholder="Inserisci la metratura del tuo locale" class="form-control" min="1"
-                                    max="249" required>
+                                    max="249" required value="{{old('square_meters')}}">
                             </li>
 
                             <!-- Indirizzo -->
                             <li>
                                 <label class="control-label my-2">Inserisci il tuo indirizzo</label>
-                                <input type="text" name="address" id="address" placeholder="Inserisci il tuo indirizzo"
+                                <input type="text" name="address" id="address" placeholder="Inserisci il tuo indirizzo" value="{{old('address')}}"
                                 class="form-control @error('address') is-invalid @enderror" required>
 
                                 @error('address')
@@ -116,9 +116,6 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-
-
-
                             </li>
 
                             <!-- Visibilità -->
@@ -127,12 +124,12 @@
                                 <div class="radio-container d-flex">
                                     {{-- parte del si  --}}
                                     <div class="yes-container">
-                                        <input type="radio" id="yes" name="visibility" value="1" checked>
+                                        <input type="radio" id="yes" name="visibility" value="1" {{old('visibility', '1') == '1' ? 'checked' : ''}} >
                                         <label for="yes">Sì, rendi l'annuncio visibile</label>
                                     </div>
                                     {{-- parte del no --}}
                                     <div class="no-container ms-5">
-                                        <input type="radio" id="no" name="visibility" value="0">
+                                        <input type="radio" id="no" name="visibility" value="0" {{old('visibility') == '0' ? 'checked' : ''}}>
                                         <label for="no">No, non rendere l'annuncio visibile</label>
                                     </div>
                                 </div>
@@ -141,7 +138,7 @@
                             <!-- Descrizione -->
                             <li>
                                 <label class="control-label my-2">Descrizione</label>
-                                <textarea name="description" id="description" placeholder="Inserisci descrizione" class="form-control @error('description') is-invalid @enderror" required>
+                                <textarea name="description" id="description" placeholder="Inserisci descrizione" class="form-control @error('description') is-invalid @enderror" required> {{ old('description')}}
                                 </textarea>
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">

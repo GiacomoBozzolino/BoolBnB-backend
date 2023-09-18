@@ -9,9 +9,9 @@
 }
 
 .btn-color {
-    background-color: #ba9593;
-    border-color: #ba9593;
-    border: #ba9593 2px solid;
+    background-color: #3C6E71;
+    border-color: #3C6E71;
+    border: #3C6E71 2px solid;
 }
 
 .btn-color:hover {
@@ -33,12 +33,12 @@
 
 .btn-modify {
     background-color: white;
-    border: 2px solid #89608E;
+    border: 2px solid #C5ADC5;
 }
 
 .btn-modify:hover {
-    background-color: #89608E;
-    border: 2px solid #89608E;
+    background-color: #C5ADC5;
+    border: 2px solid #C5ADC5;
     color: white;
 }
 
@@ -69,32 +69,32 @@ th {
 }
 
 tr:hover {
-    background-color: #EDFFAB;
+    background-color: #B2B5E0;
 }
 
 // HEADER
 
 .logo {
-    color: #EDFFAB;
+    color: #000000;
     transition: background-color 1s;
 }
 
 .logo:hover {
-    background-color: #edffab;
+    background-color: #B2B5E0;
     color: black;
 }
 
 .link-hover-header {
-    color: #C8FFBE;
+    color: #000000;
 }
 
 .link-hover-header:hover {
     // background-color: #DFBE99;
-    background-color: #EDFFAB;
+    background-color: #B2B5E0;
 }
 
 .nav-background {
-    background-color: #89608E;
+    background-color: #C5ADC5;
 }
 
 .drop-down:hover {
@@ -115,7 +115,7 @@ tr:hover {
 }
 
 .jumbotron-welcome-partial {
-    background-color: #C8FFBE;
+    background-color: #B2B5E0;
     height: 35vh;
 }
 
@@ -157,7 +157,7 @@ tr:hover {
 
 // SIDEBAR
 .background-color {
-    background-color: #c8ffbe;
+    background-color: #B2B5E0;
     padding-bottom: 65em;
     position: fixed;
     top: 0;
@@ -169,11 +169,11 @@ tr:hover {
 }
 
 .selected {
-    background-color: #edffab;
+    background-color: #B2B5E0;
 }
 
 .select:hover {
-    background-color: yellow;
+    background-color: #FCD951;
 }
 
 // YELD ADMIN.BLADE.PHP

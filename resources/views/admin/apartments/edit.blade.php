@@ -8,17 +8,7 @@
                     <h2 class="fw-bold">Modifica il tuo appartamento</h2>
                 </div>
             </div>
-            @if ($errors->any())
-
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $err)
-                            <li>{{$err}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                    
-            @endif
+            
             <div class="col-12 mb-5">
                 <form action=" {{ Route('admin.apartments.update', $apartment->id) }} " method="POST"
                     enctype="multipart/form-data">
@@ -47,11 +37,9 @@
                             <li>
                                 <label class="control-label my-2">Numero delle stanze</label>
                                 <select class="form-control " name="n_rooms" id="n_rooms" required>
-                                    <option
-                                        {{ $apartment->n_rooms == old('n_rooms', $apartment->n_rooms) ? 'selected' : '' }}
-                                        value="{{ $apartment->n_rooms }}">{{ $apartment->n_rooms }}</option>
+                                    
                                     @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                        <option {{ $i == old('n_rooms', $apartment->n_rooms) ? 'selected': '' }} value="{{$i}}">{{ $i }}</option>
                                     @endfor
                                 </select>
                             </li>
@@ -60,10 +48,8 @@
                             <li>
                                 <label class="control-label my-2">Numero delle stanze da letto</label>
                                 <select class="form-control" name="n_beds" id="n_beds" required>
-                                    <option {{ $apartment->n_beds == old('n_beds', $apartment->n_beds) ? 'selected' : '' }}
-                                        value="{{ $apartment->n_beds }}">{{ $apartment->n_beds }}</option>
                                     @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    <option {{ $i == old('n_beds', $apartment->n_beds) ? 'selected': '' }} value="{{$i}}">{{ $i }}</option>
                                     @endfor
                                 </select>
                             </li>
@@ -72,11 +58,8 @@
                             <li>
                                 <label class="control-label my-2">Numero bagni</label>
                                 <select class="form-control" name="n_bathrooms" id="n_bathrooms" required>
-                                    <option
-                                        {{ $apartment->n_bathrooms == old('n_bathrooms', $apartment->n_bathrooms) ? 'selected' : '' }}
-                                        value="{{ $apartment->n_bathrooms }}">{{ $apartment->n_bathrooms }}</option>
                                     @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    <option {{ $i == old('n_bathrooms', $apartment->n_bathrooms) ? 'selected': '' }} value="{{$i}}">{{ $i }}</option>
                                     @endfor
                                 </select>
                             </li>
@@ -88,9 +71,14 @@
 
                                     @foreach ($services as $item)
                                         <li class="list-group-item col-5 d-flex align-items-center">
+                                            @if($errors->any())
+                                                <input type="checkbox" name="services[]" value="{{ $item->id }}"
+                                                class="form-check-input me-4" {{in_array($item->id, old ('services', []))? 'checked': ''}}>
+                                            @else
                                             <input type="checkbox" name="services[]" value="{{ $item->id }}"
-                                                class="form-check-input me-4"
-                                                {{ $apartment->services->contains($item) ? 'checked' : '' }}>
+                                                class="form-check-input me-4" {{$apartment->services->contains($item)? 'checked': ''}}>
+                                            @endif
+
                                             <label class="control-label my-2"><?php echo $item->icon; ?>
                                                 {{ $item->type }}</label>
                                         </li>
@@ -107,8 +95,8 @@
                                         alt="">
                                 </div>
                                 <input class="ps-3 form-control @error('cover_img') is-invalid @enderror" type="file" id="cover_img" name="cover_img"
-                                    value="{{ $apartment->cover_img }}">
-
+                                    value="{{old('cover_img')?? $apartment->cover_img}}">
+                                   
                                 @error('cover_img')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -146,19 +134,21 @@
 
                             <!-- Visibili -->
                             <li>
-                                <label class="control-label my-2">Rendi visibile il tuo anuncio</label>
+                                <label class="control-label my-2">Rendi visibile il tuo annuncio</label>
                                 <div class="radio-container d-flex">
                                     {{-- parte del si  --}}
                                     <div class="yes-container">
-                                        <input type="radio" id="yes" name="visibility" value="1"
-                                            {{ $apartment->visibility == 1 ? 'checked' : '' }}>
-                                        <label for="yes">Si rendi l'anuncio visibile</label>
+                                        <input type="radio" id="yes" name="visibility" value="1" {{  old('visibility', '1') == '1' ? 'checked' : ''}} >
+                                        {{-- <input type="radio" id="yes" name="visibility" value="1"
+                                            {{ $apartment->visibility == 1 ? 'checked' : '' }}> --}}
+                                        <label for="yes">Si rendi l'annuncio visibile</label>
                                     </div>
                                     {{-- parte del no --}}
                                     <div class="no-container ms-5">
-                                        <input type="radio" id="no" name="visibility" value="0"
-                                            {{ $apartment->visibility == 0 ? 'checked' : '' }}>
-                                        <label for="no">Non rendere l'anuncio visibile</label>
+                                        <input type="radio" id="no" name="visibility" value="0" {{old('visibility') == '0' ? 'checked' : ''}}>
+                                        {{-- <input type="radio" id="no" name="visibility" value="0"
+                                            {{ $apartment->visibility == 0 ? 'checked' : '' }}> --}}
+                                        <label for="no">Non rendere l'annuncio visibile</label>
                                     </div>
                                 </div>
                             </li>
@@ -167,9 +157,8 @@
                             <li>
                                 <div class="form-group">
                                     <label class="control-label my-2">Descrizione</label>
-                                    <textarea name="description" id="description" placeholder="Inserisci descrzione" class="text-start form-control @error('address') is-invalid @enderror"
-                                        required>
-                                        {{ old('description') ?? $apartment->description }}
+                                    <textarea name="description" id="description" class="text-start form-control @error('address') is-invalid @enderror"
+                                        required>{{ old('description') ?? $apartment->description }}
                                     </textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">

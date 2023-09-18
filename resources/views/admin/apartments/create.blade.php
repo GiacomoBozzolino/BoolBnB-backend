@@ -34,8 +34,6 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-
-                                
                             </li>
 
                             <!-- Numero stanze -->
@@ -138,7 +136,7 @@
                             <!-- Descrizione -->
                             <li>
                                 <label class="control-label my-2">Descrizione</label>
-                                <textarea name="description" id="description" placeholder="Inserisci descrizione" class="form-control @error('description') is-invalid @enderror" required> {{ old('description')}}
+                                <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" required> {{old('description')}}
                                 </textarea>
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">

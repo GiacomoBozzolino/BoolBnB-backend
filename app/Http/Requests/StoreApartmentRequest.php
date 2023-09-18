@@ -32,7 +32,7 @@ class StoreApartmentRequest extends FormRequest
             'square_meters'=>'required',
             'address'=>'required|max:250',
             'visibility'=>'required',
-            'description'=>'required|max:255',
+            'description'=>'required',
             'cover_img'=>'required|image',
             
         ];
@@ -51,7 +51,6 @@ class StoreApartmentRequest extends FormRequest
             'address.required'=>'ERRORE: l indirizzo dell appartamento è obbligatorio',
             'address.max'=>'ERRORE: l indirizzo dell appartamento non deve essere lungo più di 250 caratteri',
             'visibility.required'=>'ERRORE: specificare se rendere visibile o nascosto l annuncio',
-            'description.max'=>'ERRORE: la descrizione non puo essere lunga più di 255 caratteri',
             'description.required'=>'ERRORE: la descrizione è obbligatoria',
             'cover_img.image'=>'ERRORE: assicurati che il file caricato sia in formato png, jpeg, jpg',
             'cover_img.required'=>'ERRORE: è obbligatorio caricare un immagine',

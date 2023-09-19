@@ -3,11 +3,13 @@
 @section('content')
     <div class="mx-5 py-5">
         <div class="row">
-            <div class="col-12 text-center">
+            <div class="col-12 text-center pb-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <h2 class="fw-bold">Aggiungi il tuo appartamento</h2>
+                    
                 </div>
             </div>
+            <h6>Quando sul nome del campo si trova il seguente simbolo:<span class="text-danger"> *</span>. Significa che il campo deve essere compilato obbligatoriamente </h6>
             {{-- BANNER TUTTI MESSAGGI ERRORE --}}
             {{-- @if ($errors->any())
                 <div class="alert alert-danger">
@@ -76,14 +78,20 @@
                                 <span class="text-danger"> *</span>
                                 <ul class="list-group d-flex flex-row flex-wrap justify-content-evenly my-3 ">
                                     @foreach ($services as $item)
-                                        <li class="list-group-item col-5 d-flex align-items-center">
+                                        <li class="list-group-item col-5 d-flex align-items-center  @error('services') is-invalid @enderror">
                                             <input type="checkbox" name="services[]" value="{{ $item->id }}"
                                                 class="form-check-input me-4"
-                                                {{ in_array($item->id, old('services', [])) ? 'checked' : '' }}>
+                                                {{ in_array($item->id, old('services', [])) ? 'checked' : '' }} >
                                             <label class="control-label my-2 text-capitalize" ><?php echo $item->icon; ?>
                                                 {{ $item->type }}</label>
                                         </li>
+                                        
                                     @endforeach
+                                    @error('services')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </ul>
                             </li>
 
@@ -93,7 +101,7 @@
                                     Immagine
                                 </label>
                                 <span class="text-danger"> *</span>
-                                <input class="ps-3 @error('cover_img') is-invalid @enderror form-control" type="file" id="cover_img" name="cover_img" value="{{old('cover_img')}}">
+                                <input class="ps-3 @error('cover_img') is-invalid @enderror form-control" type="file" id="cover_img" name="cover_img" value="{{old('cover_img')}}" required>
                                 @error('cover_img')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

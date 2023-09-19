@@ -33,6 +33,7 @@ class UpdateApartmentRequest extends FormRequest
             'visibility'=>'required',
             'description'=>'required',
             'cover_img'=>'image',
+            'services'=>'required|exists:services,id'
             
         ];
     }
@@ -52,6 +53,8 @@ class UpdateApartmentRequest extends FormRequest
             'visibility.required'=>'ERRORE: specificare se rendere visibile o nascosto l annuncio',
             'description.required'=>'ERRORE: la descrizione è obbligatoria',
             'cover_img.image'=>'ERRORE: assicurati che il file caricato sia in formato png, jpeg, jpg',
+            'services.exists'=>'Seleziona un servizio valido',
+            'services.required'=>'inserisci almeno un servizio',
             
 
         ];

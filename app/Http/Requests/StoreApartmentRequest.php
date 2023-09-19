@@ -34,6 +34,7 @@ class StoreApartmentRequest extends FormRequest
             'visibility'=>'required',
             'description'=>'required',
             'cover_img'=>'required|image',
+            'services'=>'required|exists:services,id'
             
         ];
         
@@ -52,8 +53,10 @@ class StoreApartmentRequest extends FormRequest
             'address.max'=>'ERRORE: l indirizzo dell appartamento non deve essere lungo più di 250 caratteri',
             'visibility.required'=>'ERRORE: specificare se rendere visibile o nascosto l annuncio',
             'description.required'=>'ERRORE: la descrizione è obbligatoria',
-            'cover_img.image'=>'ERRORE: assicurati che il file caricato sia in formato png, jpeg, jpg',
+            'cover_img.image'=>'ERRORE: assicurati che il file caricato sia in formato png, jpeg, jpg, webpg',
             'cover_img.required'=>'ERRORE: è obbligatorio caricare un immagine',
+            'services.exists'=>'Seleziona un servizio valido',
+            'services.required'=>'inserisci almeno un servizio',
 
         ];
     }

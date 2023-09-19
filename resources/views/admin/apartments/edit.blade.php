@@ -73,7 +73,7 @@
                                         <li class="list-group-item col-5 d-flex align-items-center">
                                             @if($errors->any())
                                                 <input type="checkbox" name="services[]" value="{{ $item->id }}"
-                                                class="form-check-input me-4" {{in_array($item->id, old ('services', []))? 'checked': ''}}>
+                                                class="form-check-input me-4 @error('services') is-invalid @enderror" {{in_array($item->id, old ('services', []))? 'checked': ''}}>
                                             @else
                                             <input type="checkbox" name="services[]" value="{{ $item->id }}"
                                                 class="form-check-input me-4" {{$apartment->services->contains($item)? 'checked': ''}}>
@@ -83,6 +83,11 @@
                                                 {{ $item->type }}</label>
                                         </li>
                                     @endforeach
+                                    @error('services')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
 
                                 </ul>
                             </li>

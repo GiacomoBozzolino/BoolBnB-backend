@@ -38,6 +38,7 @@ class Apartment extends Model
         'longitude',
         'visibility',
         'description',
+        'service_id',
     ];
 
     public static function generateSlug($title){

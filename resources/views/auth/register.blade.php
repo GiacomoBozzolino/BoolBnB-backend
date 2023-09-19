@@ -13,12 +13,12 @@
                         {{-- name --}}
                             <div class="mb-4 row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome') }} <span class="text-success"> (facoltativo)</span></label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                        value="{{ old('name') }}" autocomplete="name" autofocus>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -28,41 +28,32 @@
                                 </div>
                             </div>
 
-                        {{-- surname --}}
+                        {{-- surname (facoltativo) --}}
                         <div class="mb-4 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}<span class="text-success"> (facoltativo)</span></label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" class="form-control @error('name') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
+                                <input id="surname" type="text" class="form-control" name="surname" value="{{ old('surname') }}"  autocomplete="surname" autofocus>
 
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                
                             </div>
                         </div>
                        
 
-                        {{-- date_of_birth --}}
+                        {{-- date_of_birth (facoltativo)--}}
                         <div class="mb-4 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}<span class="text-success"> (facoltativo)</span></label>
 
                             <div class="col-md-6">
-                                <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="date_of_birth" autofocus>
+                                <input id="date_of_birth" type="date" class="form-control"  name="date_of_birth" value="{{ old('date_of_birth') }}" autocomplete="date_of_birth" autofocus>
 
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
                             </div>
                         </div>
                         
                         {{-- address email --}}
                             <div class="mb-4 row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo e-mail') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo e-mail') }}<span class="text-danger"> *</span></label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -80,7 +71,7 @@
                         {{-- password --}}
                             <div class="mb-4 row">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}<span class="text-danger"> *</span></label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -97,7 +88,7 @@
 
                             <div class="mb-4 row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}<span class="text-danger"> *</span></label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"

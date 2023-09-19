@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Imposto la rota 
 
 Route::get('/apartments', [ApartmentController::class, 'index']);
+Route::get('/apartments/{slug}', [ApartmentController::class, 'show']);

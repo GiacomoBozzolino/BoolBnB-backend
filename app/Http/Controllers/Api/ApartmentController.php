@@ -20,4 +20,23 @@ class ApartmentController extends Controller
             'results' => $apartments
         ]);
     }
+
+
+    public function show ($slug){
+        $apartment =Apartment::with('services')->where('slug', $slug)->first();
+
+        if($apartment){
+            return response()->json([
+                'success' => true,
+                'apartment' => $apartment,
+            ]);
+        }
+
+        else{
+            return response()->json([
+                'success' => false,
+                'error' => 'nessun post trovato',
+            ]);
+        }
+    }
 }

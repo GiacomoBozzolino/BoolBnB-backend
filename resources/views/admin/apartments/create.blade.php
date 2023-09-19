@@ -106,8 +106,45 @@
                             <!-- Indirizzo -->
                             <li>
                                 <label class="control-label my-2">Inserisci il tuo indirizzo</label>
-                                <input type="text" name="address" id="address" placeholder="Inserisci il tuo indirizzo" value="{{old('address')}}"
+                                <input type="text" name="address" id="autocomplete-address" placeholder="Inserisci il tuo indirizzo" value="{{old('address')}}"
                                 class="form-control @error('address') is-invalid @enderror" required>
+
+                                <div id="address-results">
+                                    <!--inserimento risultati in tempo reale-->
+
+                                </div>
+
+                                <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
+
+                                <script>
+
+                                    var apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
+                                    var addressInput = document.getElementById('autocomplete-address');
+                                    var resultsContainer = document.getElementById('address-results');
+
+                                    addressInput.addEventListener('input', function(){
+                                        var searchValue = addressInput.value;
+
+                                        //richiesta AJAX
+                                        fetch('https://api.tomtom.com/search/2/search/'+searchValue+'.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true')
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            resultsContainer.innerHTML = ''; //cancella i risultati precedenti
+
+                                            if (data.results) {
+                                                data.results.forEach(result => {
+                                                    var resultItem = document.createElement('div');
+                                                    resultItem.textContent = result.address.freeformAddress; //mostra il risultato
+                                                    resultItem.classList.add('address-result-item');
+                                                    resultsContainer.appendChild(resultItem);
+                                                });
+                                            }
+                                        });
+                                    });
+
+                                </script>
+
+
 
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">

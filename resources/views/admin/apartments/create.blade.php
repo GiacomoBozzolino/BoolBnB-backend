@@ -118,12 +118,12 @@
 
                                 <script>
 
-                                    var apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
-                                    var addressInput = document.getElementById('autocomplete-address');
-                                    var resultsContainer = document.getElementById('address-results');
+                                    let apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
+                                    let addressInput = document.getElementById('autocomplete-address');
+                                    let resultsContainer = document.getElementById('address-results');
 
                                     addressInput.addEventListener('input', function(){
-                                        var searchValue = addressInput.value;
+                                        let searchValue = addressInput.value;
 
                                         //richiesta AJAX
                                         fetch('https://api.tomtom.com/search/2/search/'+searchValue+'.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true')
@@ -133,7 +133,7 @@
 
                                             if (data.results) {
                                                 data.results.forEach(result => {
-                                                    var resultItem = document.createElement('div');
+                                                    let resultItem = document.createElement('div');
                                                     resultItem.textContent = result.address.freeformAddress; //mostra il risultato
                                                     resultItem.classList.add('address-result-item');
                                                     resultsContainer.appendChild(resultItem);

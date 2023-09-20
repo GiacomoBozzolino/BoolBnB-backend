@@ -22,9 +22,9 @@
                 <div class="border border-light rounded-3 d-flex flex-wrap justify-content-start">
                     {{-- CARDS --}}
                     @foreach ($apartments as $apartment)
-                        <div class="m-4 d-flex border rounded-5 p-3" style="width: 40rem; ">
+                        <div class="m-4 d-flex border rounded-5 p-4" style="width: 40rem; ">
                             {{-- imagine --}}
-                            <div class="ratio ratio-4x3">
+                            <div class="">
                                 <img src="{{ asset('storage/' . $apartment->cover_img) }}"
                                     class="card-img-top ratio ratio-4x3 rounded-5" alt="{{ $apartment->title }}">
                             </div>
@@ -32,13 +32,27 @@
                             <div class="card-container ms-4">
                                 {{-- text card --}}
                                 <div class="card-body">
-                                    <h4 class="card-title text-center">{{ $apartment->title }}</h4>
-                                    <div class="description-card overflow-auto mt-2" style="height: 12rem">
-                                        <p class="card-text py-2 text-start">{{ $apartment->description }}</p>
+                                    <h4 class="card-title text-center ">{{ $apartment->title }}</h4>
+                                    <div class="description-card overflow-auto mt-2">
+                                        <p class="card-text
+                                        py-2 text-start">
+                                            {{ $apartment->description }} Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit. Accusantium eos quae, repudiandae illum eum voluptatum possimus, ipsam
+                                            excepturi libero id quia praesentium nostrum. Enim eveniet voluptatem neque
+                                            dicta molestias nesciunt?</p>
                                     </div>
                                 </div>
+                                {{-- Visibilita --}}
+                                <div class="visibility-container text-center mt-3">
+                                    @if ($apartment->visibility === 1)
+                                        <strong>Il tuo anuncio e <span class="badge text-bg-success">On-Line</span></strong>
+                                    @else
+                                        <strong>Il tuo annuncio e <span
+                                                class="badge text-bg-danger">Off-Line</span></strong>
+                                    @endif
+                                </div>
                                 {{-- servizi --}}
-                                <ul class="list-group list-group-flush text-center">
+                                <ul class="list-group list-group-flush text-center mt-2">
                                     <li class="list-group-item">
 
                                         @if (count($apartment->services) > 0)

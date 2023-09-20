@@ -19,13 +19,13 @@
                             <i class="fa-solid fa-plus"></i></a>
                     </div>
                 </div>
-                <div class="border border-light rounded-3 d-flex flex-wrap justify-content-evenly">
+                <div class="border border-light rounded-3 d-flex flex-wrap justify-content-start">
                     {{-- CARDS --}}
                     @foreach ($apartments as $apartment)
                         <div class="card m-4" style="max-width: 23rem; ">
                             <div class="ratio ratio-4x3">
-                                <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top ratio ratio-4x3"
-                                    alt="{{ $apartment->title }}">
+                                <img src="{{ asset('storage/' . $apartment->cover_img) }}"
+                                    class="card-img-top ratio ratio-4x3" alt="{{ $apartment->title }}">
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title text-center">{{ $apartment->title }}</h4>

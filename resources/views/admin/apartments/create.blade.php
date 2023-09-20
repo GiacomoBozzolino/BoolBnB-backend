@@ -142,6 +142,22 @@
                                         });
                                     });
 
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        var addressInput = document.getElementById('autocomplete-address');
+                                        var resultsContainer = document.getElementById('address-results');
+
+                                        // click sui risultiti 
+                                        resultsContainer.addEventListener('click', function(event) {
+                                            if (event.target && event.target.tagName == 'DIV') {
+                                                var selectedAddress = event.target.textContent;
+                                                addressInput.value = selectedAddress;
+                                                addressInput.focus(); //focus su input
+                                                resultsContainer.innerHTML = ''; //svuoto i risultati proposti 
+                                                document.activeElement.blur(); //simula il click fuori dall'area dei risultati
+                                            }
+                                        });
+                                    });
+
                                 </script>
 
 

@@ -29,17 +29,61 @@
                         </p>
                         <p class="card-text">Breve descrizione: <strong>{{ $apartment->description }}</strong></p>
                         <p class="card-text">Servizi: <strong>
-                                <ul class="card-list list-unstyled ms-5">
-                                    @if (count($apartment->services) > 0)
-                                        @foreach ($apartment->services as $item)
-                                            <li><?php echo $item->icon; ?> {{ $item->type }}</li>
-                                        @endforeach
-                                    @else
-                                        <li>Non ci sono servizi inseriti</li>
-                                    @endif
-                                </ul>
+                            <ul class="card-list list-unstyled ms-5">
+                                @if (count($apartment->services) > 0)
+                                    @foreach ($apartment->services as $item)
+                                        <li><?php echo $item->icon; ?> {{ $item->type }}</li>
+                                    @endforeach
+                                @else
+                                    <li>Non ci sono servizi inseriti</li>
+                                @endif
+                            </ul>
 
-                            </strong></p>
+                        </strong></p>
+
+                        <!--inizio mappa-->
+
+                        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
+
+                        <div id="map" style="width: 100%; height: 500px;"></div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function(){
+                                let apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
+                                let apartmentLat = {{ $apartment->latitude }};
+                                let apartmentLgn = {{ $apartment->longitude }};
+
+                                let map = tt.map({
+                                    key: apiKey,
+                                    container: 'map',
+                                    center: [apartmentLgn, apartmentLat],
+                                    zoom: 15
+                                });
+
+                                let markerHeight = 50, markerRadius = 10, linearOffset = 25;
+                                let popupOffsets = {
+                                    'top': [0,0],
+                                    'top-left': [0,0],
+                                    'top-right': [0,0],
+                                    'bottom': [0, -markerHeight],
+                                    'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                                    'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                                    'left': [markerRadius, (markerHeight - markerRadius) * -1],
+                                    'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+                                };
+
+                                // Aggiungi un gestore di eventi per il click sulla mappa
+                                map.on('click', function(e) {
+                                    let popup = new tt.Popup({offset: popupOffsets, className: 'my-class'})
+                                        .setLngLat(e.lngLat)
+                                        .setHTML("<h1>Hello i'm a popup</h1>")
+                                        .addTo(map);
+                                });
+
+                                let marker = new tt.Marker().setLngLat([apartmentLgn, apartmentLat]).addTo(map);
+                            });
+                        </script>
+
                         <a href="{{ Route('admin.apartments.index') }}" class="btn btn-primary">Back Home</a>
                         {{-- <p class="card-text"> {{ $posts->category->name }} </p> --}}
                         <div class="col-12">

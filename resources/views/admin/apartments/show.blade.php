@@ -39,7 +39,60 @@
                                     @endif
                                 </ul>
 
-                            </strong></p>
+                            </strong>
+                        </p>
+
+
+                        <!--inizio mappa-->
+
+                        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
+                        <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+
+
+                        <div id="map" style="width: 100%; height: 500px;"></div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                // CONFIGURAZIONE API KEY LAT E LONG
+                                let apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
+                                let apartmentLat = {{ $apartment->latitude }};
+                                let apartmentLgn = {{ $apartment->longitude }};
+                                // CONFIGURAZIONE MAPPA 
+                                let map = tt.map({
+                                    key: apiKey,
+                                    container: 'map',
+                                    center: [apartmentLgn, apartmentLat],
+                                    zoom: 13
+                                });
+                                // DATI MARKER
+                                let markerHeight = 50;
+                                let markerRadius = 10;
+                                let linearOffset = 25;
+
+                                let popupOffsets = {
+                                    'top': [0, 0],
+                                    'top-left': [0, 0],
+                                    'top-right': [0, 0],
+                                    'bottom': [0, -markerHeight],
+                                    'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                                    'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                                    'left': [markerRadius, (markerHeight - markerRadius) * -1],
+                                    'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+                                };
+                                // Aggiungi un gestore di eventi per il click sulla mappa
+                                map.on('click', function(e) {
+                                    let popup = new tt.Popup({
+                                            offset: popupOffsets,
+                                            className: 'my-class'
+                                        })
+                                        .setLngLat(e.lngLat)
+                                        .setHTML("<span>{{ $apartment->address }}</span>")
+                                        .addTo(map);
+                                });
+                                let marker = new tt.Marker().setLngLat([apartmentLgn, apartmentLat]).addTo(map);
+                            });
+                        </script>
+
                         <a href="{{ Route('admin.apartments.index') }}" class="btn btn-primary">Back Home</a>
                         {{-- <p class="card-text"> {{ $posts->category->name }} </p> --}}
                         <div class="col-12">

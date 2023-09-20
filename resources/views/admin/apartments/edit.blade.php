@@ -128,13 +128,65 @@
                             <!-- Indrizzo -->
                             <li>
                                 <label class="control-label my-2">Inserisci il tuo indirizzo</label>
-                                <input type="text" name="address" id="address" placeholder="Inserisci il tuo indirizzo"
+                                <input type="text" name="address" id="autocomplete-address" placeholder="Inserisci il tuo indirizzo"
                                     class="form-control @error('address') is-invalid @enderror" value="{{ old('address') ?? $apartment->address }}" required>
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+
+                                <div id="address-results">
+                                    <!--inserimento risultati in tempo reale-->
+
+                                </div>
+
+                                <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
+
+                                <script>
+
+                                    let apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
+                                    let addressInput = document.getElementById('autocomplete-address');
+                                    let resultsContainer = document.getElementById('address-results');
+
+                                    addressInput.addEventListener('input', function(){
+                                        let searchValue = addressInput.value;
+
+                                        //richiesta AJAX
+                                        fetch('https://api.tomtom.com/search/2/search/'+searchValue+'.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true')
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            resultsContainer.innerHTML = ''; //cancella i risultati precedenti
+
+                                            if (data.results) {
+                                                data.results.forEach(result => {
+                                                    let resultItem = document.createElement('div');
+                                                    resultItem.textContent = result.address.freeformAddress; //mostra il risultato
+                                                    resultItem.classList.add('address-result-item');
+                                                    resultsContainer.appendChild(resultItem);
+                                                });
+                                            }
+                                        });
+                                    });
+
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        var addressInput = document.getElementById('autocomplete-address');
+                                        var resultsContainer = document.getElementById('address-results');
+
+                                        // click sui risultiti 
+                                        resultsContainer.addEventListener('click', function(event) {
+                                            if (event.target && event.target.tagName == 'DIV') {
+                                                var selectedAddress = event.target.textContent;
+                                                addressInput.value = selectedAddress;
+                                                addressInput.focus(); //focus su input
+                                                resultsContainer.innerHTML = ''; //svuoto i risultati proposti 
+                                                document.activeElement.blur(); //simula il click fuori dall'area dei risultati
+                                            }
+                                        });
+                                    });
+
+                                </script>
+                                
                             </li>
 
                             <!-- Visibili -->

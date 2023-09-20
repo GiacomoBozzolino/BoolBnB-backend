@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Service;
-
+use TomTom\Telematics\Endpoints\Geocoding\GeocodeQuery;
 use GuzzleHttp\Client;
 use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
@@ -186,4 +186,38 @@ class ApartmentController extends Controller
 
         return redirect()->route('admin.apartments.index', compact('message'));
     }
+
+    public function searchAddress(Request $request)
+    {
+        $searchTerm = $request->input('address');
+        $apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
+
+        //ricerca degli indirizzi con tom tom 
+        $query = GeocodeQuery::create($searchTerm)->withMaxResults(10);
+        $results = $this->performTomTomGeocoding($query, $apiKey);
+
+        return response()->json(['results' => $results]);
+    }
+
+    public function saveAddress(Request $request)
+    {
+        $selectedAddress = $request->input('selected_address');
+    }
+
+    private function performTomTomGeocoding($query, $apiKey)
+{
+    $client = new Client();
+    $response = $client->get("https://api.tomtom.com/search/2/search/{$query}.json", [
+        'query' => [
+            'key' => $apiKey,
+        ],
+    ]);
+
+    $data = json_decode($response->getBody());
+
+    // Estrai i risultati o le informazioni necessarie dalla risposta
+    $results = $data->results;
+
+    return $results;
+}
 }

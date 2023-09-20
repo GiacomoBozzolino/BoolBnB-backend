@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 
 use App\Models\User;
 use App\Models\Service;
+use App\Models\Lead;
 
 class Apartment extends Model
 {
@@ -19,9 +20,13 @@ class Apartment extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+    // CONNESSIONE A USER
     public function services() {
         return $this->belongsToMany(Service::class);
+    }
+    // CONNESSIONE A LEADS(MESSAGI)
+    public function leads(){
+        return $this->belongsTo(Lead::class);
     }
 
     protected $fillable = [

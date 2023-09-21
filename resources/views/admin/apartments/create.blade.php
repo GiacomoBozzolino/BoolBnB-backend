@@ -122,7 +122,7 @@
                             <li>
                                 <label class="control-label my-2">Inserisci il tuo indirizzo</label>
                                 <span class="text-danger"> *</span>
-                                <input type="text" name="address" id="address" placeholder="Inserisci il tuo indirizzo" value="{{old('address')}}"
+                                <input type="text" name="address" id="autocomplete-address" placeholder="Inserisci il tuo indirizzo" value="{{old('address')}}"
                                 class="form-control @error('address') is-invalid @enderror" required>
 
                                 <div id="address-results">

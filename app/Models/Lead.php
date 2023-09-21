@@ -15,7 +15,7 @@ class Lead extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'message'];
+    protected $fillable = ['name', 'email', 'content'];
 
     public function apartments(): HasMany{
         return $this->hasMany(Apartment::class);

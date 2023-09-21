@@ -26,7 +26,7 @@ class Apartment extends Model
     }
     // CONNESSIONE A LEADS(MESSAGI)
     public function leads(){
-        return $this->belongsTo(Lead::class);
+        return $this->hasMany(Lead::class);
     }
 
     protected $fillable = [

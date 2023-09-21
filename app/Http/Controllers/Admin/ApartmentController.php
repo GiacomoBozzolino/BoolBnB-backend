@@ -102,13 +102,13 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Apartment $apartment, Lead $lead)
+    public function show(Request $request, Apartment $apartment, )
     {
         $message = $request->query->get('message');
-        $lead = Lead::all();
+       
         
 
-        return view('admin.apartments.show', compact('apartment', 'message', 'lead'));
+        return view('admin.apartments.show', compact('apartment', 'message'));
     }
 
     /**

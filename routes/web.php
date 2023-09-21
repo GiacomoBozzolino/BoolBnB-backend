@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ApartmentController as ApartmentController;;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
+use App\Http\Controllers\Admin\LeadController as LeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::get('/', function () {
 Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(function(){
     Route::get('/', [ApartmentController::class,'index'])->name('dashboard');
     Route:: resource('apartments', ApartmentController::class);
+    Route:: resource('leads', LeadController::class);
 });
 
 Route::middleware('auth')->group(function () {

@@ -120,19 +120,22 @@
             </div>
         </div>
            <!--fine mappa-->
-           <strong class="d-flex flex-wrap">
-           
-                    @foreach ($apartment->leads as $item)
-                        <ul>
-                            <li>
-                                {{$item->email}}
-                            </li>
-                        </ul>
-                    @endforeach
-                {{-- @else
-                    <h5><span class="badge text-bg-warning rounded-pill">Non ci sono messagi</span>
-                    </h5>
-                @endif --}}
-        </strong>
+              
+        @foreach ($apartment->leads as $item)
+            <ul>
+                <li>
+                    nome: {{ $item->name }}
+                </li>
+                <li>
+                    Email del cliente: {{ $item->email }}
+                </li>
+                <li>
+                    Messaggio: {{ $item->content }}
+                </li>
+                <li>
+                    Inviato alle: {{$item->created_at}}
+                </li>
+            </ul>
+        @endforeach
     </div>
 @endsection

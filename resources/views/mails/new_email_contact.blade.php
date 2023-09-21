@@ -1,4 +1,4 @@
-<h1> Nuovo contatto ricevuto da form Boolfolio</h1>
+<h1> Nuovo contatto ricevuto da form BoolBnB</h1>
 
 <p>
     Hai ricevuto un nuovo messaggio:<br><br>

@@ -53,8 +53,6 @@
                                 <h5><span class="badge text-bg-warning rounded-pill">Non ci sono servizi inseriti</span>
                                 </h5>
                             @endif
-
-
                         </strong>
                         {{-- tasti con realtive sulla col-12 --}}
 
@@ -121,5 +119,20 @@
                 </script>
             </div>
         </div>
+           <!--fine mappa-->
+           <strong class="d-flex flex-wrap">
+           
+                    @foreach ($apartment->leads as $item)
+                        <ul>
+                            <li>
+                                {{$item->email}}
+                            </li>
+                        </ul>
+                    @endforeach
+                {{-- @else
+                    <h5><span class="badge text-bg-warning rounded-pill">Non ci sono messagi</span>
+                    </h5>
+                @endif --}}
+        </strong>
     </div>
 @endsection

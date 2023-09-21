@@ -7,17 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 // import
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 use App\Models\Apartment;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Lead extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'message'];
+    protected $fillable = ['name', 'email', 'content', 'apartment_id'];
 
-    public function apartments(): HasMany{
-        return $this->hasMany(Apartment::class);
+    public function apartments(): BelongsTo{
+        return $this->belongsTo(Apartment::class);
     }
 }

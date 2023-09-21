@@ -13,6 +13,7 @@ use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Lead;
 
 class ApartmentController extends Controller
 {
@@ -101,9 +102,11 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Apartment $apartment)
+    public function show(Request $request, Apartment $apartment, )
     {
         $message = $request->query->get('message');
+       
+        
 
         return view('admin.apartments.show', compact('apartment', 'message'));
     }

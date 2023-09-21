@@ -10,7 +10,7 @@
                     </div>
                 </div>
             @endif
-            <div class="col-12 d-flex mt-5 position-relative">
+            <div class="col-12 d-flex mt-5 position-relativeshadow border p-4 rounded-4 shadow">
                 <div class="img-container">
                     <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top" alt="">
                 </div>
@@ -66,9 +66,41 @@
                     </div>
                 </div>
             </div>
-
+            {{-- Inizio messaggi --}}
+            <div class="col-6 border mt-5 rounded-4 shadow ">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Messaggio</th>
+                            <th scope="col">Inviato alle</th>
+                            <th scope="col">Strumenti</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($apartment->leads as $item)
+                            <tr>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
+                                <td>{{ $item->created_at }}</td>
+                                <td>
+                                    <div>
+                                        <a href="{{ route('admin.leads.index', $apartment->id) }}"
+                                            class="btn btn-sm mx-1 rounded-5 btn-show">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <!--inizio mappa-->
-            <div class="col-12 mt-5">
+            <div class="col-6
+                                    mt-5 shadow ">
 
                 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
                 <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
@@ -119,23 +151,6 @@
                 </script>
             </div>
         </div>
-           <!--fine mappa-->
-              
-        @foreach ($apartment->leads as $item)
-            <ul>
-                <li>
-                    nome: {{ $item->name }}
-                </li>
-                <li>
-                    Email del cliente: {{ $item->email }}
-                </li>
-                <li>
-                    Messaggio: {{ $item->content }}
-                </li>
-                <li>
-                    Inviato alle: {{$item->created_at}}
-                </li>
-            </ul>
-        @endforeach
+        <!--fine mappa-->
     </div>
 @endsection

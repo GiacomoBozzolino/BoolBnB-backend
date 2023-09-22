@@ -127,40 +127,40 @@
 
                                 <div id="address-results">
                                     <!--inserimento risultati in tempo reale-->
-
                                 </div>
+
+                                <div id="address-error" class="text-danger"></div>
 
                                 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
 
                                 <script>
-
-                                    let apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
-                                    let addressInput = document.getElementById('autocomplete-address');
-                                    let resultsContainer = document.getElementById('address-results');
-
-                                    addressInput.addEventListener('input', function(){
-                                        let searchValue = addressInput.value;
-
-                                        //richiesta AJAX
-                                        fetch('https://api.tomtom.com/search/2/search/'+searchValue+'.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true')
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            resultsContainer.innerHTML = ''; //cancella i risultati precedenti
-
-                                            if (data.results) {
-                                                data.results.forEach(result => {
-                                                    let resultItem = document.createElement('div');
-                                                    resultItem.textContent = result.address.freeformAddress; //mostra il risultato
-                                                    resultItem.classList.add('address-result-item');
-                                                    resultsContainer.appendChild(resultItem);
-                                                });
-                                            }
-                                        });
-                                    });
-
                                     document.addEventListener('DOMContentLoaded', function() {
                                         var addressInput = document.getElementById('autocomplete-address');
                                         var resultsContainer = document.getElementById('address-results');
+                                        var errorContainer = document.getElementById('address-error');
+
+                                        addressInput.addEventListener('input', function(){
+                                            let searchValue = addressInput.value;
+
+                                            //richiesta AJAX
+                                            fetch('https://api.tomtom.com/search/2/search/'+searchValue+'.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true')
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                resultsContainer.innerHTML = ''; //cancella i risultati precedenti
+
+                                                if (data.results && data.results.length > 0) {
+                                                    data.results.forEach(result => {
+                                                        let resultItem = document.createElement('div');
+                                                        resultItem.textContent = result.address.freeformAddress; //mostra il risultato
+                                                        resultItem.classList.add('address-result-item');
+                                                        resultsContainer.appendChild(resultItem);
+                                                    });
+                                                    errorContainer.textContent = ''; // Cancella il messaggio di errore se presente
+                                                } else {
+                                                    errorContainer.textContent = 'Nessun risultato trovato. Inserisci un indirizzo valido.';
+                                                }
+                                            });
+                                        });
 
                                         // click sui risultiti 
                                         resultsContainer.addEventListener('click', function(event) {
@@ -173,15 +173,12 @@
                                             }
                                         });
                                     });
-
                                 </script>
 
-
-
                                 @error('address')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </li>
 

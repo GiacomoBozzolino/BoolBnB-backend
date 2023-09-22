@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light nav-background shadow-sm fixed z-3">
 
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center transition-logo" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex align-items-center transition-logo" href="{{ url('http://localhost:5174/') }}">
                     <div class="logo-laravel">
                         <h2 class="logo p-4 rounded-5 shadow-lg"><i class="fa-solid fa-earth-europe"></i>BoolBnB</h2>
                     </div>

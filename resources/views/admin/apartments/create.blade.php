@@ -44,6 +44,7 @@
                                 <label class="control-label my-2">Numero delle stanze</label>
                                 <span class="text-danger"> *</span>
                                 <select class="form-control" name="n_rooms" id="n_rooms" required>
+                                    <option value="" disabled selected>Seleziona il numero di stanze</option>
                                     @for ($i = 1; $i <= 9; $i++)
                                         <option value="{{ $i }}" @selected(old('n_rooms') == $i)>{{ $i }} </option>
                                     @endfor
@@ -55,6 +56,7 @@
                                 <label class="control-label my-2">Numero delle stanze da letto</label>
                                 <span class="text-danger"> *</span>
                                 <select class="form-control" name="n_beds" id="n_beds" required>
+                                    <option value="" disabled selected>Seleziona il numero di stanze da letto</option>
                                     @for ($i = 1; $i <= 9; $i++)
                                         <option value="{{$i}}" @selected(old('n_beds') == $i)>{{ $i }}</option>
                                     @endfor
@@ -66,6 +68,7 @@
                                 <label class="control-label my-2">Numero bagni</label>
                                 <span class="text-danger"> *</span>
                                 <select class="form-control" name="n_bathrooms" id="n_bathrooms" required>
+                                    <option value="" disabled selected>Seleziona il numero di bagni</option>
                                     @for ($i = 1; $i <= 10; $i++)
                                         <option value="{{ $i }}" @selected(old('n_bathrooms') == $i)>{{ $i }}</option>
                                     @endfor

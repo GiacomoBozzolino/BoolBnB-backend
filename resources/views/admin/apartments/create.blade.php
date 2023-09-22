@@ -82,19 +82,35 @@
                                 <ul class="list-group d-flex flex-row flex-wrap justify-content-evenly my-3 ">
                                     @foreach ($services as $item)
                                         <li class="list-group-item col-5 d-flex align-items-center  @error('services') is-invalid @enderror">
-                                            <input type="checkbox" name="services[]" value="{{ $item->id }}"
+                                            <input id="servizi" type="checkbox" name="services[]" value="{{ $item->id }}"
                                                 class="form-check-input me-4"
                                                 {{ in_array($item->id, old('services', [])) ? 'checked' : '' }} >
                                             <label class="control-label my-2 text-capitalize" ><?php echo $item->icon; ?>
                                                 {{ $item->type }}</label>
                                         </li>
+
                                         
                                     @endforeach
+
                                     @error('services')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+
+                                    {{-- <script>
+                                        let service = document.getElementById('#servizi')
+                                        let button = document.querySelector('.btn')
+
+                                        if (service === 'checked') {
+                                            
+                                            button.disabled = false
+                                            
+                                        } else{
+                                            button.disalbled = true
+                                        }
+                                        
+                                    </script> --}}
                                 </ul>
                             </li>
 
@@ -150,6 +166,7 @@
                                             .then(response => response.json())
                                             .then(data => {
                                                 resultsContainer.innerHTML = ''; //cancella i risultati precedenti
+                                                let button = document.querySelector('.btn')
 
                                                 if (data.results && data.results.length > 0) {
                                                     data.results.forEach(result => {
@@ -159,8 +176,10 @@
                                                         resultsContainer.appendChild(resultItem);
                                                     });
                                                     errorContainer.textContent = ''; // Cancella il messaggio di errore se presente
+                                                    button.disabled = false
                                                 } else {
                                                     errorContainer.textContent = 'Nessun risultato trovato. Inserisci un indirizzo valido.';
+                                                    button.disabled = true
                                                 }
                                             });
                                         });

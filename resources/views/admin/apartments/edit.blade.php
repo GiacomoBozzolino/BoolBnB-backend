@@ -153,7 +153,7 @@
                                             .then(response => response.json())
                                             .then(data => {
                                                 resultsContainer.innerHTML = ''; //cancella i risultati precedenti
-
+                                                let button = document.querySelector('.btn')
                                                 if (data.results && data.results.length > 0) {
                                                     data.results.forEach(result => {
                                                         let resultItem = document.createElement('div');
@@ -161,9 +161,11 @@
                                                         resultItem.classList.add('address-result-item');
                                                         resultsContainer.appendChild(resultItem);
                                                     });
+                                                    button.disabled = false
                                                     errorContainer.textContent = ''; // Cancella il messaggio di errore se presente
                                                 } else {
                                                     errorContainer.textContent = 'Nessun risultato trovato. Inserisci un indirizzo valido.';
+                                                    button.disabled = true
                                                 }
                                             });
                                         });

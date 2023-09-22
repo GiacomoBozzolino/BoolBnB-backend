@@ -163,9 +163,11 @@
                                                     });
                                                     button.disabled = false
                                                     errorContainer.textContent = ''; // Cancella il messaggio di errore se presente
+                                                    
                                                 } else {
                                                     errorContainer.textContent = 'Nessun risultato trovato. Inserisci un indirizzo valido.';
                                                     button.disabled = true
+                                                    
                                                 }
                                             });
                                         });

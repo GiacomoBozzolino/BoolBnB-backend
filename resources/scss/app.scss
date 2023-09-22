@@ -191,3 +191,8 @@ tr:hover {
     height: 150px;
     width: 250px;
 }
+
+
+.btn:disabled{
+    background-color: rgb(142, 140, 140);
+}

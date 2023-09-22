@@ -22,7 +22,7 @@
             @endif --}}
 
             <div class="col-12 mb-5">
-                <form action=" {{ Route('admin.apartments.store') }} " method="POST" enctype="multipart/form-data">
+                <form action=" {{ Route('admin.apartments.store') }} " method="POST" enctype="multipart/form-data" autocomplete="off">
                     @csrf
                     <div class="form-group p-4">
                         <ul class="list-unstyled">

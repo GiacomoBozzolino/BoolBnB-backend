@@ -82,19 +82,35 @@
                                 <ul class="list-group d-flex flex-row flex-wrap justify-content-evenly my-3 ">
                                     @foreach ($services as $item)
                                         <li class="list-group-item col-5 d-flex align-items-center  @error('services') is-invalid @enderror">
-                                            <input type="checkbox" name="services[]" value="{{ $item->id }}"
+                                            <input id="servizi" type="checkbox" name="services[]" value="{{ $item->id }}"
                                                 class="form-check-input me-4"
                                                 {{ in_array($item->id, old('services', [])) ? 'checked' : '' }} >
                                             <label class="control-label my-2 text-capitalize" ><?php echo $item->icon; ?>
                                                 {{ $item->type }}</label>
                                         </li>
+
                                         
                                     @endforeach
+
                                     @error('services')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+
+                                    {{-- <script>
+                                        let service = document.getElementById('#servizi')
+                                        let button = document.querySelector('.btn')
+
+                                        if (service === 'checked') {
+                                            
+                                            button.disabled = false
+                                            
+                                        } else{
+                                            button.disalbled = true
+                                        }
+                                        
+                                    </script> --}}
                                 </ul>
                             </li>
 
@@ -130,40 +146,43 @@
 
                                 <div id="address-results">
                                     <!--inserimento risultati in tempo reale-->
-
                                 </div>
+
+                                <div id="address-error" class="text-danger"></div>
 
                                 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
 
                                 <script>
-
-                                    let apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
-                                    let addressInput = document.getElementById('autocomplete-address');
-                                    let resultsContainer = document.getElementById('address-results');
-
-                                    addressInput.addEventListener('input', function(){
-                                        let searchValue = addressInput.value;
-
-                                        //richiesta AJAX
-                                        fetch('https://api.tomtom.com/search/2/search/'+searchValue+'.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true')
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            resultsContainer.innerHTML = ''; //cancella i risultati precedenti
-
-                                            if (data.results) {
-                                                data.results.forEach(result => {
-                                                    let resultItem = document.createElement('div');
-                                                    resultItem.textContent = result.address.freeformAddress; //mostra il risultato
-                                                    resultItem.classList.add('address-result-item');
-                                                    resultsContainer.appendChild(resultItem);
-                                                });
-                                            }
-                                        });
-                                    });
-
                                     document.addEventListener('DOMContentLoaded', function() {
                                         var addressInput = document.getElementById('autocomplete-address');
                                         var resultsContainer = document.getElementById('address-results');
+                                        var errorContainer = document.getElementById('address-error');
+
+                                        addressInput.addEventListener('input', function(){
+                                            let searchValue = addressInput.value;
+
+                                            //richiesta AJAX
+                                            fetch('https://api.tomtom.com/search/2/search/'+searchValue+'.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true')
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                resultsContainer.innerHTML = ''; //cancella i risultati precedenti
+                                                let button = document.querySelector('.btn')
+
+                                                if (data.results && data.results.length > 0) {
+                                                    data.results.forEach(result => {
+                                                        let resultItem = document.createElement('div');
+                                                        resultItem.textContent = result.address.freeformAddress; //mostra il risultato
+                                                        resultItem.classList.add('address-result-item');
+                                                        resultsContainer.appendChild(resultItem);
+                                                    });
+                                                    errorContainer.textContent = ''; // Cancella il messaggio di errore se presente
+                                                    button.disabled = false
+                                                } else {
+                                                    errorContainer.textContent = 'Nessun risultato trovato. Inserisci un indirizzo valido.';
+                                                    button.disabled = true
+                                                }
+                                            });
+                                        });
 
                                         // click sui risultiti 
                                         resultsContainer.addEventListener('click', function(event) {
@@ -176,15 +195,12 @@
                                             }
                                         });
                                     });
-
                                 </script>
 
-
-
                                 @error('address')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </li>
 

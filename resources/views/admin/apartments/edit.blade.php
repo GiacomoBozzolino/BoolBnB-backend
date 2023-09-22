@@ -10,8 +10,7 @@
             </div>
             
             <div class="col-12 mb-5">
-                <form action=" {{ Route('admin.apartments.update', $apartment->id) }} " method="POST"
-                    enctype="multipart/form-data">
+                <form action=" {{ Route('admin.apartments.update', $apartment->id) }} " method="POST" enctype="multipart/form-data" autocomplete="off">
                     {{-- TOKEN --}}
                     @csrf
                     {{-- METHOD PUT --}}

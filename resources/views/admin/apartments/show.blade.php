@@ -10,7 +10,7 @@
                     </div>
                 </div>
             @endif
-            <div class="col-12 d-flex mt-5 position-relativeshadow border p-4 rounded-4 shadow">
+            <div class="col-12 d-flex mt-5 position-relative shadow border p-4 rounded-4">
                 <div class="img-container">
                     <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top" alt="">
                 </div>
@@ -56,7 +56,7 @@
                         </strong>
                         {{-- tasti con realtive sulla col-12 --}}
 
-                        <div class="position-absolute top-0 end-0 me-5">
+                        <div class="position-absolute top-0 end-0 me-5 mt-3">
                             <a href="{{ Route('admin.apartments.index') }}" class="btn btn-primary"> <i
                                     class="fa-solid fa-house"></i> Back Home</a>
                             <a href="{{ route('admin.apartments.edit', $apartment->id) }}" class="btn btn-warning">

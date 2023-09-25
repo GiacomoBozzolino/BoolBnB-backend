@@ -27,3 +27,4 @@ Route::get('/apartments', [ApartmentController::class, 'index']);
 Route::get('/apartments/{slug}', [ApartmentController::class, 'show']);
 Route::post('/contacts', [LeadController::class, 'store']);
 Route::get('/search', [ApartmentController::class, "search"]);
+Route::get('/searchAdvanced', [ApartmentController::class, "searchAdvanced"]);

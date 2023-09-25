@@ -14,6 +14,7 @@ use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
+use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
 class ApartmentController extends Controller
 {
@@ -27,6 +28,14 @@ class ApartmentController extends Controller
         $message = $request->query->get('message');
         // DARE ID UTENTI A APPARTAMENTI
         $apartments = auth()->user()->apartments;
+
+
+
+
+
+        
+
+
         return view('admin.apartments.index', compact('apartments', 'message'));
     }
 
@@ -105,8 +114,32 @@ class ApartmentController extends Controller
     public function show(Request $request, Apartment $apartment, )
     {
         $message = $request->query->get('message');
+
+
+        // $user_id = auth()->user()->id;
        
+        $user = auth()->user();
+        // dd($user->apartments);
+
         
+
+        
+
+        // CONTROLLO SE, IL APPARTAMENTO CHE MI è STATO PASSATO, CORRISPONDE AL APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
+        if ($user->apartments->contains($apartment)){
+
+            // RITORNO LA SHOW DEL apartment
+            return view('admin.apartments.show', compact('apartment'));
+           
+           
+
+        } else {
+
+            // RIMANDO L'UTENTE NELLA PAGINA DI PARTENZA
+            return redirect()->route('admin.apartments.index', compact('apartment'));
+        }
+
+
 
         return view('admin.apartments.show', compact('apartment', 'message'));
     }

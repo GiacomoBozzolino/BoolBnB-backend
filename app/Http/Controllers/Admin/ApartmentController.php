@@ -128,7 +128,7 @@ class ApartmentController extends Controller
         // CONTROLLO SE, IL APPARTAMENTO CHE MI è STATO PASSATO, CORRISPONDE AL APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
         if ($user->apartments->contains($apartment)){
 
-            // RITORNO LA SHOW DEL apartment
+            // RITORNO LA SHOW DEL APARTMENT
             return view('admin.apartments.show', compact('apartment'));
            
            
@@ -155,6 +155,29 @@ class ApartmentController extends Controller
         
 
         $services = Service::all();
+
+
+        $user = auth()->user();
+        // dd($user->apartments);
+
+        
+
+        
+
+        // CONTROLLO SE, IL APPARTAMENTO CHE MI è STATO PASSATO, CORRISPONDE AL APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
+        if ($user->apartments->contains($apartment)){
+
+            // RITORNO LA SHOW DEL APARTMENT
+            return view('admin.apartments.edit', compact('apartment', 'services'));
+           
+           
+
+        } else {
+
+            // RIMANDO L'UTENTE NELLA PAGINA DI PARTENZA
+            return redirect()->route('admin.apartments.index', compact('apartment', 'services'));
+        }
+
 
         return view('admin.apartments.edit', compact('apartment', 'services'));
     }

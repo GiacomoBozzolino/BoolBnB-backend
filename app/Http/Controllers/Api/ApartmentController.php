@@ -51,9 +51,7 @@ class ApartmentController extends Controller
         $response = Http::get($url, [
             'key' => $apiKey
         ]);
-
-       
-
+        
         $data = json_decode($response->getBody());
 
         // Estrai le coordinate dalla risposta
@@ -63,12 +61,18 @@ class ApartmentController extends Controller
         $apartmentLatitude = $coordinates->lat;
         $apartmentLongitude = $coordinates->lon;
 
-        $apartments = Apartment::select('apartments.*')
-        ->where('visibility',1)
-        ->where('latitude',$apartmentLatitude )
-        ->where('longitude',$apartmentLongitude )
-        ->get();
+        // Calcola la distanza in chilometri (utilizzando la formula Haversine)
+    $distance = 20; // Raggio in chilometri
 
+    $apartments = Apartment::select('apartments.*')
+        ->selectRaw(
+            '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
+            [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
+        )
+        ->where('visibility', 1)
+        ->having('distance', '<', $distance)
+        ->orderBy('distance')
+        ->get();
 
         return response()->json($apartments);
     }

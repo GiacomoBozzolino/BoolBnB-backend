@@ -29,13 +29,6 @@ class ApartmentController extends Controller
         // DARE ID UTENTI A APPARTAMENTI
         $apartments = auth()->user()->apartments;
 
-
-
-
-
-        
-
-
         return view('admin.apartments.index', compact('apartments', 'message'));
     }
 

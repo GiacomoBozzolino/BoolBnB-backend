@@ -14,6 +14,7 @@ use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
+use App\Http\Controllers\Api\LeadController;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
 class ApartmentController extends Controller
@@ -111,11 +112,11 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Apartment $apartment, )
+    public function show(Request $request, Apartment $apartment, Lead $lead )
     {
         $message = $request->query->get('message');
 
-
+        
         // $user_id = auth()->user()->id;
        
         $user = auth()->user();

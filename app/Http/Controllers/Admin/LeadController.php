@@ -24,7 +24,10 @@ class LeadController extends Controller
 
     public function show(Lead $lead)
     {
+        
+        
         return view('admin.leads.show', compact('lead'));
+        
     }
 
 

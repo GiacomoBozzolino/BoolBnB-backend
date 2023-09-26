@@ -86,17 +86,23 @@
                                 <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>
-                                    <div>
-                                        <a href="{{ route('admin.leads.index', $apartment->id) }}"
+                                    <div class="d-flex justify-content-center pt-3">
+                                        <a href="{{ route('admin.leads.show', $item->id) }}"
                                             class="btn btn-sm mx-1 rounded-5 btn-show">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                    </div>
+                                            <i class="fa-solid fa-eye"></i></a>
+                                    </div> 
                                 </td>
+                                
                             </tr>
                         @endforeach
+                        
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center pt-3">
+                    <a href="{{ route('admin.leads.index', $apartment->id) }}"
+                        class="btn btn-sm mx-1 rounded-5 btn-show">
+                        <i class="fa-solid fa-eye"></i> guarda tutti i messaggi</a>
+                </div>
             </div>
             <!--inizio mappa-->
             <div class="col-6

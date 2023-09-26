@@ -27,9 +27,11 @@
                     
                      <div class="col-3 border-message m-3 bg-light">
                         <p class="p-3 border-b"><strong>MITTENTE</strong>: {{$lead->name}}</p>
-                        <p class="p-3 mb-0"><strong>email:</strong> {{$lead->email}}</p>
-                        <p class="p-3 mb-0"><strong>contenuto del messaggio:</strong></p>
-                        
+                        <p class="p-3 mb-0"><strong>Email:</strong> {{$lead->email}}</p>
+                        <p class="p-3 mb-0"><strong>Contenuto del messaggio:</strong></p>
+                        <div class="container-content ff border-message m-3 mt-0 p-2">
+                            <p>{{$lead->content}}</p>
+                        </div>
                         
                         
                      </div>

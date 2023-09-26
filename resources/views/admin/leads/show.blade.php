@@ -11,7 +11,7 @@
                 <p class="p-3 border-b"><strong>MITTENTE</strong>: {{$lead->name}}</p>
                 <p class="p-3 mb-0"><strong>Email:</strong> {{$lead->email}}</p>
                 <p class="p-3 mb-0"><strong>Contenuto del messaggio:</strong></p>
-                <div class="container-content border-message m-3 mt-0 p-2">
+                <div class="container-content ff border-message m-3 mt-0 p-2">
                     <p>{{$lead->content}}</p>
                 </div>
                 
@@ -19,6 +19,6 @@
             </div>
             
         </div>
-        <!--fine mappa-->
+       
     </div>
 @endsection

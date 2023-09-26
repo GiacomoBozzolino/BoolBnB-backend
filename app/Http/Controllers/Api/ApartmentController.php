@@ -105,8 +105,8 @@ class ApartmentController extends Controller
 
         // Calcola la distanza in chilometri (utilizzando la formula Haversine)
     $distance = $request->input ('distance'); // Raggio in chilometri
-    $nRooms = $request->input('n_rooms');
-    $nBeds = $request->input('n_beds');
+    $n_rooms = $request->input('n_rooms');
+    $n_beds = $request->input('n_beds');
 
 
     $apartments = Apartment::select('apartments.*')
@@ -117,8 +117,8 @@ class ApartmentController extends Controller
         ->where('visibility', 1)
         ->having('distance', '<', $distance)
         ->orderBy('distance')
-        ->where('n_rooms', '>=', $nRooms)
-        ->where('n_beds', '>=', $nBeds)
+        ->where('n_rooms', '>=', $n_rooms)
+        ->where('n_beds', '>=', $n_beds)
         ->get();
 
         return response()->json($apartments);

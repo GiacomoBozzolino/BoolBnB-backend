@@ -14,6 +14,10 @@ use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
+
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Api\LeadController;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
@@ -116,6 +120,7 @@ class ApartmentController extends Controller
         // dd($user->apartments);
 
         
+        $leads = $apartment->leads = DB::table('leads')->orderBy('created_at', 'desc')->get();
 
         
 
@@ -135,7 +140,7 @@ class ApartmentController extends Controller
 
 
 
-        return view('admin.apartments.show', compact('apartment', 'message'));
+        return view('admin.apartments.show', compact('apartment', 'message', 'leads'));
     }
 
     /**

@@ -18,6 +18,7 @@
                 
             </div>
             
+            
         </div>
         <div class="d-flex justify-content-center pt-3">
             <a href="{{ route('admin.apartments.show', $lead->apartment_id) }}"

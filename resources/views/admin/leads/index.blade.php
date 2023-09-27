@@ -29,6 +29,7 @@
                         <div class="container-content ff border-message m-3 mt-0 p-2">
                             <p>{{$lead->content}}</p>
                         </div>
+                        <p class="ps-3">{{$lead->created_at}}</p>
                         
                         
                      </div>

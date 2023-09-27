@@ -81,6 +81,7 @@
                     <tbody>
                         @foreach ($apartment->leads as $item)
                             <tr>
+                                
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
@@ -92,7 +93,7 @@
                                             <i class="fa-solid fa-eye"></i></a>
                                     </div> 
                                 </td>
-                                
+                            
                             </tr>
                         @endforeach
                         

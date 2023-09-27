@@ -10,15 +10,16 @@
                     </div>
                 </div>
             @endif
-            <div class="mt-5">
-                <div class="d-flex justify-content-between justify-content-center me-5 mb-3 p-2">
+            <div class="mt-5 " >
+                <div class="d-flex  justify-content-center me-5 mb-3 p-2">
                     <h2>MESSAGGI RICEVUTI <span><i class="fa-solid text-primary fa-message fa-shake fa-xl"></i></span></h2>
                     
                 </div>
                 
+                
 
 
-                <div class="col-12 flex-wrap d-flex ">
+                <div class="col-12 flex-wrap d-flex justify-content-center">
                     @foreach($leads as $lead )
                     
                      <div class="col-3 border-message m-3 bg-light">
@@ -33,4 +34,12 @@
                      </div>
                     @endforeach
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center pt-3">
+        <a href="{{ route('admin.apartments.show', $lead->apartment_id) }}"
+            class="btn btn-sm bg-primary text-light mx-1 rounded-5 btn-show">
+            <i class="fa-solid fa-backward"></i> Torna all'appartamento</a>
+    </div>             
 @endsection

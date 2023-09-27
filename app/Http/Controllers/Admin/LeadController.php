@@ -27,7 +27,7 @@ class LeadController extends Controller
     public function show(Lead $lead, Apartment $apartament)
     {
 
-        $apartament = Apartment::all();
+        
         
         return view('admin.leads.show', compact('lead'));
     }

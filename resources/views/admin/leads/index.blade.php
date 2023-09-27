@@ -13,11 +13,7 @@
             <div class="mt-5">
                 <div class="d-flex justify-content-between justify-content-center me-5 mb-3 p-2">
                     <h2>MESSAGGI RICEVUTI <span><i class="fa-solid text-primary fa-message fa-shake fa-xl"></i></span></h2>
-                    <div class="button-container">
-                        {{-- <a href="{{ route('admin.apartments.show', $apartment->id) }}" class="btn btn-bg btn-outline-success">Torna all'
-                            appartamento
-                            <i class="fa-solid fa-plus"></i></a> --}}
-                    </div>
+                    
                 </div>
                 
 

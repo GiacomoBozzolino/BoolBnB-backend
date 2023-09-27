@@ -19,6 +19,11 @@
             </div>
             
         </div>
-       
+        <div class="d-flex justify-content-center pt-3">
+            <a href="{{ route('admin.apartments.index', $lead) }}"
+                class="btn btn-sm mx-1 rounded-5 btn-show">
+                <i class="fa-solid fa-backward"></i> Torna alla home</a>
+        </div> 
+        <!--fine mappa-->
     </div>
 @endsection

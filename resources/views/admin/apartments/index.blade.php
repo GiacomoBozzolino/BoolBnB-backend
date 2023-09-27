@@ -16,7 +16,8 @@
                     <div class="button-container">
                         <a href="{{ route('admin.apartments.create') }}" class="btn btn-bg btn-outline-success">Aggiungi
                             appartamento
-                            <i class="fa-solid fa-plus"></i></a>
+                            <i class="fa-solid fa-plus"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="border border-light rounded-3 d-flex flex-wrap justify-content-start">

@@ -45,7 +45,8 @@
 
                         </p>
                         <a href="{{ url('admin/apartments') }}" class="btn btn-lg btn-color text-uppercase fw-semibold"
-                            type="button">Scopri</a>
+                            type="button">Scopri
+                        </a>
                     </div>
                 </div>
             </div>

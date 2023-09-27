@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+
 // Importo il model di Apartment
 
 use App\Models\Apartment;
+use App\Models\Service;
 
 class ApartmentController extends Controller
 {
@@ -92,7 +94,7 @@ class ApartmentController extends Controller
         $city = $request->input('city');
 
         $url = 'https://api.tomtom.com/search/2/geocode/' . urlencode($city) . '.json';
-        $apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
+        $apiKey = 'aFDJe2bs8IDU6bZxos4ruOdBhXWHbbAr';
 
         $response = Http::get($url, [
             'key' => $apiKey
@@ -111,20 +113,30 @@ class ApartmentController extends Controller
     $distance = $request->input ('distance'); // Raggio in chilometri
     $n_rooms = $request->input('n_rooms');
     $n_beds = $request->input('n_beds');
+    $selectedServices = $request->input('services', []);
+
 
 
     $apartments = Apartment::select('apartments.*')
-        ->selectRaw(
-            '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
-            [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
-        )
-        ->where('visibility', 1)
-        ->having('distance', '<', $distance)
-        ->orderBy('distance')
-        ->where('n_rooms', '>=', $n_rooms)
-        ->where('n_beds', '>=', $n_beds)
-        ->get();
+    ->selectRaw(
+        '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
+        [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
+    )
+    ->where('visibility', 1)
+    ->having('distance', '<', $distance)
+    ->orderBy('distance')
+    ->where('n_rooms', '>=', $n_rooms)
+    ->where('n_beds', '>=', $n_beds);
 
+    if ($selectedServices) {
+     foreach ($selectedServices as $serviceId) {
+        $apartments->whereHas('services', function ($query) use ($serviceId) {
+            $query->where('service_id', $serviceId);
+        });
+    }
+}
+
+$apartments = $apartments->get();
         return response()->json($apartments);
     }
     

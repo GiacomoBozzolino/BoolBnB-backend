@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Lead;
 use App\Mail\NewContact;
+use App\Models\Apartment;
+use App\Http\Controllers\Admin\ApartmentController;
 
 class LeadController extends Controller
 {
@@ -22,8 +24,11 @@ class LeadController extends Controller
     }
 
 
-    public function show(Lead $lead)
+    public function show(Lead $lead, Apartment $apartament)
     {
+
+        $apartament = Apartment::all();
+        
         return view('admin.leads.show', compact('lead'));
     }
 

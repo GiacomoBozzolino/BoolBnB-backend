@@ -196,3 +196,20 @@ tr:hover {
 .btn:disabled{
     background-color: rgb(142, 140, 140);
 }
+
+
+// LEAD MESSAGE STYLE
+
+.border-message{
+    border: 1px solid rgb(174, 168, 168);
+    border-radius: 10px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, .1);
+
+}
+.border-b{
+    border-bottom: 1px solid gray;
+}
+.ff{
+    overflow-y: auto;
+}
+

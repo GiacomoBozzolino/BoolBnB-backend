@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
 use App\Http\Controllers\Admin\LeadController as LeadController;
 use App\Http\Controllers\SponsorController as SponsorController;
+use App\Http\Controllers\Admin\PaymentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(f
     Route:: resource('apartments', ApartmentController::class);
     Route:: resource('leads', LeadController::class);
     Route:: resource('sponsors', SponsorController::class);
+    Route::get('sponsors/create', [PaymentsController::class, 'create']);
+    Route::get('sponsors/create/p', [PaymentsController::class, 'process'])->name('sponsor.process');
+    Route::any('/payment/token', [PaymentController::class, 'token'])->name('payment.token');
+    Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
 });
 
 Route::middleware('auth')->group(function () {

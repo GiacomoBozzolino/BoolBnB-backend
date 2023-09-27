@@ -13,22 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('apartment_sponsor', function (Blueprint $table) {
+        Schema::create('apartment_sponsors', function (Blueprint $table) {
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')
                 ->references('id')
                 ->on('apartments')
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
 
             $table->unsignedBigInteger('sponsor_id');
             $table->foreign('sponsor_id')
                 ->references('id')
                 ->on('sponsors')
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
 
-            $table->dateTime('deadline');    
+            $table->dateTime('start_at');  
+            $table->dateTime('end_at');  
             $table->primary(['apartment_id', 'sponsor_id']);
             $table->timestamps();        
         });
@@ -41,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apartment_sponsor');
+        Schema::dropIfExists('apartment_sponsors');
     }
 };

@@ -17,6 +17,9 @@ use App\Models\Lead;
 use App\Http\Controllers\Api\LeadController;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
+use App\Models\Sponsor;
+
+
 class ApartmentController extends Controller
 {
     /**

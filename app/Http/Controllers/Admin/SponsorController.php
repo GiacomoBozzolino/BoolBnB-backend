@@ -71,8 +71,8 @@ class SponsorController extends Controller
 
             $apartments = Apartment::where('user_id', $user->id)
             ->whereDoesntHave('sponsors', function ($query)  use ($oggi) {
-                $query->where('deadline', '>', $oggi)
-                ->orWhereNull('deadline');
+                $query->where('end_at', '>', $oggi)
+                ->orWhereNull('end_at');
             })
             ->get();
             foreach ($apartments as $key => $item) {

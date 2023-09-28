@@ -29,6 +29,14 @@ class Apartment extends Model
         return $this->hasMany(Lead::class);
     }
 
+    // CONNESSIONE AI SPONSOR
+    public function sponsors()
+    {
+        return $this->belongsToMany(Sponsor::class, 'apartment_sponsors');
+    }
+    
+
+
     protected $fillable = [
         'user_id',
         'title',

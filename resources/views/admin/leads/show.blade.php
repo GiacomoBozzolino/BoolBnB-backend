@@ -14,6 +14,7 @@
                 <div class="container-content ff border-message m-3 mt-0 p-2">
                     <p>{{$lead->content}}</p>
                 </div>
+                <p class="p-3 mb-0"><strong>ricevuto il:</strong> {{$newDate}}</p>
                 
                 
             </div>

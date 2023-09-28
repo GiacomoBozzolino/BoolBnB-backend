@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Lead;
 use App\Mail\NewContact;
 use App\Models\Apartment;
+use Carbon\Carbon;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -23,10 +24,16 @@ class LeadController extends Controller
         // $leads = Lead::all();
         $leads = DB::table('leads')->orderBy('created_at', 'desc')->get();
         
+        $user = Lead::first();
+        $newDate = $user->created_at->format('d-m-Y');
         
-
+        // dd($newDate);
+        
+        // $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $leads->created_at)
+        // ->format('m/d/Y');
+        // dd($newDate);
     
-        return view('admin.leads.index', compact( 'leads'));
+        return view('admin.leads.index', compact( 'leads', 'newDate'));
        
         
     }
@@ -37,7 +44,13 @@ class LeadController extends Controller
 
         
         
-        return view('admin.leads.show', compact('lead'));
+        
+        
+        $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $lead->created_at)
+                                    ->format('m/d/Y');
+        // dd($newDate);
+        
+        return view('admin.leads.show', compact('lead', 'newDate'));
     }
 
 

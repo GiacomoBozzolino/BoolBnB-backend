@@ -49,4 +49,8 @@ class Apartment extends Model
     public static function generateSlug($title){
         return Str::slug($title, '-');
     }
+
+    
+
+
 }

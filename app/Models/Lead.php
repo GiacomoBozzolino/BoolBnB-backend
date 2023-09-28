@@ -21,4 +21,12 @@ class Lead extends Model
     public function apartments(): BelongsTo{
         return $this->belongsTo(Apartment::class);
     }
+
+    public function index()
+    {
+        $user = Lead::first();
+        $newDate = $user->created_at->format('d-m-Y');
+        
+        dd($newDate);
+    }
 }

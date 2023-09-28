@@ -74,7 +74,7 @@
                                             {{ $apartment->address }}
                                         </td>
                                         <td class="align-middle text-center">
-                                            <a href="{{ route('admin.payment.token', ['sponsor_id' => $sponsor->id, 'apartment_id' => $apartment->id]) }}"
+                                            <a href="{{ route('admin.payment.create', ['sponsor_id' => $sponsor->id, 'apartment_id' => $apartment->id]) }}"
                                                 class="primary-btn">
                                                 Paga
                                             </a>
@@ -112,6 +112,7 @@
                             <img class="img-fluid rounded" src="{{ $apartment->full_path_main_img }}">
                         </div>
                         <div class="text-center my-3">
+                            {{-- occhio alla rotta che adesso e admin.payment.create --}}
                             <a href="{{ route('admin.payment.token', ['sponsor_id' => $sponsor->id, 'apartment_id' => $apartment->id]) }}"
                                 class="secondary-btn">
                                 Procedi al pagamento

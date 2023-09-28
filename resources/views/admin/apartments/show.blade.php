@@ -81,7 +81,7 @@
                     <tbody>
                         @foreach ($apartment->leads as $item)
                             <tr>
-                                
+
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
@@ -91,17 +91,16 @@
                                         <a href="{{ route('admin.leads.show', $item->id) }}"
                                             class="btn btn-sm mx-1 rounded-5 btn-show">
                                             <i class="fa-solid fa-eye"></i></a>
-                                    </div> 
+                                    </div>
                                 </td>
-                            
+
                             </tr>
                         @endforeach
-                        
+
                     </tbody>
                 </table>
                 <div class="d-flex pt-3">
-                    <a href="{{ route('admin.leads.index', $apartment->id) }}"
-                        class="btn btn-sm mx-1 rounded-5 btn-show">
+                    <a href="{{ route('admin.leads.index', $apartment->id) }}" class="btn btn-sm mx-1 rounded-5 btn-show">
                         <i class="fa-solid fa-eye"></i> guarda tutti i messaggi</a>
                 </div>
             </div>

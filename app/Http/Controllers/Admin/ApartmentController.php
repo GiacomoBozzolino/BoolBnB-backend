@@ -121,8 +121,8 @@ class ApartmentController extends Controller
         $user = auth()->user();
         // dd($user->apartments);
 
-        
-        $leads = $apartment->leads = DB::table('leads')->orderBy('apartment_id', 'desc')->get();
+        $apartment_id = $apartment->id;
+        $leads = $apartment->leads = DB::table('leads')->where('apartment_id', $apartment_id)->orderBy('created_at', 'desc')->get();
 
 
         
@@ -154,7 +154,7 @@ class ApartmentController extends Controller
 
 
 
-        return view('admin.apartments.show', compact('apartment', 'message', 'leads', 'newDate'));
+        return view('admin.apartments.show', compact('apartment', 'message','leads', 'newDate'));
     }
 
     /**

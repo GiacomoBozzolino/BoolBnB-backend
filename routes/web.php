@@ -33,7 +33,7 @@ Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(f
     Route:: resource('leads', LeadController::class);
     Route:: resource('sponsors', SponsorController::class);
     Route::get('sponsors/create', [PaymentController::class, 'create']);
-    Route::get('sponsors/create/p', [PaymentController::class, 'process'])->name('sponsor.process');
+    Route::get('sponsors/create', [PaymentController::class, 'process'])->name('sponsor.process');
     Route::any('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
     Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
 });

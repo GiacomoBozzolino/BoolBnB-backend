@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
 use App\Http\Controllers\Admin\LeadController as LeadController;
-use App\Http\Controllers\SponsorController as SponsorController;
+use App\Http\Controllers\Admin\SponsorController as SponsorController;
 use App\Http\Controllers\Admin\PaymentsController;
 
 /*

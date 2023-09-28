@@ -25,7 +25,8 @@
         <nav class="navbar navbar-expand-md navbar-light nav-background shadow-sm fixed z-3">
 
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center transition-logo" href="{{ url('http://localhost:5174/') }}">
+                <a class="navbar-brand d-flex align-items-center transition-logo"
+                    href="{{ url('http://localhost:5174/') }}">
                     <div class="logo-laravel">
                         <h2 class="logo p-4 rounded-5 shadow-lg"><i class="fa-solid fa-earth-europe"></i>BoolBnB</h2>
                     </div>
@@ -101,8 +102,8 @@
                                     <h4 class="ms-2">Appartamenti</h4>
                                 </div>
                             </a>
-                            <a href="{{ route('admin.apartments.create') }}"
-                                class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === 'admin.apartments.create' ? 'selected' : '' }} select">
+                            <a href="{{ route('admin.sponsors.index') }}"
+                                class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === 'admin.sponsors.index' ? 'selected' : '' }} select">
                                 <div class="text-container d-flex align-items-center">
                                     <i class="fa-regular fa-lightbulb ms-3"></i>
                                     <h4 class="ms-3">Sponsor</h4>

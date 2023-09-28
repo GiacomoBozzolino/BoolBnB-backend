@@ -21,21 +21,10 @@ class LeadController extends Controller
 
     public function index(Request $request)
     {
-        // $leads = Lead::all();
-        $leads = DB::table('leads')->orderBy('created_at', 'desc')->get();
         
-        $user = Lead::first();
-        $newDate = $user->created_at->format('d-m-Y');
+
         
-        // dd($newDate);
-        
-        // $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $leads->created_at)
-        // ->format('m/d/Y');
-        // dd($newDate);
-    
-        return view('admin.leads.index', compact( 'leads', 'newDate'));
-       
-        
+        return view('admin.leads.index', compact( 'leads', 'newDate'));  
     }
 
 

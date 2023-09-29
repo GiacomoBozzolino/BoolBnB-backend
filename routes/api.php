@@ -32,3 +32,4 @@ Route::post('/contacts', [LeadController::class, 'store']);
 Route::get('/search', [ApartmentController::class, "search"]);
 Route::get('/searchAdvanced', [ApartmentController::class, "searchAdvanced"]);
 Route::get('/services', [ServiceController::class, "index"]);
+Route::get('sponsored-apartments', [ApartmentController::class, 'getFeaturedApartments']);

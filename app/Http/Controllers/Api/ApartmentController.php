@@ -13,7 +13,7 @@ use App\Models\Apartment;
 use App\Models\Service;
 
 class ApartmentController extends Controller
-{
+{   
     public function index()
     {
         $apartments = Apartment::with('services')->where('visibility',1)->get();
@@ -43,6 +43,13 @@ class ApartmentController extends Controller
         }
     }
 
+    // CHIAMATA API SPOSORIZZAZIONI
+    public function getFeaturedApartments()
+    {
+        $apartments = Apartment::with('sponsors')->get();
+
+        return response()->json($apartments);
+    }
 
 
 
@@ -137,9 +144,9 @@ class ApartmentController extends Controller
             $query->where('service_id', $serviceId);
         });
     }
-}
+    }   
 
-$apartments = $apartments->get();
+    $apartments = $apartments->get();
         return response()->json($apartments);
     }
     

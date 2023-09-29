@@ -13,11 +13,12 @@
     <script src="https://js.braintreegateway.com/web/dropin/1.40.0/js/dropin.min.js"></script>
 
     <script>
-        let sponsor = "{{ $sponsors->first()->id }}";
-
-        let apartment = "{{ $apartments->first()->id }}";
+        let urlParams = new URLSearchParams(window.location.search);
+        let sponsor = urlParams.get('sponsor_id');
+        let apartment = urlParams.get('apartment_id');
 
         const button = document.querySelector('#submit-button');
+        
         braintree.dropin.create({
             authorization: '{{ $token }}',
             container: '#dropin-container'
@@ -34,38 +35,28 @@
                             .getAttribute('content')
                     });
 
-                    // Dati da inviare
-
-
-                    // Opzioni per la richiesta Fetch
-                    const options = {
-                        method: 'GET',
-                        headers: headers,
-                        //body: JSON.stringify(payload) // Assumi che payload sia un oggetto da inviare come JSON
-                    };
-
                     // URL della richiesta
-
-                    const url = "{{ route('admin.sponsor.process') }}?code=" + payload.nonce +
-                        "&sponsor_id=" + sponsor + "&apartment_id=" +
-                        apartment; // Assumi che questa parte sia nel tuo template blade
-
+                    let url = "{{ route('admin.sponsor.process') }}?code=" + payload.nonce +
+                        "&sponsor_id=" + sponsor + "&apartment_id=" + apartment;
 
                     // Esegui la richiesta Fetch
-                    fetch(url, options)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Errore nella richiesta');
-                            }
-                            return response.json(); // Parsa la risposta JSON, se necessario
-                        })
-                        .then(data => {
-                            console.log('success', payload);
-                        })
-                        .catch(error => {
-                            console.log('error', payload);
-                            console.error(error);
-                        });
+                    fetch(url, {
+                        method: 'GET',
+                        headers: headers
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Errore nella richiesta');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('success', payload);
+                    })
+                    .catch(error => {
+                        console.log('error', payload);
+                        console.error(error);
+                    });
                 });
             });
         });

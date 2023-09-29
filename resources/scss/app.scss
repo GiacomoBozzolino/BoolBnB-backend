@@ -131,6 +131,10 @@ tr:hover {
     height: 50vh;
 }
 
+.fas.fa-star {
+    color: rgb(189, 17, 54);
+}
+
 .box {
     flex: 1;
     overflow: hidden;
@@ -193,23 +197,24 @@ tr:hover {
 }
 
 
-.btn:disabled{
+.btn:disabled {
     background-color: rgb(142, 140, 140);
 }
 
 
 // LEAD MESSAGE STYLE
 
-.border-message{
+.border-message {
     border: 1px solid rgb(174, 168, 168);
     border-radius: 10px;
     box-shadow: 0 20px 30px rgba(0, 0, 0, .1);
 
 }
-.border-b{
+
+.border-b {
     border-bottom: 1px solid gray;
 }
-.ff{
+
+.ff {
     overflow-y: auto;
 }
-

@@ -38,7 +38,7 @@ Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(f
     Route::any('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
     Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
     Route::any('/payment/token', [PaymentController::class, 'token'])->name('payment.token');
-    Route::get('statistics', VisitorController::class);
+    Route::get('/stats', [VisitorController::class, 'index'])->name('stats.index');
 });
 
 Route::middleware('auth')->group(function () {

@@ -1,12 +1,13 @@
 <?php
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\LeadController as LeadController;
 use App\Http\Controllers\Api\ServiceController as ServiceController;
-
+use App\Http\Controllers\Api\VisitorController;
 
 
 /*
@@ -32,3 +33,4 @@ Route::post('/contacts', [LeadController::class, 'store']);
 Route::get('/search', [ApartmentController::class, "search"]);
 Route::get('/searchAdvanced', [ApartmentController::class, "searchAdvanced"]);
 Route::get('/services', [ServiceController::class, "index"]);
+Route::post("/visitor/store", [VisitorController::class, "store"]);

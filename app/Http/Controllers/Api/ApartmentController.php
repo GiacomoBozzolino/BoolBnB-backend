@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -75,14 +75,15 @@ class ApartmentController extends Controller
     $distance = 20; // Raggio in chilometri
 
     $apartments = Apartment::select('apartments.*')
-        ->selectRaw(
-            '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
-            [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
-        )
-        ->where('visibility', 1)
-        ->having('distance', '<', $distance)
-        ->orderBy('distance')
-        ->get();
+    ->selectRaw(
+        '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
+        [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
+    )
+    ->leftJoin('apartment_sponsors', 'apartments.id', '=', 'apartment_sponsors.apartment_id')
+    ->where('visibility', 1)
+    ->having('distance', '<', $distance)
+    ->orderByRaw('CASE WHEN apartment_sponsors.apartment_id IS NOT NULL THEN 0 ELSE 1 END, apartment_sponsors.end_at DESC, distance')
+    ->get();
 
         return response()->json($apartments);
     }
@@ -122,11 +123,13 @@ class ApartmentController extends Controller
         '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
         [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
     )
+    ->leftJoin('apartment_sponsors', 'apartments.id', '=', 'apartment_sponsors.apartment_id')
     ->where('visibility', 1)
     ->having('distance', '<', $distance)
-    ->orderBy('distance')
+    
     ->where('n_rooms', '>=', $n_rooms)
-    ->where('n_beds', '>=', $n_beds);
+    ->where('n_beds', '>=', $n_beds)
+    ->orderByRaw('CASE WHEN apartment_sponsors.apartment_id IS NOT NULL THEN 0 ELSE 1 END, apartment_sponsors.end_at DESC, distance');
 
     if ($selectedServices) {
      foreach ($selectedServices as $serviceId) {

@@ -6,7 +6,10 @@
             <div class="col-md-8 col-md-offset-2">
                 <div id="dropin-container"></div>
                 <button class="btn btn-primary" id="submit-button">Request payment method</button>
+                <button id="butt" class="btn btn-danger d-none">Ritorna alla schermata precedente</button>
             </div>
+
+           
         </div>
     </div>
 
@@ -52,13 +55,32 @@
                     })
                     .then(data => {
                         console.log('success', payload);
+                        if (payload) {
+
+                            alert('Complimenti: il pagamento è stato effettuato con successo')
+                            let buttonReturn = document.getElementById("butt")
+                            buttonReturn.classList.remove("d-none");
+                            console.log(buttonReturn)
+                            
+                        }
+
                     })
                     .catch(error => {
                         console.log('error', payload);
                         console.error(error);
+                        if (payload) {
+
+                            alert('Appartamento già sponsorizzato in precedenza')
+                            let buttonReturn = document.getElementById("butt")
+                            buttonReturn.classList.remove("d-none");
+                            console.log(buttonReturn)
+
+                            
+                        }
                     });
                 });
             });
         });
     </script>
+  
 @endsection

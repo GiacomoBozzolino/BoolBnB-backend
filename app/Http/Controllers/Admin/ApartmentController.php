@@ -14,6 +14,10 @@ use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Api\LeadController;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
@@ -95,11 +99,13 @@ class ApartmentController extends Controller
         
         $apartment->save();
 
+        // $leads = $apartment->leads = DB::table('leads')->orderBy('created_at', 'desc')->get();
+
         if($request->has('services')){
             $apartment->services()->attach($request->services);
         }  
         $message = 'Appartamento aggiunto con successo!';
-        return redirect()->route('admin.apartments.index', compact('apartment', 'message'));
+        return redirect()->route('admin.apartments.index', compact('apartment', 'message', 'leads'));
     }
 
     /**
@@ -118,8 +124,21 @@ class ApartmentController extends Controller
         $user = auth()->user();
         // dd($user->apartments);
 
+        $apartment_id = $apartment->id;
+        $leads = $apartment->leads = DB::table('leads')->where('apartment_id', $apartment_id)->orderBy('created_at', 'desc')->get();
+
+
+        
+        // $dates = Lead::all();
+        // $newDate = $dates->created_at->format('d-m-Y');
+
+        // dd($newDate);
+        
         
 
+
+        // $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $item)
+        // ->format('m/d/Y');
         
 
         // CONTROLLO SE, IL APPARTAMENTO CHE MI è STATO PASSATO, CORRISPONDE AL APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
@@ -138,7 +157,7 @@ class ApartmentController extends Controller
 
 
 
-        return view('admin.apartments.show', compact('apartment', 'message'));
+        return view('admin.apartments.show', compact('apartment', 'message','leads', 'newDate'));
     }
 
     /**

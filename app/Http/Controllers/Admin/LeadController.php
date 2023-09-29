@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Lead;
 use App\Mail\NewContact;
 use App\Models\Apartment;
+use Carbon\Carbon;
+
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Admin\ApartmentController;
 
 class LeadController extends Controller
@@ -16,11 +21,10 @@ class LeadController extends Controller
 
     public function index(Request $request)
     {
-        $leads = Lead::all();
-
-        return view('admin.leads.index', compact('leads'));
-       
         
+
+        
+        return view('admin.leads.index', compact( 'leads', 'newDate'));  
     }
 
 
@@ -29,7 +33,13 @@ class LeadController extends Controller
 
         
         
-        return view('admin.leads.show', compact('lead'));
+        
+        
+        $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $lead->created_at)
+                                    ->format('m/d/Y');
+        // dd($newDate);
+        
+        return view('admin.leads.show', compact('lead', 'newDate'));
     }
 
 

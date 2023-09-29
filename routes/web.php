@@ -36,6 +36,7 @@ Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(f
     Route::get('sponsors/create', [PaymentController::class, 'process'])->name('sponsor.process');
     Route::any('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
     Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+    Route::any('/payment/token', [PaymentController::class, 'token'])->name('payment.token');
 });
 
 Route::middleware('auth')->group(function () {

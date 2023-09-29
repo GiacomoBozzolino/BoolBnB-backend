@@ -114,50 +114,22 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Apartment $apartment, Lead $lead )
+    public function show(Request $request, Apartment $apartment, Lead $lead)
     {
         $message = $request->query->get('message');
-
-        
-        // $user_id = auth()->user()->id;
-       
         $user = auth()->user();
-        // dd($user->apartments);
-
+    
         $apartment_id = $apartment->id;
         $leads = $apartment->leads = DB::table('leads')->where('apartment_id', $apartment_id)->orderBy('created_at', 'desc')->get();
-
-
-        
-        // $dates = Lead::all();
-        // $newDate = $dates->created_at->format('d-m-Y');
-
-        // dd($newDate);
-        
-        
-
-
-        // $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $item)
-        // ->format('m/d/Y');
-        
-
+    
         // CONTROLLO SE, IL APPARTAMENTO CHE MI è STATO PASSATO, CORRISPONDE AL APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
-        if ($user->apartments->contains($apartment)){
-
+        if ($user->apartments->contains($apartment)) {
             // RITORNO LA SHOW DEL APARTMENT
-            return view('admin.apartments.show', compact('apartment'));
-           
-           
-
+            return view('admin.apartments.show', compact('apartment', 'message', 'leads'));
         } else {
-
             // RIMANDO L'UTENTE NELLA PAGINA DI PARTENZA
-            return redirect()->route('admin.apartments.index', compact('apartment'));
+            return redirect()->route('admin.apartments.index')->with('error', 'Non hai accesso a questo appartamento.');
         }
-
-
-
-        return view('admin.apartments.show', compact('apartment', 'message','leads', 'newDate'));
     }
 
     /**

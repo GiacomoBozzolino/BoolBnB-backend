@@ -74,7 +74,8 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
                             <th scope="col">Messaggio</th>
-                            <th scope="col">Inviato alle</th>
+                            <th scope="col">Data Invio</th>
+                            <th scope="col">Orario</th>                            
                             <th scope="col">Strumenti</th>
                         </tr>
                     </thead>
@@ -85,7 +86,19 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
-                                <td>{{ $item->created_at }}</td>
+
+                                @if ($apartment->created_at instanceof \Carbon\Carbon)
+                                    <td>{{ $apartment->created_at->format('d/m/Y') }}</td>
+                                @else
+                                    <td>Data non valida</td>
+                                @endif          
+
+                                @if ($apartment->created_at instanceof \Carbon\Carbon)
+                                    <td>{{ $apartment->created_at->format('H:i') }}</td>
+                                @else
+                                    <td>Data non valida</td>
+                                @endif                  
+
                                 <td>
                                     <div class="d-flex justify-content-center pt-3">
                                         <a href="{{ route('admin.leads.show', $item->id) }}"
@@ -104,7 +117,6 @@
             <div class="col-6 mt-5 shadow ">
                 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
                 <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
-
 
                 <div id="map" style="width: 100%; height: 500px;"></div>
 

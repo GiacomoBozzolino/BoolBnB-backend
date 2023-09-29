@@ -35,8 +35,6 @@ class Apartment extends Model
         return $this->belongsToMany(Sponsor::class, 'apartment_sponsors');
     }
     
-
-
     protected $fillable = [
         'user_id',
         'title',
@@ -57,8 +55,5 @@ class Apartment extends Model
     public static function generateSlug($title){
         return Str::slug($title, '-');
     }
-
-    
-
 
 }

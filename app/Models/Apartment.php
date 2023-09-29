@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Lead;
+use App\Models\Visitor;
+
 
 class Apartment extends Model
 {
@@ -27,6 +29,11 @@ class Apartment extends Model
     // CONNESSIONE A LEADS(MESSAGI)
     public function leads(){
         return $this->hasMany(Lead::class);
+    }
+
+    //CONNESSIONE A VISITOR
+    public function visitors(){
+        return $this->hasMany(Visitor::class);
     }
 
     // CONNESSIONE AI SPONSOR

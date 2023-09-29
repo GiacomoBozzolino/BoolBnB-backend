@@ -105,9 +105,7 @@
                 </div>
             </div>
             <!--inizio mappa-->
-            <div class="col-6
-                                    mt-5 shadow ">
-
+            <div class="col-6 mt-5 shadow ">
                 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
                 <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 

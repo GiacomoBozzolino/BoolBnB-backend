@@ -26,8 +26,12 @@
                         <div class="m-4 d-flex border rounded-5 p-4" style="width: 40rem; ">
                             {{-- imagine --}}
                             <div class="">
-                                <img src="{{ asset('storage/' . $apartment->cover_img) }}"
-                                    class="card-img-top ratio ratio-4x3 rounded-5" alt="{{ $apartment->title }}">
+                                <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top ratio ratio-4x3 rounded-5" alt="{{ $apartment->title }}">
+                                @foreach($apartment->sponsors as $sponsor)
+                                    <i class="fas fa-star"></i>
+                                    <p>Sponsor attiva: {{ $sponsor->title }}</p>
+                                    <p>Scadenza: {{ $sponsor->pivot->end_at }}</p>
+                                @endforeach
                             </div>
                             {{-- CARD CONTETN --}}
                             <div class="card-container ms-4">

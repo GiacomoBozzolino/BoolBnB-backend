@@ -32,7 +32,7 @@ class Apartment extends Model
     // CONNESSIONE AI SPONSOR
     public function sponsors()
     {
-        return $this->belongsToMany(Sponsor::class, 'apartment_sponsors');
+        return $this->belongsToMany(Sponsor::class, 'apartment_sponsors')->withPivot('end_at');
     }
     
 

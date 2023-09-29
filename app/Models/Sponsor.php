@@ -15,7 +15,7 @@ class Sponsor extends Model
 
     public function apartments()
     {
-        return $this->belongsToMany(Apartment::class, 'apartment_sponsors');
+        return $this->belongsToMany(Apartment::class, 'apartment_sponsors')->withPivot('end_at');
     }
 
     

@@ -81,35 +81,32 @@
                     </thead>
                     <tbody>
                         @foreach ($apartment->leads as $item)
-                            <tr>
+                        <tr>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
 
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
+                            @php
+                                $createdAt = \Carbon\Carbon::parse($item->created_at);
+                            @endphp
 
-                                @if ($apartment->created_at instanceof \Carbon\Carbon)
-                                    <td>{{ $apartment->created_at->format('d/m/Y') }}</td>
-                                @else
-                                    <td>Data non valida</td>
-                                @endif          
+                            @if ($createdAt instanceof \Carbon\Carbon)
+                                <td>{{ $createdAt->format('d m Y') }}</td>
+                                <td>{{ $createdAt->format('H:i') }}</td>
+                            @else
+                                <td>Data non valida</td>
+                                <td>Data non valida</td>
+                            @endif
 
-                                @if ($apartment->created_at instanceof \Carbon\Carbon)
-                                    <td>{{ $apartment->created_at->format('H:i') }}</td>
-                                @else
-                                    <td>Data non valida</td>
-                                @endif                  
-
-                                <td>
-                                    <div class="d-flex justify-content-center pt-3">
-                                        <a href="{{ route('admin.leads.show', $item->id) }}"
-                                            class="btn btn-sm mx-1 rounded-5 btn-show">
-                                            <i class="fa-solid fa-eye"></i></a>
-                                    </div>
-                                </td>
-
-                            </tr>
+                            <td>
+                                <div class="d-flex justify-content-center pt-3">
+                                    <a href="{{ route('admin.leads.show', $item->id) }}" class="btn btn-sm mx-1 rounded-5 btn-show">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>

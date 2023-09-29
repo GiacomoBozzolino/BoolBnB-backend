@@ -22,13 +22,27 @@ class LeadController extends Controller
     public function index(Request $request)
     {
         
-        return view('admin.leads.index', compact( 'leads'));  
+
+        
+        return view('admin.leads.index', compact( 'leads', 'newDate'));  
     }
+
 
     public function show(Lead $lead, Apartment $apartament)
     {
+
         
-        return view('admin.leads.show', compact('lead'));
+        
+        
+        
+        $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $lead->created_at)
+                                    ->format('m/d/Y');
+        // dd($newDate);
+        
+        return view('admin.leads.show', compact('lead', 'newDate'));
     }
+
+
+            
       
 }

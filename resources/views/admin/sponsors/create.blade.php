@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div id="dropin-container"></div>
                 <button class="btn btn-primary" id="submit-button">Request payment method</button>
-                <button id="butt" class="btn btn-danger d-none">Ritorna alla schermata precedente</button>
+                <button id="butt" class="btn btn-success links-decor d-none"><a href="{{ route('admin.sponsors.index') }}">Torna agli Sponsor</button>
             </div>
 
            
@@ -60,6 +60,8 @@
                             alert('Complimenti: il pagamento è stato effettuato con successo')
                             let buttonReturn = document.getElementById("butt")
                             buttonReturn.classList.remove("d-none");
+                            // button.disabled = true
+                            button.classList.add("d-none");
                             console.log(buttonReturn)
                             
                         }

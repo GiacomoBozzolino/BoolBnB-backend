@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div id="dropin-container"></div>
                 <button class="btn btn-primary" id="submit-button">Request payment method</button>
-                <button id="butt" class="btn btn-danger  d-none"><a href="{{ route('admin.sponsors.index') }}" class="links-decor text-light">Torna agli Sponsor</button>
+                <button id="butt" class="btn btn-danger mt-3 d-none"><a href="{{ route('admin.sponsors.index') }}" class="links-decor text-light">Torna agli Sponsor <i class="fa-solid fa-right-from-bracket fa-beat ps-2"></i></button>
             </div>
 
            

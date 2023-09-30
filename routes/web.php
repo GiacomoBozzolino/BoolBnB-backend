@@ -39,6 +39,7 @@ Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(f
     Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
     Route::any('/payment/token', [PaymentController::class, 'token'])->name('payment.token');
     Route::get('/statistic', [VisitorController::class, 'index'])->name('statistic.index');
+    Route::get('statistic/show/{id}', [VisitorController::class, 'show'])->name('statistic.show');
 });
 
 Route::middleware('auth')->group(function () {

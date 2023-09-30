@@ -24,7 +24,7 @@ class VisitorController extends Controller
             $viewsByYear = $visitors->groupBy(function ($visitor) {
                 return Carbon::parse($visitor->viewed_at)->format('Y');
             });
-
+        
             $yearlyViews = $viewsByYear->map(function ($views) {
                 return count($views);
             });
@@ -44,7 +44,7 @@ class VisitorController extends Controller
                 }
                 return $yearlyMonthlyViews;
             });
-
+            
             return [
                 'total_views' => count($visitors),
                 'yearly_views' => $yearlyViews,
@@ -103,8 +103,58 @@ class VisitorController extends Controller
         })->filter()->unique()->toArray();
         
         rsort($years);
+
+        $apartmentMessages = $userApartments->map(function ($apartment) {
+            return [
+                'apartment_id' => $apartment->id,
+                'message_count' => $apartment->leads()->count(),
+            ];
+        });
         
-        return view('admin.statistic.index', compact('visitors', 'user', 'years', 'userApartmentIds', 'apartmentViews', 'userApartments', 'yearlyViews', 'monthlyViews', 'yearlyMonthlyViews', 'viewsByApartmentAndYear'));
+        return view('admin.statistic.index', compact('visitors', 'user', 'years', 'userApartmentIds', 'apartmentViews', 'userApartments', 'yearlyViews', 'monthlyViews', 'yearlyMonthlyViews', 'viewsByApartmentAndYear', 'apartmentMessages'));
     }
+
+    public function show($id)
+    {
+        // Trova l'appartamento con l'ID fornito
+        $apartment = Apartment::findOrFail($id);
+        
+        // Altri passaggi necessari per visualizzare i dettagli dell'appartamento
+        
+        $user = Auth::user();
+        $userApartments = Apartment::where('user_id', $user->id)->get();
+        $userApartmentIds = $userApartments->pluck('id')->toArray();
+        
+        // Recupera i dati dei visitatori anziché delle visualizzazioni
+        $visitors = Visitor::whereIn('apartment_id', $userApartmentIds)->get();
+        
+        // Calcola le statistiche sui visitatori
+        $viewsByYear = $visitors->groupBy(function ($visitor) {
+            return Carbon::parse($visitor->viewed_at)->format('Y');
+        });
     
+        $yearlyViews = $viewsByYear->map(function ($views) {
+            return count($views);
+        });
+    
+        // Altre elaborazioni...
+    
+        $years = $visitors->map(function ($visitor) {
+            if ($visitor->viewed_at) {
+                return Carbon::parse($visitor->viewed_at)->format('Y');
+            }
+            return null;
+        })->filter()->unique()->toArray();
+        
+        rsort($years);
+    
+        $apartmentMessages = $userApartments->map(function ($apartment) {
+            return [
+                'apartment_id' => $apartment->id,
+                'message_count' => $apartment->leads()->count(),
+            ];
+        });
+        
+        return view('admin.statistic.show', compact('visitors', 'user', 'years', 'userApartmentIds', 'userApartments', 'yearlyViews', 'apartmentMessages'));
+    }
 }

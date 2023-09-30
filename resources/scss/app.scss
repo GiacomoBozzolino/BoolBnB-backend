@@ -218,3 +218,30 @@ tr:hover {
 .ff {
     overflow-y: auto;
 }
+
+// PER IL FOOTER
+p a:hover {
+    text-decoration: underline;
+}
+
+.jumbotron-footer {
+    background-color: #DCDCDC;
+}
+
+.footer-li a {
+    color: black;
+}
+
+.footer-li a:hover {
+    text-decoration: underline;
+}
+
+// FINE FOOTER
+
+.img-container {
+    width: 30%;
+
+    img {
+        width: 100%;
+    }
+}

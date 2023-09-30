@@ -11,8 +11,9 @@
                 </div>
             @endif
             <div class="col-12 d-flex mt-5 position-relative shadow border p-4 rounded-4">
+
                 <div class="img-container">
-                    <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top" alt="">
+                    <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="img-fluid rounded-5" alt="">
                 </div>
                 <div class="ms-5 ">
                     <div class="card-body">
@@ -67,7 +68,7 @@
                 </div>
             </div>
             {{-- Inizio messaggi --}}
-            <div class="col-6 border mt-5 rounded-4 shadow ">
+            <div class="col-6 border mt-5 rounded-4 shadow overflow-auto" style="height: 500px">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -75,43 +76,44 @@
                             <th scope="col">Email</th>
                             <th scope="col">Messaggio</th>
                             <th scope="col">Data Invio</th>
-                            <th scope="col">Orario</th>                            
+                            <th scope="col">Orario</th>
                             <th scope="col">Strumenti</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($apartment->leads as $item)
-                        <tr>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->email }}</td>
-                            <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
+                            <tr>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
 
-                            @php
-                                $createdAt = \Carbon\Carbon::parse($item->created_at);
-                            @endphp
+                                @php
+                                    $createdAt = \Carbon\Carbon::parse($item->created_at);
+                                @endphp
 
-                            @if ($createdAt instanceof \Carbon\Carbon)
-                                <td>{{ $createdAt->format('d m Y') }}</td>
-                                <td>{{ $createdAt->format('H:i') }}</td>
-                            @else
-                                <td>Data non valida</td>
-                                <td>Data non valida</td>
-                            @endif
+                                @if ($createdAt instanceof \Carbon\Carbon)
+                                    <td>{{ $createdAt->format('d m Y') }}</td>
+                                    <td>{{ $createdAt->format('H:i') }}</td>
+                                @else
+                                    <td>Data non valida</td>
+                                    <td>Data non valida</td>
+                                @endif
 
-                            <td>
-                                <div class="d-flex justify-content-center pt-3">
-                                    <a href="{{ route('admin.leads.show', $item->id) }}" class="btn btn-sm mx-1 rounded-5 btn-show">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                                <td>
+                                    <div class="d-flex justify-content-center pt-3">
+                                        <a href="{{ route('admin.leads.show', $item->id) }}"
+                                            class="btn btn-sm mx-1 rounded-5 btn-show">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
             <!--inizio mappa-->
-            <div class="col-6 mt-5 shadow ">
+            <div class="col-6 mt-5 ">
                 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>
                 <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 

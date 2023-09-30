@@ -128,5 +128,9 @@
         </div>
     </div>
 </body>
+{{-- NEL CASO SI VOLESSE IL FOOTER E PRONTO --}}
+{{-- <footer>
+    @include('admin.partials.footer')
+</footer> --}}
 
 </html>

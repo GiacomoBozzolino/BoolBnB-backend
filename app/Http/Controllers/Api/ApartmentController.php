@@ -89,11 +89,19 @@ class ApartmentController extends Controller
     ->leftJoin('apartment_sponsors', 'apartments.id', '=', 'apartment_sponsors.apartment_id')
     ->where('visibility', 1)
     ->having('distance', '<', $distance)
-    ->orderByRaw('CASE WHEN apartment_sponsors.apartment_id IS NOT NULL THEN 0 ELSE 1 END, apartment_sponsors.end_at DESC, distance')
-    ->get();
+    ->orderByRaw('CASE WHEN apartment_sponsors.apartment_id IS NOT NULL THEN 0 ELSE 1 END, apartment_sponsors.end_at DESC, distance');
 
-        return response()->json($apartments);
+    // Aggiungi la clausola where per verificare la data end_at
+    $now = now(); // Data e ora attuali
+    $apartments->where(function ($query) use ($now) {
+        $query->whereNull('apartment_sponsors.end_at')
+            ->orWhere('apartment_sponsors.end_at', '>', $now);
+    });
+
+    $apartments = $apartments->get();
+    return response()->json($apartments);
     }
+
 
 
     // FUNZIONE DI RICERCA AVANZATA
@@ -133,18 +141,24 @@ class ApartmentController extends Controller
     ->leftJoin('apartment_sponsors', 'apartments.id', '=', 'apartment_sponsors.apartment_id')
     ->where('visibility', 1)
     ->having('distance', '<', $distance)
-    
     ->where('n_rooms', '>=', $n_rooms)
     ->where('n_beds', '>=', $n_beds)
     ->orderByRaw('CASE WHEN apartment_sponsors.apartment_id IS NOT NULL THEN 0 ELSE 1 END, apartment_sponsors.end_at DESC, distance');
 
-    if ($selectedServices) {
-     foreach ($selectedServices as $serviceId) {
+if ($selectedServices) {
+    foreach ($selectedServices as $serviceId) {
         $apartments->whereHas('services', function ($query) use ($serviceId) {
             $query->where('service_id', $serviceId);
         });
     }
-    }   
+}
+
+// Aggiungi la clausola where per verificare la data end_at
+$now = now(); // Data e ora attuali
+$apartments->where(function ($query) use ($now) {
+    $query->whereNull('apartment_sponsors.end_at')
+          ->orWhere('apartment_sponsors.end_at', '>', $now);
+}); 
 
     $apartments = $apartments->get();
         return response()->json($apartments);

@@ -26,11 +26,10 @@
 
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center transition-logo"
-                    href="{{ url('http://localhost:5174/') }}">
+                    href="{{ url('http://localhost:5173/') }}">
                     <div class="logo-laravel">
                         <h2 class="logo p-4 rounded-5 shadow-lg"><i class="fa-solid fa-earth-europe"></i>BoolBnB</h2>
                     </div>
-                    {{-- config('app.name', 'Laravel') --}}
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -44,7 +43,8 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
-                                href="{{ url('admin/apartments') }}">{{ __('Home') }}</a>
+                                href="{{ url('admin/apartments') }}">{{ __('Home') }}
+                            </a>
                         </li>
                     </ul>
 
@@ -105,14 +105,14 @@
                             <a href="{{ route('admin.sponsors.index') }}"
                                 class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === 'admin.sponsors.index' ? 'selected' : '' }} select">
                                 <div class="text-container d-flex align-items-center">
-                                    <i class="fa-regular fa-lightbulb ms-3"></i>
+                                    <i class="fa-solid fa-star ms-3"></i>
                                     <h4 class="ms-3">Sponsor</h4>
                                 </div>
                             </a>
                             <a href=""
                                 class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === '' ? 'selected' : '' }} select">
                                 <div class="text-container d-flex align-items-center">
-                                    <i class="fa-solid fa-diagram-project ms-3"></i>
+                                    <i class="fa-solid fa-magnifying-glass-chart ms-3"></i>
                                     <h4 class="ms-3">Statistiche</h4>
                                 </div>
                             </a>

@@ -5,7 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Registrazione') }}</div>
+                    <h4 class="card-header">{{ __('Registrazione') }}</h4>
+                    <div class="ms-3 mt-2"><small><span class="text-danger">*</span> I campi contrassegnati da questo simbolo sono obbligatori</small></div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
@@ -30,23 +31,19 @@
 
                         {{-- surname (facoltativo) --}}
                         <div class="mb-4 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}<span class="text-success"> (facoltativo)</span></label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}</label>
 
                             <div class="col-md-6">
                                 <input id="surname" type="text" class="form-control" name="surname" value="{{ old('surname') }}"  autocomplete="surname" autofocus>
-
-                                
                             </div>
                         </div>
                        
-
                         {{-- date_of_birth (facoltativo)--}}
                         <div class="mb-4 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}<span class="text-success"> (facoltativo)</span></label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}</label>
 
                             <div class="col-md-6">
                                 <input id="date_of_birth" type="date" class="form-control"  name="date_of_birth" value="{{ old('date_of_birth') }}" autocomplete="date_of_birth" autofocus>
-
                             </div>
                         </div>
                         

@@ -1,19 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+
 use App\Models\Lead;
+
 use App\Mail\NewContact;
 
 class LeadController extends Controller
 {
     //CREO LA FUNZIONE STORE
-
     public function store(Request $request){
-
         $form_data = $request->all();
 
         // VALIDIAMO I DATI
@@ -30,7 +32,6 @@ class LeadController extends Controller
                 'success' => false,
                 'errors' =>  $validator->errors()
             ]);
-            
         };
 
         //SALVO I DATI NEL DATABASE

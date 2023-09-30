@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Sponsor;
 use App\Models\User;
 use App\Models\Apartment;
+
 use Carbon\Carbon;
 
 class SponsorController extends Controller
@@ -59,8 +60,7 @@ class SponsorController extends Controller
      */
     public function show(Apartment $apartment, Sponsor $sponsor, Request $request)
     {
-
-        // usoo di carbon per prendere la data attuale
+        // utilizzo Carbon per recuperare la data attuale
         $oggi = Carbon::today();
 
         $id = $request->query('apartment_id');
@@ -83,9 +83,8 @@ class SponsorController extends Controller
                 'apartments' => $apartments,
                 'sponsor' => $sponsor,
             ]);
-
-            
         }
+
         else{
 
             $apartments = Apartment::findOrFail($id);
@@ -100,10 +99,7 @@ class SponsorController extends Controller
                 'apartment' => $apartments,
                 'sponsor' => $sponsor,
             ]);
-
         }
-
-        
     }
 
     /**

@@ -15,21 +15,20 @@ class Apartment extends Model
 {
     use HasFactory;
 
-    /*connessione con User*/
+    // CONNESSIONE A USER
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    // CONNESSIONE A USER
+    // CONNESSIONE A SERVIZI
     public function services() {
         return $this->belongsToMany(Service::class);
     }
-    // CONNESSIONE A LEADS(MESSAGI)
+    // CONNESSIONE A LEADS(MESSAGGI)
     public function leads(){
         return $this->hasMany(Lead::class);
     }
-
-    // CONNESSIONE AI SPONSOR
+    // CONNESSIONE A SPONSOR
     public function sponsors()
     {
         return $this->belongsToMany(Sponsor::class, 'apartment_sponsors')->withPivot('end_at');
@@ -55,5 +54,4 @@ class Apartment extends Model
     public static function generateSlug($title){
         return Str::slug($title, '-');
     }
-
 }

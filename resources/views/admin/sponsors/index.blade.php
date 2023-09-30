@@ -5,13 +5,12 @@
         <div class="col py-3">
             <h1>
                 <span class="icon-section me-2">
-                    <i class="fa-solid fa-sack-dollar fa-sm"></i>
+                    <i class="fa-solid fa-star"></i>
                 </span>
                 Sponsorships
             </h1>
         </div>
     </div>
-
 
     <div class="container h-100 d-flex align-items-center justify-content-center p-lg-0">
         <div class="row w-100 gy-5 mt-5 mt-md-0">
@@ -37,8 +36,6 @@
                     </a>
                 </div>
             @endforeach
-
-
         </div>
     </div>
 @endsection

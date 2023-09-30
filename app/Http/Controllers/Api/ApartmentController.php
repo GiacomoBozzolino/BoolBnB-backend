@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-
-
-// Importo il model di Apartment
 
 use App\Models\Apartment;
 use App\Models\Service;
@@ -24,7 +23,6 @@ class ApartmentController extends Controller
         ]);
     }
 
-
     public function show ($slug){
         $apartment =Apartment::with('services')->where('slug', $slug)->first();
 
@@ -38,20 +36,18 @@ class ApartmentController extends Controller
         else{
             return response()->json([
                 'success' => false,
-                'error' => 'nessun post trovato',
+                'error' => 'Nessun Appartamento Trovato',
             ]);
         }
     }
 
-    // CHIAMATA API SPOSORIZZAZIONI
+    // CHIAMATA API SPONSORIZZAZIONI
     public function getFeaturedApartments()
     {
         $apartments = Apartment::with('sponsors')->get();
 
         return response()->json($apartments);
     }
-
-
 
     // FUNZIONE DI RICERCA BASE
     public function search(Request $request)
@@ -79,30 +75,29 @@ class ApartmentController extends Controller
         $apartmentLongitude = $coordinates->lon;
 
         // Calcola la distanza in chilometri (utilizzando la formula Haversine)
-    $distance = 20; // Raggio in chilometri
+        $distance = 20; // Raggio in chilometri
 
-    $apartments = Apartment::select('apartments.*')
-    ->selectRaw(
-        '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
-        [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
-    )
-    ->leftJoin('apartment_sponsors', 'apartments.id', '=', 'apartment_sponsors.apartment_id')
-    ->where('visibility', 1)
-    ->having('distance', '<', $distance)
-    ->orderByRaw('CASE WHEN apartment_sponsors.apartment_id IS NOT NULL THEN 0 ELSE 1 END, apartment_sponsors.end_at DESC, distance');
+        $apartments = Apartment::select('apartments.*')
+        ->selectRaw(
+            '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
+            [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
+        )
+        ->leftJoin('apartment_sponsors', 'apartments.id', '=', 'apartment_sponsors.apartment_id')
+        ->where('visibility', 1)
+        ->having('distance', '<', $distance)
+        ->orderByRaw('CASE WHEN apartment_sponsors.apartment_id IS NOT NULL THEN 0 ELSE 1 END, apartment_sponsors.end_at DESC, distance');
 
-    // Aggiungi la clausola where per verificare la data end_at
-    $now = now(); // Data e ora attuali
-    $apartments->where(function ($query) use ($now) {
-        $query->whereNull('apartment_sponsors.end_at')
-            ->orWhere('apartment_sponsors.end_at', '>', $now);
-    });
+        // Aggiungi la clausola where per verificare la data end_at
+        $now = now(); // Data e ora attuali
+        $apartments->where(function ($query) use ($now) {
+            $query->whereNull('apartment_sponsors.end_at')
+                ->orWhere('apartment_sponsors.end_at', '>', $now);
+        });
 
-    $apartments = $apartments->get();
-    return response()->json($apartments);
+        $apartments = $apartments->get();
+
+        return response()->json($apartments);
     }
-
-
 
     // FUNZIONE DI RICERCA AVANZATA
     public function searchAdvanced(Request $request)
@@ -126,44 +121,41 @@ class ApartmentController extends Controller
         $apartmentLongitude = $coordinates->lon;
 
         // Calcola la distanza in chilometri (utilizzando la formula Haversine)
-    $distance = $request->input ('distance'); // Raggio in chilometri
-    $n_rooms = $request->input('n_rooms');
-    $n_beds = $request->input('n_beds');
-    $selectedServices = $request->input('services', []);
+        $distance = $request->input ('distance'); // Raggio in chilometri
+        $n_rooms = $request->input('n_rooms');
+        $n_beds = $request->input('n_beds');
+        $selectedServices = $request->input('services', []);
 
+        $apartments = Apartment::select('apartments.*')
+        ->selectRaw(
+            '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
+            [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
+        )
+        ->leftJoin('apartment_sponsors', 'apartments.id', '=', 'apartment_sponsors.apartment_id')
+        ->where('visibility', 1)
+        ->having('distance', '<', $distance)
+        ->where('n_rooms', '>=', $n_rooms)
+        ->where('n_beds', '>=', $n_beds)
+        ->orderByRaw('CASE WHEN apartment_sponsors.apartment_id IS NOT NULL THEN 0 ELSE 1 END, apartment_sponsors.end_at DESC, distance');
 
+        if ($selectedServices) {
+            foreach ($selectedServices as $serviceId) {
+                $apartments->whereHas('services', function ($query) use ($serviceId) 
+                {$query->where('service_id', $serviceId);});
+            }
+        }
 
-    $apartments = Apartment::select('apartments.*')
-    ->selectRaw(
-        '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
-        [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
-    )
-    ->leftJoin('apartment_sponsors', 'apartments.id', '=', 'apartment_sponsors.apartment_id')
-    ->where('visibility', 1)
-    ->having('distance', '<', $distance)
-    ->where('n_rooms', '>=', $n_rooms)
-    ->where('n_beds', '>=', $n_beds)
-    ->orderByRaw('CASE WHEN apartment_sponsors.apartment_id IS NOT NULL THEN 0 ELSE 1 END, apartment_sponsors.end_at DESC, distance');
+        // Aggiungi la clausola where per verificare la data end_at
+        $now = now(); // Data e ora attuali
+        $apartments->where(function ($query) use ($now) {
+            $query->whereNull('apartment_sponsors.end_at')
+                ->orWhere('apartment_sponsors.end_at', '>', $now);
+        }); 
 
-if ($selectedServices) {
-    foreach ($selectedServices as $serviceId) {
-        $apartments->whereHas('services', function ($query) use ($serviceId) {
-            $query->where('service_id', $serviceId);
-        });
-    }
-}
-
-// Aggiungi la clausola where per verificare la data end_at
-$now = now(); // Data e ora attuali
-$apartments->where(function ($query) use ($now) {
-    $query->whereNull('apartment_sponsors.end_at')
-          ->orWhere('apartment_sponsors.end_at', '>', $now);
-}); 
-
-    $apartments = $apartments->get();
+        $apartments = $apartments->get();
+        
         return response()->json($apartments);
     }
-    
 }
 
 

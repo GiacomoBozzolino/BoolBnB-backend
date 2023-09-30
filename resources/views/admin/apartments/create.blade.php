@@ -5,21 +5,11 @@
         <div class="row">
             <div class="col-12 text-center pb-2">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="fw-bold">Aggiungi il tuo appartamento</h2>
+                    <h2 class="fw-bold">Aggiungi un appartamento</h2>
                     
                 </div>
             </div>
-            <h6>Quando sul nome del campo si trova il seguente simbolo:<span class="text-danger"> *</span>. Significa che il campo deve essere compilato obbligatoriamente </h6>
-            {{-- BANNER TUTTI MESSAGGI ERRORE --}}
-            {{-- @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $err)
-                            <li>{{$err}}</li>
-                        @endforeach
-                    </ul>
-                </div>        
-            @endif --}}
+            <h6><span class="text-danger">*</span> I campi contrassegnati da questo simbolo sono obbligatori</h6>
 
             <div class="col-12 mb-5">
                 <form action=" {{ Route('admin.apartments.store') }} " method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -30,7 +20,7 @@
                             <li>
                                 <label class="control-label my-2">Titolo</label>
                                 <span class="text-danger"> *</span>
-                                <input type="text" name="title" id="title" placeholder="Inserisci il titolo"
+                                <input type="text" name="title" id="title" placeholder="Inserisci un titolo per il tuo annuncio"
                                 class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}" required>
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -41,7 +31,7 @@
 
                             <!-- Numero stanze -->
                             <li>
-                                <label class="control-label my-2">Numero delle stanze</label>
+                                <label class="control-label my-2">Stanze</label>
                                 <span class="text-danger"> *</span>
                                 <select class="form-control" name="n_rooms" id="n_rooms" required>
                                     <option value="" disabled selected>Seleziona il numero di stanze</option>
@@ -53,7 +43,7 @@
 
                             <!-- Numero stanze da letto -->
                             <li>
-                                <label class="control-label my-2">Numero delle stanze da letto</label>
+                                <label class="control-label my-2">Posti letto</label>
                                 <span class="text-danger"> *</span>
                                 <select class="form-control" name="n_beds" id="n_beds" required>
                                     <option value="" disabled selected>Seleziona il numero di stanze da letto</option>

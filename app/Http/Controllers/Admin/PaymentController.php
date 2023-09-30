@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
-use Braintree_Transaction;
+
 use App\Models\Sponsor;
 use App\Models\ApartmentSponsor;
 
-
-
+use Braintree_Transaction;
 
 class PaymentController extends Controller
 {
@@ -65,11 +65,10 @@ class PaymentController extends Controller
 
         $clientToken = $gateway->clientToken()->generate();
         
-        
         return view('admin.sponsors.create', [
             'token' => $clientToken,
             'sponsors' => $sponsors,
             'apartments' => $apartments,
-            ]);
+        ]);
     }
 }

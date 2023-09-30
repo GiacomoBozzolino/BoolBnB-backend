@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-// import
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use App\Models\Service;
-use TomTom\Telematics\Endpoints\Geocoding\GeocodeQuery;
-use GuzzleHttp\Client;
-use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Http\Controllers\Controller;
-use App\Models\Lead;
-use Carbon\Carbon;
+use App\Http\Controllers\Api\LeadController;
+
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-use App\Http\Controllers\Api\LeadController;
-use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
-
+use App\Models\Service;
+use App\Models\Apartment;
+use App\Models\Lead;
 use App\Models\Sponsor;
 
+use TomTom\Telematics\Endpoints\Geocoding\GeocodeQuery;
+use GuzzleHttp\Client;
+use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
+use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -62,7 +61,7 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
         $form_data = $request->all();
-        // controllo per aggiornare l'imagine
+        // controllo per aggiornare l'immagine
         if($request->hasFile('cover_img')){
             $path = Storage::put('apartments_img', $request->cover_img);
             $form_data['cover_img']=$path;
@@ -74,7 +73,6 @@ class ApartmentController extends Controller
 
         // funzione che genera lo slug
         $form_data['slug'] = $apartment->generateSlug($form_data['title']);
-
 
         $apartment->fill($form_data);
 
@@ -99,8 +97,6 @@ class ApartmentController extends Controller
         
         $apartment->save();
 
-        // $leads = $apartment->leads = DB::table('leads')->orderBy('created_at', 'desc')->get();
-
         if($request->has('services')){
             $apartment->services()->attach($request->services);
         }  
@@ -122,9 +118,9 @@ class ApartmentController extends Controller
         $apartment_id = $apartment->id;
         $leads = $apartment->leads = DB::table('leads')->where('apartment_id', $apartment_id)->orderBy('created_at', 'desc')->get();
     
-        // CONTROLLO SE, IL APPARTAMENTO CHE MI è STATO PASSATO, CORRISPONDE AL APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
+        // CONTROLLO SE L'APPARTAMENTO CHE MI è STATO PASSATO CORRISPONDE ALL'APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
         if ($user->apartments->contains($apartment)) {
-            // RITORNO LA SHOW DEL APARTMENT
+            // RITORNO LA SHOW DI APARTMENT
             return view('admin.apartments.show', compact('apartment', 'message', 'leads'));
         } else {
             // RIMANDO L'UTENTE NELLA PAGINA DI PARTENZA
@@ -140,32 +136,22 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        
-
         $services = Service::all();
-
 
         $user = auth()->user();
         // dd($user->apartments);
 
-        
-
-        
-
-        // CONTROLLO SE, IL APPARTAMENTO CHE MI è STATO PASSATO, CORRISPONDE AL APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
+        // CONTROLLO SE L'APPARTAMENTO CHE MI è STATO PASSATO CORRISPONDE ALL'APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
         if ($user->apartments->contains($apartment)){
 
-            // RITORNO LA SHOW DEL APARTMENT
+            // RITORNO LA SHOW DI APARTMENT
             return view('admin.apartments.edit', compact('apartment', 'services'));
-           
-           
 
         } else {
 
             // RIMANDO L'UTENTE NELLA PAGINA DI PARTENZA
             return redirect()->route('admin.apartments.index', compact('apartment', 'services'));
         }
-
 
         return view('admin.apartments.edit', compact('apartment', 'services'));
     }
@@ -180,7 +166,7 @@ class ApartmentController extends Controller
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
         $form_data = $request->all();
-        // controllo per aggiornare l'imagine
+        // controllo per aggiornare l'immagine
         if($request->hasFile('cover_img')){
             $path = Storage::put('apartments_img', $request->cover_img);
             $form_data['cover_img']=$path;
@@ -204,7 +190,6 @@ class ApartmentController extends Controller
         $apartment->latitude = $coordinates->lat;
         $apartment->longitude = $coordinates->lon;
         
-
         $form_data['slug'] = Str::slug($form_data['title'], '-');
 
         $apartment->update($form_data);
@@ -213,7 +198,7 @@ class ApartmentController extends Controller
             $apartment->services()->sync($request->services);
         }  
 
-        $message = 'Modifiche Appartamento Completata';
+        $message = 'Modifiche Applicate Con Successo';
 
         return redirect()->route('admin.apartments.show', compact('apartment', 'message'));
     }
@@ -240,7 +225,7 @@ class ApartmentController extends Controller
         $searchTerm = $request->input('address');
         $apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
 
-        //ricerca degli indirizzi con tom tom 
+        //ricerca degli indirizzi con TomTom 
         $query = GeocodeQuery::create($searchTerm)->withMaxResults(10);
         $results = $this->performTomTomGeocoding($query, $apiKey);
 
@@ -253,19 +238,19 @@ class ApartmentController extends Controller
     }
 
     private function performTomTomGeocoding($query, $apiKey)
-{
-    $client = new Client();
-    $response = $client->get("https://api.tomtom.com/search/2/search/{$query}.json", [
-        'query' => [
-            'key' => $apiKey,
-        ],
-    ]);
+    {
+        $client = new Client();
+        $response = $client->get("https://api.tomtom.com/search/2/search/{$query}.json", [
+            'query' => [
+                'key' => $apiKey,
+            ],
+        ]);
 
-    $data = json_decode($response->getBody());
+        $data = json_decode($response->getBody());
 
-    // Estrai i risultati o le informazioni necessarie dalla risposta
-    $results = $data->results;
+        // Estrai i risultati o le informazioni necessarie dalla risposta
+        $results = $data->results;
 
-    return $results;
-}
+        return $results;
+    }
 }

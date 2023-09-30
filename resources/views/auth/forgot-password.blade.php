@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Reset Password') }}</div>
+                    <h4 class="card-header">{{ __('Password Reset') }}</h4>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -19,7 +19,7 @@
 
                             <div class="mb-4 row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo e-mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -37,7 +37,7 @@
                             <div class="mb-4 row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Send Password Reset Link') }}
+                                        {{ __('Invia Password Reset Link') }}
                                     </button>
                                 </div>
                             </div>

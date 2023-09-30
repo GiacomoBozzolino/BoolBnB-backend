@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div id="dropin-container"></div>
                 <button class="btn btn-primary" id="submit-button">Request payment method</button>
-                <button id="butt" class="btn btn-success links-decor d-none"><a href="{{ route('admin.sponsors.index') }}">Torna agli Sponsor</button>
+                <button id="butt" class="btn btn-danger  d-none"><a href="{{ route('admin.sponsors.index') }}" class="links-decor text-light">Torna agli Sponsor</button>
             </div>
 
            
@@ -57,7 +57,7 @@
                         console.log('success', payload);
                         if (payload) {
 
-                            alert('Complimenti: il pagamento è stato effettuato con successo')
+                            alert('COMPLIMENTII!! il pagamento è stato effettuato con successo')
                             let buttonReturn = document.getElementById("butt")
                             buttonReturn.classList.remove("d-none");
                             // button.disabled = true
@@ -74,6 +74,8 @@
 
                             alert('Appartamento già sponsorizzato in precedenza')
                             let buttonReturn = document.getElementById("butt")
+
+                            button.classList.add("d-none");
                             buttonReturn.classList.remove("d-none");
                             console.log(buttonReturn)
 

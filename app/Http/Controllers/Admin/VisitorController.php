@@ -95,13 +95,16 @@ class VisitorController extends Controller
             return count($views);
         });
 
-        $years = array_unique($visitors->pluck(function ($visitor) {
-            return Carbon::parse($visitor->viewed_at)->format('Y');
-        })->toArray());
-
+        $years = $visitors->map(function ($visitor) {
+            if ($visitor->viewed_at) {
+                return Carbon::parse($visitor->viewed_at)->format('Y');
+            }
+            return null;
+        })->filter()->unique()->toArray();
+        
         rsort($years);
-
-        return view('admin.stats.index', compact('visitors', 'user', 'years', 'userApartmentIds', 'apartmentViews', 'userApartments', 'yearlyViews', 'monthlyViews', 'yearlyMonthlyViews', 'viewsByApartmentAndYear'));
+        
+        return view('admin.statistic.index', compact('visitors', 'user', 'years', 'userApartmentIds', 'apartmentViews', 'userApartments', 'yearlyViews', 'monthlyViews', 'yearlyMonthlyViews', 'viewsByApartmentAndYear'));
     }
     
 }

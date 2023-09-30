@@ -226,6 +226,7 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
+        $apartment->sponsors()->sync([]);
         
         $apartment->delete();
 

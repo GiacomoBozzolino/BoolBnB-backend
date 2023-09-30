@@ -14,26 +14,25 @@ class ApartmentSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-        for ($i=1; $i <11 ; $i++) {
-            $apartment= new Apartment(); 
-            $apartment->title= $faker -> sentence(3);
-            $apartment->slug=$apartment->generateSlug($apartment->title);
-            $apartment->n_rooms= $faker ->randomDigit();
-            $apartment->n_beds= $faker ->randomDigit();
-            $apartment->n_bathrooms= $faker ->randomDigit();
-            $apartment->square_meters= $faker ->numberBetween(40,250);
-            $apartment->address= $faker -> streetAddress();
-            $apartment->cover_img= $faker -> imageUrl(640,480,'city', true);
-            $apartment->latitude= $faker -> latitude();
-            $apartment->longitude= $faker -> longitude();
-            $apartment->visibility= $faker -> boolean();
-            $apartment->description= $faker -> paragraph(2);
-        
+        $apartments = config('apartments');
 
+        foreach ($apartments as $item) {
+            $apartment = new Apartment();
+            $apartment->title = $item['title'];
+            $apartment->slug = $apartment->generateSlug($item['title']);
+            $apartment->n_rooms = $item['n_rooms'];
+            $apartment->n_beds = $item['n_beds'];
+            $apartment->n_bathrooms = $item['n_bathrooms'];
+            $apartment->square_meters = $item['square_meters'];
+            $apartment->address = $item['address'];
+            $apartment->cover_img = $item['cover_img'];
+            $apartment->latitude = $item['latitude'];
+            $apartment->longitude = $item['longitude'];
+            $apartment->description = $item['description'];
+        
             $apartment->save();
-  
         }
     }
 }

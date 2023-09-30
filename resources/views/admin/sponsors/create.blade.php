@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="dropin-container"></div>
-                <button class="btn btn-primary" id="submit-button">Request payment method</button>
+                <button class="btn btn-primary" id="submit-button">Paga</button>
             </div>
         </div>
     </div>
@@ -21,7 +21,8 @@
         
         braintree.dropin.create({
             authorization: '{{ $token }}',
-            container: '#dropin-container'
+            container: '#dropin-container',
+            locale: 'it_IT',
         }, function(createErr, instance) {
             button.addEventListener('click', function() {
                 instance.requestPaymentMethod(function(requestPaymentMethodErr, payload) {

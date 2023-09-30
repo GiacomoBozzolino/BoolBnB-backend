@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="dropin-container"></div>
-                <button class="btn btn-primary" id="submit-button">Request payment method</button>
+                <button class="btn btn-primary" id="submit-button">Richiedi metodo di pagamento</button>
             </div>
         </div>
     </div>

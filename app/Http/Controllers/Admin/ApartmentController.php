@@ -126,6 +126,7 @@ class ApartmentController extends Controller
         if ($user->apartments->contains($apartment)) {
             // RITORNO LA SHOW DEL APARTMENT
             return view('admin.apartments.show', compact('apartment', 'message', 'leads'));
+
         } else {
             // RIMANDO L'UTENTE NELLA PAGINA DI PARTENZA
             return redirect()->route('admin.apartments.index')->with('error', 'Non hai accesso a questo appartamento.');
@@ -140,17 +141,10 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        
-
         $services = Service::all();
-
 
         $user = auth()->user();
         // dd($user->apartments);
-
-        
-
-        
 
         // CONTROLLO SE, IL APPARTAMENTO CHE MI è STATO PASSATO, CORRISPONDE AL APPARTAMENTO COLLEGATO ALL'UTENTE ATTUALMENTE AUTENTICATO
         if ($user->apartments->contains($apartment)){
@@ -158,14 +152,11 @@ class ApartmentController extends Controller
             // RITORNO LA SHOW DEL APARTMENT
             return view('admin.apartments.edit', compact('apartment', 'services'));
            
-           
-
         } else {
 
             // RIMANDO L'UTENTE NELLA PAGINA DI PARTENZA
             return redirect()->route('admin.apartments.index', compact('apartment', 'services'));
         }
-
 
         return view('admin.apartments.edit', compact('apartment', 'services'));
     }
@@ -204,7 +195,6 @@ class ApartmentController extends Controller
         $apartment->latitude = $coordinates->lat;
         $apartment->longitude = $coordinates->lon;
         
-
         $form_data['slug'] = Str::slug($form_data['title'], '-');
 
         $apartment->update($form_data);
@@ -226,7 +216,6 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        
         $apartment->delete();
 
         $message = 'Appartamento rimosso dal tuo account!';
@@ -252,19 +241,19 @@ class ApartmentController extends Controller
     }
 
     private function performTomTomGeocoding($query, $apiKey)
-{
-    $client = new Client();
-    $response = $client->get("https://api.tomtom.com/search/2/search/{$query}.json", [
-        'query' => [
-            'key' => $apiKey,
-        ],
-    ]);
+    {
+        $client = new Client();
+        $response = $client->get("https://api.tomtom.com/search/2/search/{$query}.json", [
+            'query' => [
+                'key' => $apiKey,
+            ],
+        ]);
 
-    $data = json_decode($response->getBody());
+        $data = json_decode($response->getBody());
 
-    // Estrai i risultati o le informazioni necessarie dalla risposta
-    $results = $data->results;
+        // Estrai i risultati o le informazioni necessarie dalla risposta
+        $results = $data->results;
 
-    return $results;
-}
+        return $results;
+    }
 }

@@ -60,7 +60,7 @@ class SponsorController extends Controller
     public function show(Apartment $apartment, Sponsor $sponsor, Request $request)
     {
 
-        // usoo di carbon per prendere la data attuale
+        // uso di carbon per prendere la data attuale
         $oggi = Carbon::today();
 
         $id = $request->query('apartment_id');
@@ -83,8 +83,6 @@ class SponsorController extends Controller
                 'apartments' => $apartments,
                 'sponsor' => $sponsor,
             ]);
-
-            
         }
         else{
 
@@ -100,10 +98,7 @@ class SponsorController extends Controller
                 'apartment' => $apartments,
                 'sponsor' => $sponsor,
             ]);
-
         }
-
-        
     }
 
     /**

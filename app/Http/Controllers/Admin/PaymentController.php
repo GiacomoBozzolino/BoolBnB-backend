@@ -8,9 +8,6 @@ use Braintree_Transaction;
 use App\Models\Sponsor;
 use App\Models\ApartmentSponsor;
 
-
-
-
 class PaymentController extends Controller
 {
     public function process(Request $request)

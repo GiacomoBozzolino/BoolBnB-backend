@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-
-// Importo il model di Apartment
-
 use App\Models\Apartment;
 use App\Models\Service;
 
@@ -23,7 +20,6 @@ class ApartmentController extends Controller
             'results' => $apartments
         ]);
     }
-
 
     public function show ($slug){
         $apartment =Apartment::with('services')->where('slug', $slug)->first();
@@ -42,9 +38,6 @@ class ApartmentController extends Controller
             ]);
         }
     }
-
-
-
 
     // FUNZIONE DI RICERCA BASE
     public function search(Request $request)
@@ -72,7 +65,7 @@ class ApartmentController extends Controller
         $apartmentLongitude = $coordinates->lon;
 
         // Calcola la distanza in chilometri (utilizzando la formula Haversine)
-    $distance = 20; // Raggio in chilometri
+        $distance = 20; // Raggio in chilometri
 
     $apartments = Apartment::select('apartments.*')
     ->selectRaw(
@@ -87,7 +80,6 @@ class ApartmentController extends Controller
 
         return response()->json($apartments);
     }
-
 
     // FUNZIONE DI RICERCA AVANZATA
     public function searchAdvanced(Request $request)
@@ -111,12 +103,10 @@ class ApartmentController extends Controller
         $apartmentLongitude = $coordinates->lon;
 
         // Calcola la distanza in chilometri (utilizzando la formula Haversine)
-    $distance = $request->input ('distance'); // Raggio in chilometri
-    $n_rooms = $request->input('n_rooms');
-    $n_beds = $request->input('n_beds');
-    $selectedServices = $request->input('services', []);
-
-
+        $distance = $request->input ('distance'); // Raggio in chilometri
+        $n_rooms = $request->input('n_rooms');
+        $n_beds = $request->input('n_beds');
+        $selectedServices = $request->input('services', []);
 
     $apartments = Apartment::select('apartments.*')
     ->selectRaw(
@@ -142,7 +132,6 @@ class ApartmentController extends Controller
 $apartments = $apartments->get();
         return response()->json($apartments);
     }
-    
 }
 
 

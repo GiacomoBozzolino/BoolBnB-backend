@@ -11,7 +11,6 @@ use App\Mail\NewContact;
 class LeadController extends Controller
 {
     //CREO LA FUNZIONE STORE
-
     public function store(Request $request){
 
         $form_data = $request->all();

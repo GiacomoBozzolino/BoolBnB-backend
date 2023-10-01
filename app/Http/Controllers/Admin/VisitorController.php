@@ -126,35 +126,9 @@ class VisitorController extends Controller
         $userApartmentIds = $userApartments->pluck('id')->toArray();
         
         // Recupera i dati dei visitatori anziché delle visualizzazioni
-        $visitors = Visitor::whereIn('apartment_id', $userApartmentIds)->get();
+        $visitors = Visitor::where('apartment_id', $id)->get();
         
         // Calcola le statistiche sui visitatori
-        $viewsByYear = $visitors->groupBy(function ($visitor) {
-            return Carbon::parse($visitor->viewed_at)->format('Y');
-        });
-    
-        $yearlyViews = $viewsByYear->map(function ($views) {
-            return count($views);
-        });
-    
-        // Altre elaborazioni...
-    
-        $years = $visitors->map(function ($visitor) {
-            if ($visitor->viewed_at) {
-                return Carbon::parse($visitor->viewed_at)->format('Y');
-            }
-            return null;
-        })->filter()->unique()->toArray();
-        
-        rsort($years);
-    
-        $apartmentMessages = $userApartments->map(function ($apartment) {
-            return [
-                'apartment_id' => $apartment->id,
-                'message_count' => $apartment->leads()->count(),
-            ];
-        });
-
         $viewsByMonthYear = $visitors->groupBy(function ($visitor) {
             return Carbon::parse($visitor->viewed_at)->format('M Y');
         });
@@ -165,13 +139,30 @@ class VisitorController extends Controller
     
         $monthsYears = $visitors->map(function ($visitor) {
             if ($visitor->viewed_at) {
-                return Carbon::parse($visitor->viewed_at)->format('M Y');
+                return Carbon::parse($visitor->viewed_at)->format('Y-m');
             }
             return null;
-        })->filter()->unique()->toArray();
-    
-        rsort($monthsYears);
+        })->filter()->unique()->sort()->toArray();
         
-        return view('admin.statistic.show', compact('visitors', 'user', 'monthsYears', 'userApartmentIds', 'userApartments', 'yearlyViews', 'monthlyViews', 'apartmentMessages'));
+        rsort($monthsYears);
+    
+        $apartmentMessages = $apartment->leads()->get();
+
+        $messagesByMonthYear = $apartmentMessages->groupBy(function ($message) {
+            return Carbon::parse($message->created_at)->format('M Y');
+        });
+    
+        $monthlyMessages = $messagesByMonthYear->map(function ($messages) {
+            return count($messages);
+        });
+    
+        $monthsYearsMessages = $apartmentMessages->map(function ($message) {
+            if ($message->created_at) {
+                return Carbon::parse($message->created_at)->format('M Y');
+            }
+            return null;
+        })->filter()->unique()->sort()->toArray();
+        
+        return view('admin.statistic.show', compact('visitors', 'user', 'monthsYears', 'userApartmentIds', 'userApartments', 'monthlyViews', 'apartmentMessages', 'monthlyMessages', 'monthsYearsMessages'));
     }
 }

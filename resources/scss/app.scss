@@ -220,6 +220,7 @@ p a:hover {
 .footer-li a:hover {
     text-decoration: underline;
 }
+
 // FINE FOOTER
 
 .img-container {
@@ -244,4 +245,26 @@ p a:hover {
     img {
         width: 100%;
     }
+}
+
+// SPONSORIZZAZIONI
+.bg-grey {
+    background-color: rgb(187, 187, 187);
+}
+
+.hvr {
+    transition: 0.5s;
+}
+
+.hvr:hover {
+    scale: 1.1;
+}
+
+.btn-sponsor {
+    color: black;
+}
+
+.pay-hover:hover {
+    background-color: rgb(175, 174, 174);
+    color: white;
 }

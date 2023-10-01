@@ -54,6 +54,20 @@
                                 </h5>
                             @endif
                         </strong>
+                        {{-- sponsorizzazione --}}
+                        <p class="card-text badge text-bg-success">Sponsorizzazioni</p>
+                        <strong class="d-flex flex-wrap">
+                        @if(count($apartment->sponsors) > 0)
+                            @foreach($apartment->sponsors as $sponsor)
+                                @if($sponsor->pivot->end_at >= now())
+                                    <p>Sponsor attiva: {{ $sponsor->title }}</p>
+                                    <p>Scadenza: {{ $sponsor->pivot->end_at }}</p>
+                                @endif
+                            @endforeach
+                        @else
+                        <h5><span class="badge text-bg-warning rounded-pill">Non ci sono sponsorizzazioni attive</span></h5>
+                        @endif
+                        </strong>
                         {{-- tasti con realtive sulla col-12 --}}
 
                         <div class="position-absolute top-0 end-0 me-5 mt-3">

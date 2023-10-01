@@ -27,10 +27,13 @@
                             {{-- imagine --}}
                             <div class="">
                                 <img src="{{ asset('storage/' . $apartment->cover_img) }}" class="card-img-top ratio ratio-4x3 rounded-5" alt="{{ $apartment->title }}">
+                                <!-- questo per visualizzare la sponsorizzazione sulla card-->
                                 @foreach($apartment->sponsors as $sponsor)
-                                    <i class="fas fa-star"></i>
-                                    <p>Sponsor attiva: {{ $sponsor->title }}</p>
-                                    <p>Scadenza: {{ $sponsor->pivot->end_at }}</p>
+                                    @if($sponsor->pivot->end_at >= now())
+                                        <i class="fas fa-star"></i>
+                                        <p>Sponsor attiva: {{ $sponsor->title }}</p>
+                                        <p>Scadenza: {{ $sponsor->pivot->end_at }}</p>
+                                    @endif
                                 @endforeach
                             </div>
                             {{-- CARD CONTETN --}}

@@ -3,10 +3,10 @@
 @section('content')
     <div class="row row-cols-1 mb-5 my-4 mx-2">
         <div class="col py-3">
-            <h1>
+            <h2>
                 Sponsorships
                 <i class="fa-solid fa-star"></i>
-            </h1>
+            </h2>
         </div>
     </div>
 

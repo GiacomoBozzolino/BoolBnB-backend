@@ -231,7 +231,7 @@
                             <!-- Submit Button -->
                             <li class="text-center my-5">
                                 <button type="submit" class="btn btn-success">Salva</button>
-                                <a href="{{ Route('admin.apartments.index') }}" class="btn btn-danger">Anulla</a>
+                                <a href="{{ Route('admin.apartments.index') }}" class="btn btn-danger">Annulla</a>
                             </li>
                     </div>
                 </form>

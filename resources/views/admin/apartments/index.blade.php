@@ -64,18 +64,49 @@
                                     </td>
                                     {{-- Sposorizzazione --}}
                                     <td>
+                                        @php
+                                            $latestSponsor = null;
+                                        @endphp
+
                                         @foreach ($apartment->sponsors as $sponsor)
-                                            <i class="fas fa-star"></i> <span>{{ $sponsor->title }}</span> <i
-                                                class="fas fa-star"></i>
+                                            @if (now() <= $sponsor->pivot->end_at &&
+                                                    (is_null($latestSponsor) || $sponsor->pivot->end_at > $latestSponsor->pivot->end_at))
+                                                @php
+                                                    $latestSponsor = $sponsor;
+                                                @endphp
+                                            @endif
                                         @endforeach
+
+                                        @if (!is_null($latestSponsor))
+                                            <i class="fas fa-star"></i> <span>{{ $latestSponsor->title }}</span> <i
+                                                class="fas fa-star"></i>
+                                        @else
+                                            <p>Questo apartamento non e sposorizzato</p>
+                                        @endif
                                     </td>
                                     {{-- Termine sposorizzazione --}}
                                     <td>
-                                        @foreach ($apartment->sponsors as $sponsor)
-                                            <span>Fino al {{ $sponsor->pivot->end_at }}</span>
-                                        @endforeach
-                                    </td>
+                                        @php
+                                            $latestSponsor = null;
+                                        @endphp
 
+                                        @foreach ($apartment->sponsors as $sponsor)
+                                            @if (now() <= $sponsor->pivot->end_at &&
+                                                    (is_null($latestSponsor) || $sponsor->pivot->end_at > $latestSponsor->pivot->end_at))
+                                                @php
+                                                    $latestSponsor = $sponsor;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+
+                                        @if (!is_null($latestSponsor))
+                                            <span>Fino al {{ $sponsor->pivot->end_at }}</span>
+                                        @else
+                                            <p><i class="fa-solid fa-minus"></i><i class="fa-solid fa-minus"></i><i
+                                                    class="fa-solid fa-minus"></i></p>
+                                        @endif
+                                    </td>
+                                    {{-- Strumenti --}}
                                     <td>
                                         <div class="d-flex align-items-center justify-content-start">
                                             <div>

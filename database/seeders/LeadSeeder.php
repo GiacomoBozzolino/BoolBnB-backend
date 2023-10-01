@@ -23,8 +23,14 @@ class LeadSeeder extends Seeder
             13,14,15,16,17,18,19,
         ];
         
+        // Ottieni la data corrente
+        $currentYear = Carbon::now()->format('Y');
+        
+        // Elimina i dati esistenti nella tabella 'leads'
+        DB::table('leads')->delete();
+        
         for ($i = 0; $i < 100; $i++) {
-            $createdAt = $faker->dateTimeBetween('-10 years', 'now')->format('Y-m-d H:i:s');
+            $createdAt = Carbon::create($currentYear, $faker->numberBetween(1, 9), $faker->numberBetween(1, 30), $faker->numberBetween(0, 23), $faker->numberBetween(0, 59), $faker->numberBetween(0, 59));
         
             $data = [
                 'name' => $faker->unique()->name(50),

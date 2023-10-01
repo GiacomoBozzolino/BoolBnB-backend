@@ -145,9 +145,14 @@ class VisitorController extends Controller
         })->filter()->unique()->sort()->toArray();
         
         rsort($monthsYears);
-    
-        $apartmentMessages = $apartment->leads()->get();
 
+        $startOfMonth = Carbon::create(2023, 1, 1)->startOfMonth();
+        $endOfMonth = Carbon::create(2023, 9, 30)->endOfMonth();
+    
+        $apartmentMessages = $apartment->leads()
+        ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+        ->get();
+    
         $messagesByMonthYear = $apartmentMessages->groupBy(function ($message) {
             return Carbon::parse($message->created_at)->format('M Y');
         });
@@ -158,11 +163,12 @@ class VisitorController extends Controller
     
         $monthsYearsMessages = $apartmentMessages->map(function ($message) {
             if ($message->created_at) {
-                return Carbon::parse($message->created_at)->format('M Y');
+                return Carbon::parse($message->created_at)->format('Y-m');
             }
             return null;
-        })->filter()->unique()->sort()->toArray();
+        })->filter()->unique()->sort();
         
         return view('admin.statistic.show', compact('visitors', 'user', 'monthsYears', 'userApartmentIds', 'userApartments', 'monthlyViews', 'apartmentMessages', 'monthlyMessages', 'monthsYearsMessages'));
+
     }
 }

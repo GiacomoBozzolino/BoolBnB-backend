@@ -22,10 +22,7 @@
 <div class="conteiner">
     <div class="row">
         <div class="col">
-            <canvas id="visitorChart" style="height: 400px; width: 100px;"></canvas>
-        </div>
-        <div class="col">
-            <canvas id="messageChart" style="height: 400px; width: 100px;"></canvas>
+            <canvas id="combinedChart" style="height: 400px;"></canvas>
         </div>
     </div>
 </div>
@@ -33,48 +30,42 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        let visitorCtx = document.getElementById('visitorChart').getContext('2d');
-        let visitorChart = new Chart(visitorCtx, {
+        let ctx = document.getElementById('combinedChart').getContext('2d');
+        let combinedChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: {!! json_encode(array_reverse($monthsYears)) !!},
-                datasets: [{
-                    label: 'Numero di visitatori',
-                    data: {!! json_encode(array_reverse($monthlyViews->values()->toArray())) !!},
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
+                labels: {!! json_encode($monthsYears) !!},
+                datasets: [
+                    {
+                        label: 'Numero di visitatori',
+                        data: {!! json_encode($monthlyViews->values()->toArray()) !!},
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderWidth: 2,
+                        yAxisID: 'visitorY',
+                    },
+                    {
+                        label: 'Numero di messaggi',
+                        data: {!! json_encode($monthlyMessages->values()->toArray()) !!},
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderWidth: 2,
+                        yAxisID: 'messageY',
                     }
-                }
-            }
-        });
-
-        let messageCtx = document.getElementById('messageChart').getContext('2d');
-        let messageChart = new Chart(messageCtx, {
-            type: 'line',
-            data: {
-                labels: {!! json_encode(array_reverse($monthsYearsMessages)) !!}, // Inverti l'array
-                datasets: [{
-                    label: 'Numero di messaggi',
-                    data: {!! json_encode(array_reverse($monthlyMessages->values()->toArray())) !!}, // Inverti l'array
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }]
+                ]
             },
             options: {
                 maintainAspectRatio: false,
                 responsive: true,
                 scales: {
-                    y: {
+                    'visitorY': {
+                        type: 'linear',
+                        position: 'left',
+                        beginAtZero: true,
+                    },
+                    'messageY': {
+                        type: 'linear',
+                        position: 'right',
                         beginAtZero: true,
                     }
                 }

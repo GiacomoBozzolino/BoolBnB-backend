@@ -22,20 +22,21 @@ class VisitorSeeder extends Seeder
             13, 14, 15, 16, 17, 18, 19,
         ];
 
+        // Elimina i dati esistenti nella tabella 'visitors'
+        DB::table('visitors')->delete();
+
         for ($i = 0; $i < 100; $i++) {
-            $carbon = new Carbon();
-            $between = $carbon->between('-10 years', 'now');
-            $viewedAt = Carbon::now()->subDays(rand(1, 365))->subHours(rand(1, 24))->subMinutes(rand(1, 60))->format('Y-m-d H:i:s');
+            $viewedAt = $faker->dateTimeBetween('2023-01-01', '2023-09-30')->format('Y-m-d H:i:s');
 
             $data = [
                 'apartment_id' => $faker->randomElement($apartments),
                 'ip_address' => $faker->ipv4,
                 'viewed_at' => $viewedAt,
-                'created_at' => $between,
-                'updated_at' => $between,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ];
 
-            DB::table('visitors')->insertOrIgnore($data);
+            DB::table('visitors')->insert($data);
         }
     }
 }

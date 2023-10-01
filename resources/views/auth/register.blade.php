@@ -14,7 +14,7 @@
                         {{-- name --}}
                             <div class="mb-4 row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome utente') }} <span class="text-danger"> *</span></label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome') }} <span class="text-danger"> *</span></label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"

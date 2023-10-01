@@ -21,7 +21,7 @@
                             <!-- Titolo -->
                             <li>
                                 <label class="control-label my-2">Titolo</label>
-                                <input type="text" name="title" id="title" placeholder="Inserisci il titolo"
+                                <input type="text" name="title" id="title" placeholder="Inserisci un titolo per il tuo annuncio"
                                 class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? $apartment->title }}" required>
 
                                 @error('title')
@@ -34,7 +34,7 @@
 
                             <!-- Numero stanze -->
                             <li>
-                                <label class="control-label my-2">Numero delle stanze</label>
+                                <label class="control-label my-2">Stanze</label>
                                 <select class="form-control " name="n_rooms" id="n_rooms" required>
                                     
                                     @for ($i = 1; $i <= 10; $i++)
@@ -45,7 +45,7 @@
 
                             <!-- Numero tanze da letto -->
                             <li>
-                                <label class="control-label my-2">Numero delle stanze da letto</label>
+                                <label class="control-label my-2">Posti letto</label>
                                 <select class="form-control" name="n_beds" id="n_beds" required>
                                     @for ($i = 1; $i <= 10; $i++)
                                     <option {{ $i == old('n_beds', $apartment->n_beds) ? 'selected': '' }} value="{{$i}}">{{ $i }}</option>
@@ -55,7 +55,7 @@
 
                             <!-- Numero bagni -->
                             <li>
-                                <label class="control-label my-2">Numero bagni</label>
+                                <label class="control-label my-2">Bagni</label>
                                 <select class="form-control" name="n_bathrooms" id="n_bathrooms" required>
                                     @for ($i = 1; $i <= 10; $i++)
                                     <option {{ $i == old('n_bathrooms', $apartment->n_bathrooms) ? 'selected': '' }} value="{{$i}}">{{ $i }}</option>
@@ -65,7 +65,7 @@
 
                             <!-- Servizi -->
                             <li>
-                                <label class="control-label my-2">Seleziona i servizi</label>
+                                <label class="control-label mt-4">Servizi aggiuntivi</label>
                                 <ul class="list-group d-flex flex-row flex-wrap justify-content-evenly my-3">
 
                                     @foreach ($services as $item)
@@ -112,9 +112,9 @@
 
                             <!-- Metratura appartamento -->
                             <li>
-                                <label class="control-label my-2">Inserisci la metratura</label>
+                                <label class="control-label my-2">Metratura</label>
                                 <input type="number" name="square_meters" id="square_meters"
-                                    placeholder="Inserisci la metratura del tuo locale" class="form-control @error('square_meters') is-invalid @enderror" min="1"
+                                    placeholder="Inserisci la metratura del tuo appartamento" class="form-control @error('square_meters') is-invalid @enderror" min="1"
                                     max="249" value="{{ old('square_meters') ?? $apartment->square_meters }}"
                                     required>
                                     @error('square_meters')
@@ -126,9 +126,9 @@
 
                             <!-- Indrizzo -->
                             <li>
-                                <label class="control-label my-2">Inserisci il tuo indirizzo</label>
+                                <label class="control-label my-2">Indirizzo</label>
                                 <span class="text-danger"> *</span>
-                                <input type="text" name="address" id="autocomplete-address" placeholder="Inserisci il tuo indirizzo" value="{{ old('address') ?? $apartment->address }}"
+                                <input type="text" name="address" id="autocomplete-address" placeholder="Inserisci l'indirizzo" value="{{ old('address') ?? $apartment->address }}"
                                 class="form-control @error('address') is-invalid @enderror" required>
 
                                 <div id="address-results">
@@ -194,21 +194,21 @@
 
                             <!-- Visibili -->
                             <li>
-                                <label class="control-label my-2">Rendi visibile il tuo annuncio</label>
+                                <label class="control-label my-2">Visibilità</label>
                                 <div class="radio-container d-flex">
                                     {{-- parte del si  --}}
                                     <div class="yes-container">
                                         <input type="radio" id="yes" name="visibility" value="1" {{  old('visibility', '1') == '1' ? 'checked' : ''}} >
                                         {{-- <input type="radio" id="yes" name="visibility" value="1"
                                             {{ $apartment->visibility == 1 ? 'checked' : '' }}> --}}
-                                        <label for="yes">Si rendi l'annuncio visibile</label>
+                                        <label for="yes">Rendi visibile l'annuncio</label>
                                     </div>
                                     {{-- parte del no --}}
                                     <div class="no-container ms-5">
                                         <input type="radio" id="no" name="visibility" value="0" {{old('visibility') == '0' ? 'checked' : ''}}>
                                         {{-- <input type="radio" id="no" name="visibility" value="0"
                                             {{ $apartment->visibility == 0 ? 'checked' : '' }}> --}}
-                                        <label for="no">Non rendere l'annuncio visibile</label>
+                                        <label for="no">Nascondi l'annuncio</label>
                                     </div>
                                 </div>
                             </li>
@@ -227,7 +227,6 @@
                                     @enderror
                                 </div>
                             </li>
-
 
                             <!-- Submit Button -->
                             <li class="text-center my-5">

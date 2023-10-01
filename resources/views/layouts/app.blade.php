@@ -53,12 +53,12 @@
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
-                                    href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    href="{{ route('login') }}">{{ __('Accedi') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5"
-                                        href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        href="{{ route('register') }}">{{ __('Registrati') }}</a>
                                 </li>
                             @endif
                         @else
@@ -73,7 +73,7 @@
                                 <div class="dropdown-menu dropdown-menu-right border-none" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item drop-down"
                                         href="{{ url('admin/apartments') }}">{{ __('Dashboard') }}</a>
-                                    <a class="dropdown-item drop-down" href="{{ url('profile') }}">{{ __('Profile') }}</a>
+                                    <a class="dropdown-item drop-down" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
                                     <a class="dropdown-item drop-down" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

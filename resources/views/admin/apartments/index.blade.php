@@ -12,11 +12,13 @@
             @endif
             <div class="mt-5">
                 <div class="col-12 d-flex justify-content-between justify-content-center me-5 mb-3 p-2">
-                    <h2>Questi sono i tuoi appartamenti</h2>
+                    <h2>I tuoi appartamenti
+                        <i class="fa-solid fa-house-user"></i>
+                    </h2>
                     <div class="button-container">
                         <a href="{{ route('admin.apartments.create') }}" class="btn btn-bg btn-outline-success">Aggiungi
-                            appartamento
-                            <i class="fa-solid fa-plus"></i>
+                            Appartamento
+                            {{-- <i class="fa-solid fa-plus"></i> --}}
                         </a>
                     </div>
                 </div>

@@ -154,7 +154,24 @@ class VisitorController extends Controller
                 'message_count' => $apartment->leads()->count(),
             ];
         });
+
+        $viewsByMonthYear = $visitors->groupBy(function ($visitor) {
+            return Carbon::parse($visitor->viewed_at)->format('M Y');
+        });
+    
+        $monthlyViews = $viewsByMonthYear->map(function ($views) {
+            return count($views);
+        });
+    
+        $monthsYears = $visitors->map(function ($visitor) {
+            if ($visitor->viewed_at) {
+                return Carbon::parse($visitor->viewed_at)->format('M Y');
+            }
+            return null;
+        })->filter()->unique()->toArray();
+    
+        rsort($monthsYears);
         
-        return view('admin.statistic.show', compact('visitors', 'user', 'years', 'userApartmentIds', 'userApartments', 'yearlyViews', 'apartmentMessages'));
+        return view('admin.statistic.show', compact('visitors', 'user', 'monthsYears', 'userApartmentIds', 'userApartments', 'yearlyViews', 'monthlyViews', 'apartmentMessages'));
     }
 }

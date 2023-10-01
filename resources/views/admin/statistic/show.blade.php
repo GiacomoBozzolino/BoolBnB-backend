@@ -32,11 +32,11 @@
             let myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: {!! json_encode($years) !!}, //anni sull'asse x? 
+                    labels: {!! json_encode($monthsYears) !!}, //anni sull'asse x? Forse meglio mesi
                     datasets: [
                         {
                             label: 'Numero di visitatori',
-                            data: {!! json_encode($yearlyViews->values()) !!}, //visitatori per anno?
+                            data: {!! json_encode($monthlyViews->values()) !!}, //visitatori per anno? Mesi
                             borderColor: 'rgba(255, 99, 132, 1)',
                             borderWidth: 2,
                             fill: false

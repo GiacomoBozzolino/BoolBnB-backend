@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('apartment_sponsors', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')
                 ->references('id')
@@ -30,7 +31,6 @@ return new class extends Migration
 
             $table->dateTime('start_at');  
             $table->dateTime('end_at');  
-            $table->primary(['apartment_id', 'sponsor_id']);
             $table->timestamps();        
         });
     }

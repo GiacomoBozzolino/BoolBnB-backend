@@ -105,7 +105,7 @@ class ApartmentController extends Controller
             $apartment->services()->attach($request->services);
         }  
         $message = 'Appartamento aggiunto con successo!';
-        return redirect()->route('admin.apartments.index', compact('apartment', 'message', 'leads'));
+        return redirect()->route('admin.apartments.index', compact('apartment', 'message'));
     }
 
     /**

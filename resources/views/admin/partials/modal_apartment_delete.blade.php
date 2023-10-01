@@ -8,9 +8,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                Sei Sicuro di Voler Eliminare l'apartamento:
+                Sei sicuro di voler <strong>ELIMINARE DEFINITIVAMENTE </strong>l'appartamento:
                 <span id="modal-apartment-title"></span> 
-                dal Tuo Account?
+                dal tuo account?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>

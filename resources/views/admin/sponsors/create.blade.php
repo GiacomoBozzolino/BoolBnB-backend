@@ -1,16 +1,26 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+    <div class="container" id="payment-container">
+        <div class="row" id="payment-container">
             <div class="col-md-8 col-md-offset-2">
                 <div id="dropin-container"></div>
                 <button class="btn btn-primary" id="submit-button">Request payment method</button>
-                <button id="butt" class="btn btn-danger mt-3 d-none"><a href="{{ route('admin.sponsors.index') }}" class="links-decor text-light">Torna agli Sponsor <i class="fa-solid fa-right-from-bracket fa-beat ps-2"></i></button>
             </div>
-
+  
+        </div>
+    </div>
+    <div class="container d-none mt-5"  id="thank-you-message">
+        <div class="row justify-content-center">
+            <div class="col-8 text-center border-message p-5 pb-0" >
+                <h1 class="text-success text center"><em>GRAZIE PER AVER EFFETTUATO IL PAGAMENTO</em></h1>
+                <p class="text-success">Ora l'appartamento verrà sponsorizzato secondo il piano promozionale selezionato. Se stai riscontrando problemi con il pagamento della sponsorship ti preghiamo di contattare l'assistenza <a href="BoolBnbAssistenza@gmail.com">BoolBnbAssistenza@gmail.com</a></p>
+                <button id="butt" class="btn btn-danger mt-3 "><a href="{{ route('admin.sponsors.index') }}" class="links-decor text-light">EXIT <i class="fa-solid fa-right-from-bracket fa-beat ps-2"></i></button>
+                <h6 class="text-dark text-start pt-3"><i class="fa-solid fa-earth-europe"></i> BoolBnB ti ringrazia...</h6>
+            </div>
            
         </div>
+
     </div>
 
     <script src="https://js.braintreegateway.com/web/dropin/1.40.0/js/dropin.min.js"></script>
@@ -57,12 +67,21 @@
                         console.log('success', payload);
                         if (payload) {
 
-                            alert('COMPLIMENTII!! il pagamento è stato effettuato con successo')
-                            let buttonReturn = document.getElementById("butt")
-                            buttonReturn.classList.remove("d-none");
-                            // button.disabled = true
-                            button.classList.add("d-none");
-                            console.log(buttonReturn)
+                            
+                            let container = document.getElementById("payment-container")
+
+                            
+                            let containerMessage = document.getElementById("thank-you-message")
+
+                            // button.classList.add("d-none");
+
+                            containerMessage.classList.remove('d-none')
+                            // buttonReturn.classList.remove("d-none");
+
+
+                            container.classList.add("d-none")
+                    
+
                             
                         }
 
@@ -72,12 +91,21 @@
                         console.error(error);
                         if (payload) {
 
-                            alert('Appartamento già sponsorizzato in precedenza')
-                            let buttonReturn = document.getElementById("butt")
+                            
 
-                            button.classList.add("d-none");
-                            buttonReturn.classList.remove("d-none");
-                            console.log(buttonReturn)
+                            let container = document.getElementById("payment-container")
+
+                            
+                            let containerMessage = document.getElementById("thank-you-message")
+
+                            // button.classList.add("d-none");
+
+                            containerMessage.classList.remove('d-none')
+                            // buttonReturn.classList.remove("d-none");
+
+
+                            container.classList.add("d-none")
+                    
 
                             
                         }

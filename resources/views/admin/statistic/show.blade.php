@@ -21,7 +21,7 @@
 
     <div class="conteiner">
         <div class="row">
-            <canvas id="myChart"></canvas>
+            <canvas id="myChart" style="height: 400px; width: 100px;"></canvas> <!--imposta le dimensioni al solito modo, non sono riuscito bene a capire come ridurre la width--> 
         </div>
     </div>
 
@@ -51,9 +51,11 @@
                     ]
                 },
                 options: {
+                    maintainAspectRatio: false, //parametri per le dimensioni e la responsività
+                    responsive: true, //questo pure come sopra
                     scales: {
                         y: {
-                            beginAtZero: true,
+                            beginAtZero: true, //questo non serve per la responsività eh, ocio 
                         }
                     }
                 }

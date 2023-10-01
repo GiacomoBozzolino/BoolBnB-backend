@@ -44,7 +44,7 @@ class ApartmentController extends Controller
     // CHIAMATA API SPONSORIZZAZIONI
     public function getFeaturedApartments()
     {
-        $apartments = Apartment::with('sponsors')->get();
+        $apartments = Apartment::with('sponsors')->where('visibility',1)->get();
 
         return response()->json($apartments);
     }

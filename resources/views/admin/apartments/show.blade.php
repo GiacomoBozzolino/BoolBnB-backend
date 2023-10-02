@@ -97,15 +97,15 @@
                     <h3 class="text-center">Non hai ancora ricevuto messaggi</h3>
                 </div>
                 @else
-                    <table class="table table-hover">
+                    <table class="table table-hover text-center">
                         <thead>
-                            <tr>
+                            <tr class="">
                                 <th scope="col">Nome</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Messaggio</th>
                                 <th scope="col">Data Invio</th>
                                 <th scope="col">Orario</th>
-                                <th scope="col">Strumenti</th>
+                                <th scope="col" >Strumenti</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -127,8 +127,8 @@
                                         <td>Data non valida</td>
                                     @endif
             
-                                    <td>
-                                        <div class="d-flex justify-content-center">
+                                    <td  class="text-center">
+                                        <div class="d-flex justify-content-center align-items-center">
                                             <a href="{{ route('admin.leads.show', $item->id) }}"
                                                 class="btn btn-sm mx-1 rounded-5 btn-show">
                                                 <i class="fa-solid fa-eye"></i>

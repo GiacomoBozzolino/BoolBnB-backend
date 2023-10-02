@@ -13,12 +13,11 @@
             <div class="mt-5">
                 <div class="col-12 d-flex justify-content-between justify-content-center me-5 mb-3 p-2">
                     <h2>I tuoi appartamenti
-                        <i class="fa-solid fa-house-user"></i>
+                        <i class="fa-solid fa-house-user" style="color: #EF7039;"></i>
                     </h2>
                     <div class="button-container">
-                        <a href="{{ route('admin.apartments.create') }}" class="btn btn-bg btn-outline-success">Aggiungi
-                            Appartamento
-                            {{-- <i class="fa-solid fa-plus"></i> --}}
+                        <a href="{{ route('admin.apartments.create') }}" class="btn btn-color btn-outline-warning">
+                            <strong>Aggiungi Appartamento</strong> 
                         </a>
                     </div>
                 </div>

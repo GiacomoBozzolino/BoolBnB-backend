@@ -21,19 +21,14 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <h2>
-                Benvenuto nella pagina delle statistiche del tuo appartamento {{ $apartment->title }}, adesso puoi visualizzare l'andamento delle visite e dei tuoi messaggi per singolo appartamento mese per mese ed individuare i periodi di maggiore convenienza per attivare delle   
-                    <a href="{{ route('admin.sponsors.index') }}"
-                        class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === 'admin.sponsors.index' ? 'selected' : '' }} select">
-                        <div class="text-container d-flex align-items-center">
-                            <h4 class="ms-3">Sponsor</h4>
-                        </div>
-                    </a>
-            </h2>
+    <div class="row row-cols-1 mb-2 my-4 mx-2">
+        <div class="col py-3">
+            <p>
+                Benvenuto nella pagina delle statistiche del tuo appartamento {{ $apartment->title }}, adesso puoi visualizzare l'andamento delle visite e dei tuoi messaggi per singolo appartamento mese per mese ed individuare i periodi di maggiore convenienza per attivare delle
+                <a href="{{ route('admin.sponsors.index') }}">sponsor</a>
+            </p>
         </div>
-        <div class="col">
+        <div class="col py-3">
             <a href="{{ route('admin.statistic.index') }}" class="back">
                 Torna indietro
                 <i class="fa-solid fa-rotate-left"></i>

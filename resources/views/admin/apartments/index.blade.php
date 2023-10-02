@@ -31,7 +31,7 @@
                                 <th>Indirizzo</th>
                                 <th>Servizi</th>
                                 <th>Sposorizzazioni</th>
-                                <th>Termine</th>
+                                <th>Scadenza</th>
                                 <th>Strumenti</th>
                             </tr>
                         </thead>
@@ -100,7 +100,18 @@
                                         @endforeach
 
                                         @if (!is_null($latestSponsor))
-                                            <span>Fino al {{ $sponsor->pivot->end_at }}</span>
+                                            {{-- <span>Fino al {{ $sponsor->pivot->end_at }}</span> --}}
+                                            @php
+                                                $formatDate = \Carbon\Carbon::parse($sponsor->pivot->end_at);
+                                            @endphp
+                                            @if (  $formatDate instanceof \Carbon\Carbon)
+                                            
+                                                {{ $formatDate->format('d/m/Y') }} 
+                                               
+                                            @else
+                                                <td>Data non valida</td>
+                                                
+                                            @endif
                                         @else
                                             <p><i class="fa-solid fa-minus"></i><i class="fa-solid fa-minus"></i><i
                                                     class="fa-solid fa-minus"></i></p>

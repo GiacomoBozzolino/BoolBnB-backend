@@ -19,13 +19,10 @@ use Carbon\Carbon;
 
 class LeadController extends Controller
 {
-    //CREO LA FUNZIONE STORE
-
     public function index(Request $request)
     {
         return view('admin.leads.index', compact( 'leads', 'newDate'));  
     }
-
 
     public function show(Lead $lead, Apartment $apartament)
     {

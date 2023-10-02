@@ -76,6 +76,7 @@ class ApartmentController extends Controller
 
         // Calcola la distanza in chilometri (utilizzando la formula Haversine)
         $distance = 20; // Raggio in chilometri
+        $distance = 20; // Raggio in chilometri
 
         $apartments = Apartment::select('apartments.*')->with('services')
         ->selectRaw(
@@ -121,6 +122,10 @@ class ApartmentController extends Controller
         $apartmentLongitude = $coordinates->lon;
 
         // Calcola la distanza in chilometri (utilizzando la formula Haversine)
+        $distance = $request->input ('distance'); // Raggio in chilometri
+        $n_rooms = $request->input('n_rooms');
+        $n_beds = $request->input('n_beds');
+        $selectedServices = $request->input('services', []);
         $distance = $request->input ('distance'); // Raggio in chilometri
         $n_rooms = $request->input('n_rooms');
         $n_beds = $request->input('n_beds');

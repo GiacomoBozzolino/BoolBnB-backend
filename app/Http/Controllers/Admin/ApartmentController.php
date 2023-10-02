@@ -246,24 +246,12 @@ class ApartmentController extends Controller
                 'key' => $apiKey,
             ],
         ]);
-    {
-        $client = new Client();
-        $response = $client->get("https://api.tomtom.com/search/2/search/{$query}.json", [
-            'query' => [
-                'key' => $apiKey,
-            ],
-        ]);
 
-        $data = json_decode($response->getBody());
         $data = json_decode($response->getBody());
 
         // Estrai i risultati o le informazioni necessarie dalla risposta
         $results = $data->results;
-        // Estrai i risultati o le informazioni necessarie dalla risposta
-        $results = $data->results;
 
-        return $results;
-    }
         return $results;
     }
 }

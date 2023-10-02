@@ -9,9 +9,9 @@
 }
 
 .btn-color {
-    background-color: #3C6E71;
-    border-color: #3C6E71;
-    border: #3C6E71 2px solid;
+    background-color: #EF7039;
+    border-color: #EF7039;
+    border: #EF7039 2px solid;
 }
 
 .btn-color:hover {
@@ -31,12 +31,12 @@
 
 .btn-modify {
     background-color: white;
-    border: 2px solid #C5ADC5;
+    border: 2px solid #EF7039;
 }
 
 .btn-modify:hover {
-    background-color: #C5ADC5;
-    border: 2px solid #C5ADC5;
+    background-color: #EF7039;
+    border: 2px solid #EF7039;
     color: white;
 }
 
@@ -63,30 +63,34 @@ th {
 }
 
 tr:hover {
-    background-color: #B2B5E0;
+    background-color: #ffbc19;
 }
 
 // HEADER
 .logo {
-    color: #000000;
+    color: #fffeef;
     transition: background-color 1s;
 }
 
 .logo:hover {
-    background-color: #B2B5E0;
-    color: black;
+    background-color: #ffbc19;
+    color: #fffeef;
 }
 
 .link-hover-header {
-    color: #000000;
+    color: #fffeef;
 }
 
 .link-hover-header:hover {
-    background-color: #B2B5E0;
+    color: #fffeef;
+}
+
+.link-hover-header:hover {
+    background-color: #ffbc19;
 }
 
 .nav-background {
-    background-color: #C5ADC5;
+    background-color: #EF7039;
 }
 
 .drop-down:hover {
@@ -100,14 +104,14 @@ tr:hover {
     right: 0;
 }
 
-// Jumbotron welcom.blade.php
+// Jumbotron welcome.blade.php
 .jumbotron-welcome-base {
-    background-color: #ba9593;
+    background-color: #fffeef;
     height: calc(100vh - 120px);
 }
 
 .jumbotron-welcome-partial {
-    background-color: #B2B5E0;
+    background-color: #ffbc19;
     height: 35vh;
 }
 
@@ -121,7 +125,7 @@ tr:hover {
 }
 
 .fas.fa-star {
-    color: rgb(189, 17, 54);
+    color: #ffbc19;
 }
 
 .box {
@@ -151,7 +155,7 @@ tr:hover {
 
 // SIDEBAR
 .background-color {
-    background-color: #B2B5E0;
+    background-color: #ffca4a;
     padding-bottom: 65em;
     position: fixed;
     top: 0;
@@ -160,14 +164,15 @@ tr:hover {
     padding: 5px;
     padding-top: 0.5rem;
     width: 210px;
+    color: #000000
 }
 
 .selected {
-    background-color: #B2B5E0;
+    background-color: #EF7039;
 }
 
 .select:hover {
-    background-color: #FCD951;
+    background-color: #EF7039;
 }
 
 // YELD ADMIN.BLADE.PHP
@@ -201,10 +206,6 @@ tr:hover {
 .ff {
     overflow-y: auto;
 }
-.links-decor{
-    text-decoration: none;
-    
-}
 
 // INIZIO FOOTER
 p a:hover {
@@ -212,7 +213,7 @@ p a:hover {
 }
 
 .jumbotron-footer {
-    background-color: #DCDCDC;
+    background-color: #ffca4a;
 }
 
 .footer-li a {
@@ -222,7 +223,6 @@ p a:hover {
 .footer-li a:hover {
     text-decoration: underline;
 }
-
 // FINE FOOTER
 
 .img-container {
@@ -247,41 +247,4 @@ p a:hover {
     img {
         width: 100%;
     }
-}
-
-// SPONSORIZZAZIONI
-.bg-grey {
-    background-color: rgb(187, 187, 187);
-}
-
-.hvr {
-    transition: 0.5s;
-}
-
-.hvr:hover {
-    scale: 1.1;
-}
-
-.btn-sponsor {
-    color: black;
-}
-
-.pay-hover:hover {
-    background-color: rgb(175, 174, 174);
-    color: white;
-}
-
-//LOADER
-.loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 2s linear infinite;
-}
-  
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }

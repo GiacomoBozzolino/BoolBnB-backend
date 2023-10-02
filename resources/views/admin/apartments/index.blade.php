@@ -11,26 +11,25 @@
                 </div>
             @endif
             <div class="mt-5">
-                <div class="col-12 d-flex justify-content-between justify-content-center me-5 mb-3 p-2">
-                    <h2>I tuoi appartamenti
-                        <i class="fa-solid fa-house-user"></i>
+                <div class="col-12 d-flex justify-content-between justify-content-center me-5 mb-3 p-2 text-capitalize">
+                    <h2>I miei appartamenti
+                        <i class="fa-solid fa-house-user" style="color: #EF7039;"></i>
                     </h2>
                     <div class="button-container">
-                        <a href="{{ route('admin.apartments.create') }}" class="btn btn-bg btn-outline-success">Aggiungi
-                            Appartamento
-                            {{-- <i class="fa-solid fa-plus"></i> --}}
+                        <a href="{{ route('admin.apartments.create') }}" class="btn btn-color btn-outline-warning">
+                            <strong>Aggiungi Appartamento</strong> 
                         </a>
                     </div>
                 </div>
                 <div class=" col-12 rounded-4 border border-2 p-4 shadow overflow-auto" style="height: 900px">
-                    <table class="table table-hover">
+                    <table class="table table-hover text-center">
                         <thead>
                             <tr>
                                 <th>Visibile</th>
                                 <th>Titolo</th>
                                 <th>Indirizzo</th>
                                 <th>Servizi</th>
-                                <th>Sposorizzazioni</th>
+                                <th>Sponsorizzazioni</th>
                                 <th>Scadenza</th>
                                 <th>Strumenti</th>
                             </tr>
@@ -80,18 +79,18 @@
                                                 @endif
                                             @endforeach
 
-                                            @if (!is_null($latestSponsor))
-                                                <i class="fas fa-star"></i> <span>{{ $latestSponsor->title }}</span> <i
-                                                    class="fas fa-star"></i>
-                                            @else
-                                                <p>Questo apartamento non e sposorizzato</p>
-                                            @endif
-                                        </td>
-                                        {{-- Termine sposorizzazione --}}
-                                        <td>
-                                            @php
-                                                $latestSponsor = null;
-                                            @endphp
+                                        @if (!is_null($latestSponsor))
+                                            <i class="fas fa-star"></i> <span>{{ $latestSponsor->title }}</span> <i
+                                                class="fas fa-star"></i>
+                                        @else
+                                            <p>Non Attive</p>
+                                        @endif
+                                    </td>
+                                    {{-- Termine sposorizzazione --}}
+                                    <td>
+                                        @php
+                                            $latestSponsor = null;
+                                        @endphp
 
                                             @foreach ($apartment->sponsors as $sponsor)
                                                 @if (now() <= $sponsor->pivot->end_at &&

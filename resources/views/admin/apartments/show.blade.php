@@ -99,7 +99,7 @@
                 @else
                     <table class="table table-hover text-center">
                         <thead>
-                            <tr class="">
+                            <tr>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Messaggio</th>

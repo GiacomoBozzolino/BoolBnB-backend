@@ -36,120 +36,140 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($apartments as $apartment)
-                                <tr>
-                                    {{-- Visibilita anuncio --}}
-                                    <td>
-                                        @if ($apartment->visibility === 1)
-                                            <strong><span class="badge text-bg-success">On-Line</span></strong>
-                                        @else
-                                            <strong><span class="badge text-bg-danger">Off-Line</span></strong>
-                                        @endif
-                                    </td>
-                                    {{-- TITOLO APARTAMENTO --}}
-                                    <td>
-                                        <h6 class="">{{ $apartment->title }}</h6>
-                                    </td>
-                                    {{-- Indirizzo --}}
-                                    <td>
-                                        <span><i class="fa-solid fa-location-dot"></i> {{ $apartment->address }}</span>
-                                    </td>
-                                    {{-- Servizi --}}
-                                    <td>
+                            @if (isset($apartments) && count($apartments) > 0)
+                                @foreach ($apartments as $apartment)
 
-                                        @foreach ($apartment->services as $item)
-                                            <?php echo $item->icon; ?>
-                                        @endforeach
-
-                                    </td>
-                                    {{-- Sposorizzazione --}}
-                                    <td>
-                                        @php
-                                            $latestSponsor = null;
-                                        @endphp
-
-                                        @foreach ($apartment->sponsors as $sponsor)
-                                            @if (now() <= $sponsor->pivot->end_at &&
-                                                    (is_null($latestSponsor) || $sponsor->pivot->end_at > $latestSponsor->pivot->end_at))
-                                                @php
-                                                    $latestSponsor = $sponsor;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-
-                                        @if (!is_null($latestSponsor))
-                                            <i class="fas fa-star"></i> <span>{{ $latestSponsor->title }}</span> <i
-                                                class="fas fa-star"></i>
-                                        @else
-                                            <p>Questo apartamento non e sposorizzato</p>
-                                        @endif
-                                    </td>
-                                    {{-- Termine sposorizzazione --}}
-                                    <td>
-                                        @php
-                                            $latestSponsor = null;
-                                        @endphp
-
-                                        @foreach ($apartment->sponsors as $sponsor)
-                                            @if (now() <= $sponsor->pivot->end_at &&
-                                                    (is_null($latestSponsor) || $sponsor->pivot->end_at > $latestSponsor->pivot->end_at))
-                                                @php
-                                                    $latestSponsor = $sponsor;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-
-                                        @if (!is_null($latestSponsor))
-                                            {{-- <span>Fino al {{ $sponsor->pivot->end_at }}</span> --}}
-                                            @php
-                                                $formatDate = \Carbon\Carbon::parse($sponsor->pivot->end_at);
-                                            @endphp
-                                            @if (  $formatDate instanceof \Carbon\Carbon)
-                                            
-                                                {{ $formatDate->format('d/m/Y') }} 
-                                               
+                                
+                                    <tr>
+                                        {{-- Visibilita anuncio --}}
+                                        <td>
+                                            @if ($apartment->visibility === 1)
+                                                <strong><span class="badge text-bg-success">On-Line</span></strong>
                                             @else
-                                                <td>Data non valida</td>
-                                                
+                                                <strong><span class="badge text-bg-danger">Off-Line</span></strong>
                                             @endif
-                                        @else
-                                            <p><i class="fa-solid fa-minus"></i><i class="fa-solid fa-minus"></i><i
-                                                    class="fa-solid fa-minus"></i></p>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <div>
-                                                <a href="{{ route('admin.apartments.show', $apartment->id) }}"
-                                                    class="btn mx-1 rounded-5 btn-show">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                            </div>
+                                        </td>
+                                        {{-- TITOLO APARTAMENTO --}}
+                                        <td>
+                                            <h6 class="">{{ $apartment->title }}</h6>
+                                        </td>
+                                        {{-- Indirizzo --}}
+                                        <td>
+                                            <span><i class="fa-solid fa-location-dot"></i> {{ $apartment->address }}</span>
+                                        </td>
+                                        {{-- Servizi --}}
+                                        <td>
 
-                                            <div>
-                                                <a href="{{ route('admin.apartments.edit', $apartment->id) }}"
-                                                    class="btn rounded-5 btn-modify">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                            </div>
+                                            @foreach ($apartment->services as $item)
+                                                <?php echo $item->icon; ?>
+                                            @endforeach
 
-                                            <div>
-                                                <form
-                                                    class="apartment-delete-button d-inline-block mx-1 btn-delete rounded-5"
-                                                    data-apartment-title="{{ $apartment->title }}"
-                                                    action="{{ route('admin.apartments.destroy', $apartment) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn ">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
+                                        </td>
+                                        {{-- Sposorizzazione --}}
+                                        <td>
+                                            @php
+                                                $latestSponsor = null;
+                                            @endphp
+
+                                            @foreach ($apartment->sponsors as $sponsor)
+                                                @if (now() <= $sponsor->pivot->end_at &&
+                                                        (is_null($latestSponsor) || $sponsor->pivot->end_at > $latestSponsor->pivot->end_at))
+                                                    @php
+                                                        $latestSponsor = $sponsor;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+
+                                            @if (!is_null($latestSponsor))
+                                                <i class="fas fa-star"></i> <span>{{ $latestSponsor->title }}</span> <i
+                                                    class="fas fa-star"></i>
+                                            @else
+                                                <p>Questo apartamento non e sposorizzato</p>
+                                            @endif
+                                        </td>
+                                        {{-- Termine sposorizzazione --}}
+                                        <td>
+                                            @php
+                                                $latestSponsor = null;
+                                            @endphp
+
+                                            @foreach ($apartment->sponsors as $sponsor)
+                                                @if (now() <= $sponsor->pivot->end_at &&
+                                                        (is_null($latestSponsor) || $sponsor->pivot->end_at > $latestSponsor->pivot->end_at))
+                                                    @php
+                                                        $latestSponsor = $sponsor;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+
+                                            @if (!is_null($latestSponsor))
+                                                {{-- <span>Fino al {{ $sponsor->pivot->end_at }}</span> --}}
+                                                @php
+                                                    $formatDate = \Carbon\Carbon::parse($sponsor->pivot->end_at);
+                                                @endphp
+                                                @if (  $formatDate instanceof \Carbon\Carbon)
+                                                
+                                                    {{ $formatDate->format('d/m/Y') }} 
+                                                
+                                                @else
+                                                    <td>Data non valida</td>
+                                                    
+                                                @endif
+                                            @else
+                                                <p><i class="fa-solid fa-minus"></i><i class="fa-solid fa-minus"></i><i
+                                                        class="fa-solid fa-minus"></i></p>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center justify-content-start">
+                                                <div>
+                                                    <a href="{{ route('admin.apartments.show', $apartment->id) }}"
+                                                        class="btn mx-1 rounded-5 btn-show">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                </div>
+
+                                                <div>
+                                                    <a href="{{ route('admin.apartments.edit', $apartment->id) }}"
+                                                        class="btn rounded-5 btn-modify">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                </div>
+
+                                                <div>
+                                                    <form
+                                                        class="apartment-delete-button d-inline-block mx-1 btn-delete rounded-5"
+                                                        data-apartment-title="{{ $apartment->title }}"
+                                                        action="{{ route('admin.apartments.destroy', $apartment) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn ">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                        </td>
+                                    </tr>
+                                @endforeach     
+                            @else
+                            <div class="container-fluid border-message mb-5">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <h1 class="p-5 pb-0"><em>NON CI SONO APPARTAMENTI....</em> <i class="text-primary text-center fa-solid fa-face-sad-tear fa-bounce"></i> </h1>
+                                    
+                                </div>
+                                <div class="col-12 d-flex justify-content-center pb-3">
+                                    {{-- <p>Pubblica un appartamento e comincia il tuo business</p> --}}
+                                    <p>Clicca su aggiungi un nuovo appartamento e compila tutti i campi..</p>
+                                </div>
+                            </div>
+                                
+                                
+                                   
+                            @endif
+                               
+
                         </tbody>
                     </table>
                     {{-- CARDS --}}

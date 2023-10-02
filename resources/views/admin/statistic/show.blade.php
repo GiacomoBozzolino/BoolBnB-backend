@@ -3,12 +3,12 @@
 @section('content')
 <div class="row row-cols-1 mb-2 my-4 mx-2">
     <div class="col py-3">
-        <h1>
+        <h2>
             <span class="icon-section me-2">
-                <i class="fa-solid fa-chart-line"></i>
+                <i class="fa-solid fa-chart-line fa-sm" style="color: #EF7039;"></i>
             </span>
-            Grafiche e Statistiche del tuo appartamento
-        </h1>
+            Grafico e Statistiche del Mio appartamento
+        </h2>
     </div>
 </div>
 
@@ -31,7 +31,7 @@
         <div class="col py-3">
             <a href="{{ route('admin.statistic.index') }}" class="back">
                 Torna indietro
-                <i class="fa-solid fa-rotate-left"></i>
+                <i class="fa-solid fa-rotate-left" style="color: #ffca4a;"></i>
             </a>
         </div>
     </div>

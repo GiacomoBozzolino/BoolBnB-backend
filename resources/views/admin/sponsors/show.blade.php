@@ -6,13 +6,14 @@
         <div class="row mb-2 my-4 mx-2 d-flex align-items-center">
             <div class="col-12 text-center py-3">
                 <h2 class="card-title fw-bold {{ strtolower(explode(' ', $sponsor->title)[1]) }} px-2 py-3 ">
-                    <i class="fa-solid fa-sack-dollar fa-sm"></i>
-                    Sponsorships {{ explode(' ', $sponsor->title)[1] }}
+                    <i class="fa-solid fa-star" style="color: #ffbc19;"></i>
+                    Sponsorship {{ explode(' ', $sponsor->title)[1] }}
+                    <i class="fa-solid fa-star" style="color: #ffbc19;"></i>
                 </h2>
                 <div class="">
                     <a href="{{ route('admin.sponsors.index') }}" class="back btn border border-black">
                         Torna indietro
-                        <i class="fa-solid fa-rotate-left"></i>
+                        <i class="fa-solid fa-rotate-left" style="color: #ffbc19;"></i>
                     </a>
                 </div>
             </div>
@@ -20,7 +21,7 @@
 
         <div id="sponsor_show" class="container h-100">
             <div class="row d-flex justify-content-center mb-5">
-                <h4 class="my-3">Seleziona l'apartamento da sponsorizzare</h4>
+                <h4 class="my-3">Seleziona l'appartamento da sponsorizzare</h4>
                 {{-- qui se più appartamenti --}}
                 @if (isset($apartments))
                     @if (count($apartments) > 0)
@@ -43,7 +44,7 @@
                                         </th>
                                         <th scope="col" class="text-center p-3">
                                             <i class="fa-solid fa-rocket"></i>
-                                            Boost
+                                            Sponsorizza
                                         </th>
                                     </tr>
                                 </thead>
@@ -65,7 +66,7 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                 <a href="{{ route('admin.payment.create', ['sponsor_id' => $sponsor->id, 'apartment_id' => $apartment->id]) }}"
-                                                    class="text-decoration-none btn-sponsor border py-1 px-3 border-black pay-hover hvr">
+                                                    class="text-decoration-none btn-sponsor border py-1 px-3 border-warning pay-hover hvr">
                                                     Seleziona
                                                 </a>
                                             </td>

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12 text-center pb-2">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="fw-bold">Aggiungi un appartamento</h2>
+                    <h2>Aggiungi un Appartamento</h2>
                 </div>
             </div>
             <div><span class="text-danger">*</span><small> I campi contrassegnati da questo simbolo sono obbligatori</small></div>

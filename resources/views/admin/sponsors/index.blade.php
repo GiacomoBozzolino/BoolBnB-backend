@@ -4,7 +4,8 @@
     <div class="row row-cols-1 mb-5 my-4 mx-2">
         <div class="col-12 py-3 text-center">
             <h2>
-                SPONSORSHIPS
+                <i class="fa-solid fa-star" style="color: #ffbc19;"></i>
+                Sponsorships
                 <i class="fa-solid fa-star" style="color: #ffbc19;"></i>
             </h2>
         </div>
@@ -24,7 +25,7 @@
                         <div class="card-body px-2 my-4 d-flex flex-column align-items-center">
                             <div class="mb-3">
                                 <i class="fa-regular fa-clock md-2" style="color: #ffbc19;"></i>
-                                <h5 class="d-inline">Durata: {{ $sponsor->duration }}h</h5>
+                                <h5 class="d-inline">Durata: {{ $sponsor->duration }} ore</h5>
                             </div>
                             <p class="text-center" style="height: 130px;">{{ $sponsor->description }}</p>
                         </div>

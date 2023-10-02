@@ -33,12 +33,13 @@
                                 <label class="control-label my-2">Stanze</label>
                                 <span class="text-danger"> *</span>
                                 <select class="form-control" name="n_rooms" id="n_rooms" required>
-                                    <option value="" disabled selected>Seleziona il numero di stanze</option>
+                                    <option value="" disabled>Seleziona il numero di stanze</option>
                                     @for ($i = 1; $i <= 9; $i++)
-                                        <option value="{{ $i }}" @selected(old('n_rooms') == $i)>{{ $i }} </option>
+                                        <option value="{{ $i }}" @if (old('n_rooms', 1) == $i) selected @endif>{{ $i }}</option>
                                     @endfor
                                 </select>
                             </li>
+                            
 
                             <!-- Numero stanze da letto -->
                             <li>
@@ -47,7 +48,7 @@
                                 <select class="form-control" name="n_beds" id="n_beds" required>
                                     <option value="" disabled selected>Seleziona il numero di posti letto</option>
                                     @for ($i = 1; $i <= 9; $i++)
-                                        <option value="{{$i}}" @selected(old('n_beds') == $i)>{{ $i }}</option>
+                                    <option value="{{ $i }}" @if (old('n_beds', 1) == $i) selected @endif>{{ $i }}</option>
                                     @endfor
                                 </select>
                             </li>
@@ -59,7 +60,7 @@
                                 <select class="form-control" name="n_bathrooms" id="n_bathrooms" required>
                                     <option value="" disabled selected>Seleziona il numero di bagni</option>
                                     @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}" @selected(old('n_bathrooms') == $i)>{{ $i }}</option>
+                                    <option value="{{ $i }}" @if (old('n_bathrooms', 1) == $i) selected @endif>{{ $i }}</option>
                                     @endfor
                                 </select>
                             </li>

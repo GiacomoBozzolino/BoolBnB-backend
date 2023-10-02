@@ -26,7 +26,7 @@ class LeadController extends Controller
 
     public function show(Lead $lead, Apartment $apartament)
     {
-        $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $lead->created_at) ->format('m/d/Y');
+        $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $lead->created_at) ->format('m/d/Y  H:i');
         // dd($newDate);
         
         return view('admin.leads.show', compact('lead', 'newDate'));

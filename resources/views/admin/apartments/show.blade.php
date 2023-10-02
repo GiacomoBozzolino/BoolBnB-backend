@@ -92,49 +92,56 @@
             </div>
             {{-- Inizio messaggi --}}
             <div class="col-6 border mt-5 rounded-4 shadow overflow-auto" style="height: 500px">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Messaggio</th>
-                            <th scope="col">Data Invio</th>
-                            <th scope="col">Orario</th>
-                            <th scope="col">Strumenti</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($apartment->leads as $item)
+                @if ($apartment->leads->isEmpty())
+                <div class="d-flex justify-content-center align-items-center" style="height: 100%">
+                    <h3 class="text-center">Non hai ancora ricevuto messaggi</h3>
+                </div>
+                @else
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
-
-                                @php
-                                    $createdAt = \Carbon\Carbon::parse($item->created_at);
-                                @endphp
-
-                                @if ($createdAt instanceof \Carbon\Carbon)
-                                    <td>{{ $createdAt->format('d/m/Y') }}</td>
-                                    <td>{{ $createdAt->format('H:i') }}</td>
-                                @else
-                                    <td>Data non valida</td>
-                                    <td>Data non valida</td>
-                                @endif
-
-                                <td>
-                                    <div class="d-flex justify-content-center ">
-                                        <a href="{{ route('admin.leads.show', $item->id) }}"
-                                            class="btn btn-sm mx-1 rounded-5 btn-show">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                    </div>
-                                </td>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Messaggio</th>
+                                <th scope="col">Data Invio</th>
+                                <th scope="col">Orario</th>
+                                <th scope="col">Strumenti</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($apartment->leads as $item)
+                                <tr>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td class="text-truncate" style="max-width: 100px;">{{ $item->content }}</td>
+            
+                                    @php
+                                        $createdAt = \Carbon\Carbon::parse($item->created_at);
+                                    @endphp
+            
+                                    @if ($createdAt instanceof \Carbon\Carbon)
+                                        <td>{{ $createdAt->format('d/m/Y') }}</td>
+                                        <td>{{ $createdAt->format('H:i') }}</td>
+                                    @else
+                                        <td>Data non valida</td>
+                                        <td>Data non valida</td>
+                                    @endif
+            
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('admin.leads.show', $item->id) }}"
+                                                class="btn btn-sm mx-1 rounded-5 btn-show">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
             </div>
+            
             <!--inizio mappa-->
             <div class="col-6 mt-5 ">
                 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.0/maps/maps-web.min.js"></script>

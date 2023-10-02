@@ -205,7 +205,7 @@
                                     </div>
                                     {{-- parte del no --}}
                                     <div class="no-container ms-5">
-                                        <input type="radio" id="no" name="visibility" value="0" {{old('visibility') == '0' ? 'checked' : ''}}>
+                                        <input type="radio" id="no" name="visibility" value="0" {{old('visibility', '0') == '0' ? 'checked' : ''}}>
                                         {{-- <input type="radio" id="no" name="visibility" value="0"
                                             {{ $apartment->visibility == 0 ? 'checked' : '' }}> --}}
                                         <label for="no">Nascondi l'annuncio</label>

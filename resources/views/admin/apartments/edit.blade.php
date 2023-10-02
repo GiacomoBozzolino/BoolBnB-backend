@@ -192,25 +192,22 @@
                                 @enderror
                             </li>
 
-                            <!-- Visibili -->
+                            <!-- Visibility -->
                             <li>
                                 <label class="control-label my-2">Visibilità</label>
                                 <div class="radio-container d-flex">
                                     {{-- parte del si  --}}
                                     <div class="yes-container">
-                                        <input type="radio" id="yes" name="visibility" value="1" {{  old('visibility', '1') == '1' ? 'checked' : ''}} >
-                                        {{-- <input type="radio" id="yes" name="visibility" value="1"
-                                            {{ $apartment->visibility == 1 ? 'checked' : '' }}> --}}
+                                        <input type="radio" id="yes" name="visibility" value="1" {{ old('visibility', $apartment->visibility) == '1' ? 'checked' : '' }}>
                                         <label for="yes">Rendi visibile l'annuncio</label>
                                     </div>
                                     {{-- parte del no --}}
                                     <div class="no-container ms-5">
-                                        <input type="radio" id="no" name="visibility" value="0" {{old('visibility', '0') == '0' ? 'checked' : ''}}>
-                                        {{-- <input type="radio" id="no" name="visibility" value="0"
-                                            {{ $apartment->visibility == 0 ? 'checked' : '' }}> --}}
+                                        <input type="radio" id="no" name="visibility" value="0" {{ old('visibility', $apartment->visibility) == '0' ? 'checked' : '' }}>
                                         <label for="no">Nascondi l'annuncio</label>
                                     </div>
                                 </div>
+                                
                             </li>
 
                             <!-- Descrizione -->

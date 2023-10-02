@@ -44,7 +44,7 @@ class ApartmentController extends Controller
     // CHIAMATA API SPONSORIZZAZIONI
     public function getFeaturedApartments()
     {
-        $apartments = Apartment::with('sponsors')->where('visibility',1)->get();
+        $apartments = Apartment::with('sponsors')->with('services')->where('visibility',1)->get();
 
         return response()->json($apartments);
     }
@@ -77,7 +77,7 @@ class ApartmentController extends Controller
         // Calcola la distanza in chilometri (utilizzando la formula Haversine)
         $distance = 20; // Raggio in chilometri
 
-        $apartments = Apartment::select('apartments.*')
+        $apartments = Apartment::select('apartments.*')->with('services')
         ->selectRaw(
             '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
             [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]
@@ -126,7 +126,7 @@ class ApartmentController extends Controller
         $n_beds = $request->input('n_beds');
         $selectedServices = $request->input('services', []);
 
-        $apartments = Apartment::select('apartments.*')
+        $apartments = Apartment::select('apartments.*')->with('services')
         ->selectRaw(
             '(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
             [$apartmentLatitude, $apartmentLongitude, $apartmentLatitude]

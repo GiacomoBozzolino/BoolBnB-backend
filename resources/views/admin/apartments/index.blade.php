@@ -155,7 +155,7 @@
                             @else
                             <div class="container-fluid border-message mb-5">
                                 <div class="col-12 d-flex justify-content-center">
-                                    <h1 class="p-5 pb-0"><em>NON CI SONO APPARTAMENTI....</em> <i class="text-primary text-center fa-solid fa-face-sad-tear fa-bounce"></i> </h1>
+                                    <h1 class="p-5 pb-0"><em>NON CI SONO APPARTAMENTI....</em> <i class="text-danger text-center fa-solid fa-face-sad-tear fa-bounce"></i> </h1>
                                     
                                 </div>
                                 <div class="col-12 d-flex justify-content-center pb-3">

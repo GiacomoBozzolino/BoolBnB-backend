@@ -57,12 +57,21 @@
                         </strong>
                         {{-- sponsorizzazione --}}
                         <p class="card-text badge text-bg-success">Sponsorizzazioni</p>
-                        <strong class="d-flex flex-wrap">
+                        <strong >
                         @if(count($apartment->sponsors) > 0)
                             @foreach($apartment->sponsors as $sponsor)
                                 @if($sponsor->pivot->end_at >= now())
-                                    <p>Sponsor attiva: {{ $sponsor->title }}</p>
-                                    <p>Scadenza: {{ $sponsor->pivot->end_at }}</p>
+                                    <p class="mb-1">Sponsor attiva: {{ $sponsor->title }}</p>
+                                    
+                                    @php
+                                        $formatDate = \Carbon\Carbon::parse($sponsor->pivot->end_at);
+                                    @endphp
+                                    @if ( $formatDate instanceof \Carbon\Carbon)
+                                        Scadenza: {{ $formatDate->format('d/m/Y') }} alle {{ $formatDate->format('H:i') }}         
+                                    @else
+                                        Data non valida          
+                                    @endif
+
                                 @endif
                             @endforeach
                         @else

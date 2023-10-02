@@ -7,15 +7,8 @@
             <span class="icon-section me-2">
                 <i class="fa-solid fa-chart-line"></i>
             </span>
-            GRAFICHINI STASTISTICHINI POLLANCHE PANINI E PANELLE
+            Grafiche e Statistiche del tuo appartamento
         </h1>
-    </div>
-
-    <div class="col">
-        <a href="{{ route('admin.statistic.index') }}" class="back">
-            Torna indietro
-            <i class="fa-solid fa-rotate-left"></i>
-        </a>
     </div>
 </div>
 
@@ -23,6 +16,28 @@
     <div class="row">
         <div class="col">
             <canvas id="combinedChart" style="height: 400px;"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>
+                Benvenuto nella pagina delle statistiche del tuo appartamento {{ $apartment->title }}, adesso puoi visualizzare l'andamento delle visite e dei tuoi messaggi per singolo appartamento mese per mese ed individuare i periodi di maggiore convenienza per attivare delle   
+                    <a href="{{ route('admin.sponsors.index') }}"
+                        class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === 'admin.sponsors.index' ? 'selected' : '' }} select">
+                        <div class="text-container d-flex align-items-center">
+                            <h4 class="ms-3">Sponsor</h4>
+                        </div>
+                    </a>
+            </h2>
+        </div>
+        <div class="col">
+            <a href="{{ route('admin.statistic.index') }}" class="back">
+                Torna indietro
+                <i class="fa-solid fa-rotate-left"></i>
+            </a>
         </div>
     </div>
 </div>

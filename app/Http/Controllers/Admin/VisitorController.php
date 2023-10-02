@@ -168,7 +168,7 @@ class VisitorController extends Controller
             return null;
         })->filter()->unique()->sort();
         
-        return view('admin.statistic.show', compact('visitors', 'user', 'monthsYears', 'userApartmentIds', 'userApartments', 'monthlyViews', 'apartmentMessages', 'monthlyMessages', 'monthsYearsMessages'));
+        return view('admin.statistic.show', compact('apartment', 'visitors', 'user', 'monthsYears', 'userApartmentIds', 'userApartments', 'monthlyViews', 'apartmentMessages', 'monthlyMessages', 'monthsYearsMessages'));
 
     }
 }

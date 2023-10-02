@@ -109,8 +109,8 @@
                                     <h4 class="ms-3">Sponsor</h4>
                                 </div>
                             </a>
-                            <a href=""
-                                class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === '' ? 'selected' : '' }} select">
+                            <a href="{{ route('admin.statistic.index') }}"
+                                class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() === 'admin.statistic.index' ? 'selected' : '' }} select">
                                 <div class="text-container d-flex align-items-center">
                                     <i class="fa-solid fa-magnifying-glass-chart ms-3"></i>
                                     <h4 class="ms-3">Statistiche</h4>

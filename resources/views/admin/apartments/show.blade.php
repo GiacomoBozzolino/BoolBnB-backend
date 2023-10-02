@@ -92,7 +92,7 @@
                                 @endphp
 
                                 @if ($createdAt instanceof \Carbon\Carbon)
-                                    <td>{{ $createdAt->format('d m Y') }}</td>
+                                    <td>{{ $createdAt->format('d/m/Y') }}</td>
                                     <td>{{ $createdAt->format('H:i') }}</td>
                                 @else
                                     <td>Data non valida</td>
@@ -100,7 +100,7 @@
                                 @endif
 
                                 <td>
-                                    <div class="d-flex justify-content-center pt-3">
+                                    <div class="d-flex justify-content-center ">
                                         <a href="{{ route('admin.leads.show', $item->id) }}"
                                             class="btn btn-sm mx-1 rounded-5 btn-show">
                                             <i class="fa-solid fa-eye"></i>
